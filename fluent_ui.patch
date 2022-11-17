@@ -1,0 +1,18 @@
+--- slider.dart	Fri Nov 11 13:32:39 2022
++++ slider.dart	Fri Nov 11 14:20:20 2022
+@@ -368,6 +368,7 @@
+     required Animation<double> enableAnimation,
+     required TextDirection textDirection,
+     required Offset thumbCenter,
++    Offset? secondaryOffset,
+     bool isDiscrete = false,
+     bool isEnabled = false,
+     double additionalActiveTrackHeight = 0,
+@@ -380,6 +381,7 @@
+       enableAnimation: enableAnimation,
+       textDirection: textDirection,
+       thumbCenter: thumbCenter,
++      secondaryOffset: secondaryOffset,
+       isDiscrete: isDiscrete,
+       isEnabled: isEnabled,
+       additionalActiveTrackHeight: additionalActiveTrackHeight,
