@@ -421,4 +421,19 @@ class Utils {
       throw Exception('Failed to load exchange rates');
     }
   }
+
+  static String convertRarityOptionToInternal(String option) {
+    switch (option) {
+      case 'Common':
+        return 'common';
+      case 'Uncommon':
+        return 'uncommon';
+      case 'Rare':
+        return 'rare';
+      case 'Mythic Rare':
+        return 'mythic';
+      default:
+        return 'common';
+    }
+  }
 }

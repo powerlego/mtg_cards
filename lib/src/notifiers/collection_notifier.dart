@@ -27,4 +27,27 @@ class CollectionNotifier extends ChangeNotifier {
     _reversed = value;
     notifyListeners();
   }
+
+  Map<String, bool> _rarityFilter = {
+    'common': false,
+    'uncommon': false,
+    'rare': false,
+    'mythic': false,
+  };
+
+  Map<String, bool> get rarityFilter => _rarityFilter;
+
+  set rarityFilter(Map<String, bool> value) {
+    _rarityFilter = value;
+    notifyListeners();
+  }
+
+  List<Map<String, dynamic>> _filters = [];
+
+  List<Map<String, dynamic>> get filters => _filters;
+
+  set filters(List<Map<String, dynamic>> value) {
+    _filters = value;
+    notifyListeners();
+  }
 }

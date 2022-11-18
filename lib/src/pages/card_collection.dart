@@ -2,6 +2,7 @@ import 'package:cron/cron.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:mtg_cards/databases.dart';
 import 'package:mtg_cards/models.dart';
+import 'package:mtg_cards/utils.dart';
 import 'package:mtg_cards/widgets.dart';
 import 'package:mtg_cards/notifiers.dart';
 import 'package:mtg_cards/pages.dart';
@@ -15,16 +16,11 @@ class CardCollectionBuilder extends StatefulWidget {
 }
 
 class _CardCollectionBuilderState extends State<CardCollectionBuilder> {
-  final _cron = Cron();
-
   final _pageStorageBucket = PageStorageBucket();
 
   @override
   void initState() {
     super.initState();
-    _cron.schedule(Schedule.parse('*/5 * * * *'), () {
-      setState(() {});
-    });
   }
 
   @override
@@ -84,6 +80,7 @@ class _CardCollectionState extends State<CardCollection> {
   void resetSearch() => searchController.clear();
   List<CardEntry> originalItems = [];
   List<CardEntry> items = [];
+  List<CardEntry> filteredItems = [];
   String get searchValue => searchController.text;
   final searchFocusNode = FocusNode();
   final List<String> _sortOptions = [
@@ -94,6 +91,45 @@ class _CardCollectionState extends State<CardCollection> {
     'Quantity',
   ];
   final List<String> _sortDirections = ['Ascending', 'Descending'];
+  final List<String> _rarityOptions = ['Common', 'Uncommon', 'Rare', 'Mythic Rare'];
+  final List<String> _colorOptions = [
+    'White',
+    'Blue',
+    'Black',
+    'Red',
+    'Green',
+    'Colorless',
+  ];
+  final List<String> _typesOptions = [
+    'Artifact',
+    'Creature',
+    'Enchantment',
+    'Instant',
+    'Land',
+    'Planeswalker',
+    'Sorcery',
+  ];
+  final List<String> _legalityOptions = [
+    'Standard',
+    'Future',
+    'Historic',
+    'Gladiator',
+    'Pioneer',
+    'Modern',
+    'Legacy',
+    'Pauper',
+    'Vintage',
+    'Penny',
+    'Commander',
+    'Brawl',
+    'Duel',
+    'Historic Brawl',
+    'Pauper Commander',
+    'Pre-Moderen',
+    'Alchemy',
+    'Explorer',
+    'Old School',
+  ];
 
   @override
   void initState() {
@@ -104,11 +140,21 @@ class _CardCollectionState extends State<CardCollection> {
     searchController.addListener(() {
       setState(() {
         if (searchValue.isEmpty) {
-          items = originalItems;
+          if (filteredItems.isNotEmpty) {
+            items = filteredItems;
+          } else {
+            items = originalItems;
+          }
         } else {
-          items = originalItems
-              .where((element) => element.card.name.toLowerCase().contains(searchValue.toLowerCase()))
-              .toList();
+          if (filteredItems.isEmpty) {
+            items = originalItems
+                .where((element) => element.card.name.toLowerCase().contains(searchValue.toLowerCase()))
+                .toList();
+          } else {
+            items = filteredItems
+                .where((element) => element.card.name.toLowerCase().contains(searchValue.toLowerCase()))
+                .toList();
+          }
         }
       });
     });
@@ -243,6 +289,94 @@ class _CardCollectionState extends State<CardCollection> {
                         });
                       },
                     ),
+                  ],
+                ),
+              ),
+              Expander(
+                header: const Text("Filter"),
+                content: Column(
+                  children: [
+                    SizedBox(
+                        height: 200,
+                        child: SingleChildScrollView(
+                          child: Column(children: [
+                            Row(
+                              children: [
+                                Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: () {
+                                      List<Widget> widgets = [
+                                        Text('Rarity',
+                                            style: FluentTheme.of(context)
+                                                .typography
+                                                .bodyLarge!
+                                                .copyWith(fontWeight: FontWeight.bold)),
+                                      ];
+                                      widgets.addAll(_rarityOptions
+                                          .map((e) => Padding(
+                                                padding: const EdgeInsets.only(bottom: 8),
+                                                child: Checkbox(
+                                                  content: Text(e),
+                                                  checked: collectionNotifier
+                                                      .rarityFilter[Utils.convertRarityOptionToInternal(e)],
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      collectionNotifier
+                                                              .rarityFilter[Utils.convertRarityOptionToInternal(e)] =
+                                                          value!;
+                                                    });
+                                                  },
+                                                ),
+                                              ))
+                                          .toList());
+                                      return widgets;
+                                    }()),
+                                const SizedBox(width: 8),
+                              ],
+                            )
+                          ]),
+                        )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Button(
+                          child: const Text("Apply"),
+                          onPressed: () {
+                            List<CardEntry> filteredList = [];
+                            for (final item in items) {
+                              if (collectionNotifier.rarityFilter[item.card.rarity.toLowerCase()]!) {
+                                filteredList.add(item);
+                              }
+                            }
+                            setState(() {
+                              if (searchValue.isEmpty) {
+                                if (filteredList.isNotEmpty) {
+                                  filteredItems = filteredList;
+                                  items = filteredList;
+                                } else {
+                                  filteredItems = [];
+                                  items = originalItems;
+                                }
+                              } else {
+                                if (filteredList.isNotEmpty) {
+                                  filteredItems = [];
+                                  items = filteredList
+                                      .where((element) =>
+                                          element.card.name.toLowerCase().contains(searchValue.toLowerCase()))
+                                      .toList();
+                                } else {
+                                  filteredItems = [];
+                                  items = originalItems
+                                      .where((element) =>
+                                          element.card.name.toLowerCase().contains(searchValue.toLowerCase()))
+                                      .toList();
+                                }
+                              }
+                            });
+                          },
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
