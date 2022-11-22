@@ -73,14 +73,14 @@ class CardCollection extends StatefulWidget {
 }
 
 class _CardCollectionState extends State<CardCollection> {
-  final searchController = TextEditingController();
+  final _searchController = TextEditingController();
 
-  void resetSearch() => searchController.clear();
-  List<CardEntry> originalItems = [];
-  List<CardEntry> items = [];
-  List<CardEntry> filteredItems = [];
-  String get searchValue => searchController.text;
-  final searchFocusNode = FocusNode();
+  void resetSearch() => _searchController.clear();
+  List<CardEntry> _originalItems = [];
+  List<CardEntry> _items = [];
+  List<CardEntry> _filteredItems = [];
+  String get searchValue => _searchController.text;
+  final _searchFocusNode = FocusNode();
   final List<String> _sortOptions = [
     'Name',
     'Set',
@@ -123,24 +123,30 @@ class _CardCollectionState extends State<CardCollection> {
   @override
   void initState() {
     super.initState();
-    originalItems = widget.cards;
-    originalItems.sort((a, b) => a.card.name.compareTo(b.card.name));
-    items = originalItems;
-    searchController.addListener(() {
+    _originalItems = widget.cards;
+    _originalItems.sort((a, b) => a.card.name.compareTo(b.card.name));
+    _items = _originalItems;
+    _searchController.addListener(() {
       setState(() {
         if (searchValue.isEmpty) {
-          if (filteredItems.isNotEmpty) {
-            items = filteredItems;
+          if (_filteredItems.isNotEmpty) {
+            _items = _filteredItems;
           } else {
-            items = originalItems;
+            _items = _originalItems;
           }
         } else {
-          if (filteredItems.isEmpty) {
-            items = originalItems
+          if (_filteredItems.isEmpty &&
+              (!Provider.of<CollectionNotifier>(context).filteringColor &&
+                  !Provider.of<CollectionNotifier>(context).filteringColor)) {
+            _items = _originalItems
                 .where((element) => element.card.name.toLowerCase().contains(searchValue.toLowerCase()))
                 .toList();
+          } else if (_filteredItems.isEmpty &&
+              (Provider.of<CollectionNotifier>(context).filteringColor ||
+                  Provider.of<CollectionNotifier>(context).filteringColor)) {
+            _items = [];
           } else {
-            items = filteredItems
+            _items = _filteredItems
                 .where((element) => element.card.name.toLowerCase().contains(searchValue.toLowerCase()))
                 .toList();
           }
@@ -151,7 +157,7 @@ class _CardCollectionState extends State<CardCollection> {
 
   @override
   void dispose() {
-    searchController.dispose();
+    _searchController.dispose();
 
     super.dispose();
   }
@@ -161,24 +167,24 @@ class _CardCollectionState extends State<CardCollection> {
     final collectionNotifier = context.watch<CollectionNotifier>();
     switch (collectionNotifier.sortValue) {
       case 'Name':
-        items.sort((a, b) => a.card.name.compareTo(b.card.name));
-        items = collectionNotifier.reversed ? items.reversed.toList() : items;
+        _items.sort((a, b) => a.card.name.compareTo(b.card.name));
+        _items = collectionNotifier.reversed ? _items.reversed.toList() : _items;
         break;
       case 'Set':
-        items.sort((a, b) => a.card.set.compareTo(b.card.set));
-        items = collectionNotifier.reversed ? items.reversed.toList() : items;
+        _items.sort((a, b) => a.card.set.compareTo(b.card.set));
+        _items = collectionNotifier.reversed ? _items.reversed.toList() : _items;
         break;
       case 'Rarity':
-        items.sort((a, b) => a.card.rarity.compareTo(b.card.rarity));
-        items = collectionNotifier.reversed ? items.reversed.toList() : items;
+        _items.sort((a, b) => a.card.rarity.compareTo(b.card.rarity));
+        _items = collectionNotifier.reversed ? _items.reversed.toList() : _items;
         break;
       case 'Price':
-        items.sort((a, b) => a.price.compareTo(b.price));
-        items = collectionNotifier.reversed ? items.reversed.toList() : items;
+        _items.sort((a, b) => a.price.compareTo(b.price));
+        _items = collectionNotifier.reversed ? _items.reversed.toList() : _items;
         break;
       case 'Quantity':
-        items.sort((a, b) => a.quantity.compareTo(b.quantity));
-        items = collectionNotifier.reversed ? items.reversed.toList() : items;
+        _items.sort((a, b) => a.quantity.compareTo(b.quantity));
+        _items = collectionNotifier.reversed ? _items.reversed.toList() : _items;
         break;
     }
     return ChangeNotifierProvider(
@@ -197,7 +203,7 @@ class _CardCollectionState extends State<CardCollection> {
                       child: TextBox(
                         key: const PageStorageKey('search_box'),
                         placeholder: 'Search for a card',
-                        focusNode: searchFocusNode,
+                        focusNode: _searchFocusNode,
                         suffixMode: OverlayVisibilityMode.editing,
                         suffix: IconButton(
                           icon: const Icon(FluentIcons.clear),
@@ -207,7 +213,7 @@ class _CardCollectionState extends State<CardCollection> {
                             });
                           },
                         ),
-                        controller: searchController,
+                        controller: _searchController,
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -225,24 +231,24 @@ class _CardCollectionState extends State<CardCollection> {
                           collectionNotifier.sortValue = value!;
                           switch (collectionNotifier.sortValue) {
                             case 'Name':
-                              items.sort((a, b) => a.card.name.compareTo(b.card.name));
-                              items = collectionNotifier.reversed ? items.reversed.toList() : items;
+                              _items.sort((a, b) => a.card.name.compareTo(b.card.name));
+                              _items = collectionNotifier.reversed ? _items.reversed.toList() : _items;
                               break;
                             case 'Set':
-                              items.sort((a, b) => a.card.set.compareTo(b.card.set));
-                              items = collectionNotifier.reversed ? items.reversed.toList() : items;
+                              _items.sort((a, b) => a.card.set.compareTo(b.card.set));
+                              _items = collectionNotifier.reversed ? _items.reversed.toList() : _items;
                               break;
                             case 'Rarity':
-                              items.sort((a, b) => a.card.rarity.compareTo(b.card.rarity));
-                              items = collectionNotifier.reversed ? items.reversed.toList() : items;
+                              _items.sort((a, b) => a.card.rarity.compareTo(b.card.rarity));
+                              _items = collectionNotifier.reversed ? _items.reversed.toList() : _items;
                               break;
                             case 'Price':
-                              items.sort((a, b) => a.price.compareTo(b.price));
-                              items = collectionNotifier.reversed ? items.reversed.toList() : items;
+                              _items.sort((a, b) => a.price.compareTo(b.price));
+                              _items = collectionNotifier.reversed ? _items.reversed.toList() : _items;
                               break;
                             case 'Quantity':
-                              items.sort((a, b) => a.quantity.compareTo(b.quantity));
-                              items = collectionNotifier.reversed ? items.reversed.toList() : items;
+                              _items.sort((a, b) => a.quantity.compareTo(b.quantity));
+                              _items = collectionNotifier.reversed ? _items.reversed.toList() : _items;
                               break;
                           }
                         });
@@ -264,13 +270,13 @@ class _CardCollectionState extends State<CardCollection> {
                           switch (collectionNotifier.sortDirection) {
                             case 'Ascending':
                               if (collectionNotifier.reversed) {
-                                items = items.reversed.toList();
+                                _items = _items.reversed.toList();
                                 collectionNotifier.reversed = false;
                               }
                               break;
                             case 'Descending':
                               if (!collectionNotifier.reversed) {
-                                items = items.reversed.toList();
+                                _items = _items.reversed.toList();
                                 collectionNotifier.reversed = true;
                               }
                               break;
@@ -356,8 +362,7 @@ class _CardCollectionState extends State<CardCollection> {
                           child: const Text("Apply"),
                           onPressed: () {
                             List<CardEntry> filteredList = [];
-
-                            for (final item in items) {
+                            for (final item in _originalItems) {
                               if (collectionNotifier.filteringRarity) {
                                 if (collectionNotifier.rarityFilter[MTGRarity.getRarityFromName(item.card.rarity)]! &&
                                     !filteredList.contains(item)) {
@@ -366,9 +371,13 @@ class _CardCollectionState extends State<CardCollection> {
                                         .rarityFilter[MTGRarity.getRarityFromName(item.card.rarity)]! &&
                                     filteredList.contains(item)) {
                                   filteredList.remove(item);
+                                } else if (!collectionNotifier
+                                        .rarityFilter[MTGRarity.getRarityFromName(item.card.rarity)]! &&
+                                    !filteredList.contains(item)) {
+                                  continue;
                                 }
                               }
-                              if (collectionNotifier.filteringRarity) {
+                              if (collectionNotifier.filteringColor) {
                                 for (final color in item.card.colorIdentity) {
                                   if (collectionNotifier.colorFilter[MTGColor.getColorFromName(color)]! &&
                                       !filteredList.contains(item)) {
@@ -376,6 +385,9 @@ class _CardCollectionState extends State<CardCollection> {
                                   } else if (!collectionNotifier.colorFilter[MTGColor.getColorFromName(color)]! &&
                                       filteredList.contains(item)) {
                                     filteredList.remove(item);
+                                  } else if (!collectionNotifier.colorFilter[MTGColor.getColorFromName(color)]! &&
+                                      !filteredList.contains(item)) {
+                                    continue;
                                   }
                                 }
                               }
@@ -383,22 +395,30 @@ class _CardCollectionState extends State<CardCollection> {
                             setState(() {
                               if (searchValue.isEmpty) {
                                 if (filteredList.isNotEmpty) {
-                                  filteredItems = filteredList;
-                                  items = filteredList;
+                                  _filteredItems = filteredList;
+                                  _items = filteredList;
+                                } else if (filteredList.isEmpty &&
+                                    (collectionNotifier.filteringRarity || collectionNotifier.filteringColor)) {
+                                  _filteredItems = [];
+                                  _items = [];
                                 } else {
-                                  filteredItems = [];
-                                  items = originalItems;
+                                  _filteredItems = [];
+                                  _items = _originalItems;
                                 }
                               } else {
                                 if (filteredList.isNotEmpty) {
-                                  filteredItems = [];
-                                  items = filteredList
+                                  _filteredItems = [];
+                                  _items = filteredList
                                       .where((element) =>
                                           element.card.name.toLowerCase().contains(searchValue.toLowerCase()))
                                       .toList();
+                                } else if (filteredList.isEmpty &&
+                                    (collectionNotifier.filteringRarity || collectionNotifier.filteringColor)) {
+                                  _filteredItems = [];
+                                  _items = [];
                                 } else {
-                                  filteredItems = [];
-                                  items = originalItems
+                                  _filteredItems = [];
+                                  _items = _originalItems
                                       .where((element) =>
                                           element.card.name.toLowerCase().contains(searchValue.toLowerCase()))
                                       .toList();
@@ -413,46 +433,53 @@ class _CardCollectionState extends State<CardCollection> {
                 ),
               ),
               Expanded(
-                child: GridView.count(
-                  crossAxisCount: (constraints.maxWidth > 1000 ? 4 : 2),
-                  mainAxisSpacing: 15,
-                  children: items.map(
-                    (entry) {
-                      final MTGCardOld card = entry.card;
-                      return GestureDetector(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            FluentPageRoute(
-                              builder: (context) => CardDetailsCollection(
-                                entry: entry,
-                              ),
-                            ),
-                          );
-                          setState(() {});
-                          widget.onRefresh();
-                        },
-                        child: SizedBox(
-                          width: width / (constraints.maxWidth > 1000 ? 4 : 2),
-                          child: Column(
-                            children: [
-                              Text(
-                                "${card.name} x ${entry.quantity}",
-                                textAlign: TextAlign.center,
-                              ),
-                              Expanded(
-                                child: CardWidget(
-                                  card: card,
-                                  side: Side.front,
+                child: (_items.isEmpty)
+                    ? Center(
+                        child: Text(
+                          'No cards found.',
+                          style: FluentTheme.of(context).typography.bodyLarge,
+                        ),
+                      )
+                    : GridView.count(
+                        crossAxisCount: (constraints.maxWidth > 1000 ? 4 : 2),
+                        mainAxisSpacing: 15,
+                        children: _items.map(
+                          (entry) {
+                            final MTGCardOld card = entry.card;
+                            return GestureDetector(
+                              onTap: () async {
+                                await Navigator.push(
+                                  context,
+                                  FluentPageRoute(
+                                    builder: (context) => CardDetailsCollection(
+                                      entry: entry,
+                                    ),
+                                  ),
+                                );
+                                setState(() {});
+                                widget.onRefresh();
+                              },
+                              child: SizedBox(
+                                width: width / (constraints.maxWidth > 1000 ? 4 : 2),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "${card.name} x ${entry.quantity}",
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Expanded(
+                                      child: CardWidget(
+                                        card: card,
+                                        side: Side.front,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ).toList(),
-                ),
+                            );
+                          },
+                        ).toList(),
+                      ),
               ),
             ]);
           });
