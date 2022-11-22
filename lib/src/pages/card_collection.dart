@@ -1,8 +1,6 @@
-import 'package:cron/cron.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:mtg_cards/databases.dart';
 import 'package:mtg_cards/models.dart';
-import 'package:mtg_cards/utils.dart';
 import 'package:mtg_cards/widgets.dart';
 import 'package:mtg_cards/notifiers.dart';
 import 'package:mtg_cards/pages.dart';
@@ -91,15 +89,6 @@ class _CardCollectionState extends State<CardCollection> {
     'Quantity',
   ];
   final List<String> _sortDirections = ['Ascending', 'Descending'];
-  final List<String> _rarityOptions = ['Common', 'Uncommon', 'Rare', 'Mythic Rare'];
-  final List<String> _colorOptions = [
-    'White',
-    'Blue',
-    'Black',
-    'Red',
-    'Green',
-    'Colorless',
-  ];
   final List<String> _typesOptions = [
     'Artifact',
     'Creature',
