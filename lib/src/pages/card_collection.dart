@@ -301,6 +301,7 @@ class _CardCollectionState extends State<CardCollection> {
                         child: SingleChildScrollView(
                           child: Column(children: [
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -312,18 +313,15 @@ class _CardCollectionState extends State<CardCollection> {
                                                 .bodyLarge!
                                                 .copyWith(fontWeight: FontWeight.bold)),
                                       ];
-                                      widgets.addAll(_rarityOptions
+                                      widgets.addAll(MTGRarity.rarities
                                           .map((e) => Padding(
                                                 padding: const EdgeInsets.only(bottom: 8),
                                                 child: Checkbox(
-                                                  content: Text(e),
-                                                  checked: collectionNotifier
-                                                      .rarityFilter[Utils.convertRarityOptionToInternal(e)],
+                                                  content: Text(e.display),
+                                                  checked: collectionNotifier.rarityFilter[e],
                                                   onChanged: (value) {
                                                     setState(() {
-                                                      collectionNotifier
-                                                              .rarityFilter[Utils.convertRarityOptionToInternal(e)] =
-                                                          value!;
+                                                      collectionNotifier.setRarityFilter(e, value!);
                                                     });
                                                   },
                                                 ),
@@ -332,6 +330,32 @@ class _CardCollectionState extends State<CardCollection> {
                                       return widgets;
                                     }()),
                                 const SizedBox(width: 8),
+                                Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: () {
+                                      List<Widget> widgets = [
+                                        Text('Color',
+                                            style: FluentTheme.of(context)
+                                                .typography
+                                                .bodyLarge!
+                                                .copyWith(fontWeight: FontWeight.bold)),
+                                      ];
+                                      widgets.addAll(MTGColor.colors
+                                          .map((e) => Padding(
+                                                padding: const EdgeInsets.only(bottom: 8),
+                                                child: Checkbox(
+                                                  content: Text(e.display),
+                                                  checked: collectionNotifier.colorFilter[e],
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      collectionNotifier.setColorFilter(e, value!);
+                                                    });
+                                                  },
+                                                ),
+                                              ))
+                                          .toList());
+                                      return widgets;
+                                    }()),
                               ],
                             )
                           ]),
@@ -343,9 +367,27 @@ class _CardCollectionState extends State<CardCollection> {
                           child: const Text("Apply"),
                           onPressed: () {
                             List<CardEntry> filteredList = [];
+
                             for (final item in items) {
-                              if (collectionNotifier.rarityFilter[item.card.rarity.toLowerCase()]!) {
-                                filteredList.add(item);
+                              if (collectionNotifier.filteringRarity) {
+                                if (collectionNotifier.rarityFilter[item.card.rarity.toLowerCase()]! &&
+                                    !filteredList.contains(item)) {
+                                  filteredList.add(item);
+                                } else if (!collectionNotifier.rarityFilter[item.card.rarity.toLowerCase()]! &&
+                                    filteredList.contains(item)) {
+                                  filteredList.remove(item);
+                                }
+                              }
+                              if (collectionNotifier.filteringRarity) {
+                                for (final color in item.card.colorIdentity) {
+                                  if (collectionNotifier.colorFilter[MTGColor.getColorFromName(color)]! &&
+                                      !filteredList.contains(item)) {
+                                    filteredList.add(item);
+                                  } else if (!collectionNotifier.colorFilter[MTGColor.getColorFromName(color)]! &&
+                                      filteredList.contains(item)) {
+                                    filteredList.remove(item);
+                                  }
+                                }
                               }
                             }
                             setState(() {
@@ -386,7 +428,7 @@ class _CardCollectionState extends State<CardCollection> {
                   mainAxisSpacing: 15,
                   children: items.map(
                     (entry) {
-                      final MTGCard card = entry.card;
+                      final MTGCardOld card = entry.card;
                       return GestureDetector(
                         onTap: () async {
                           await Navigator.push(
