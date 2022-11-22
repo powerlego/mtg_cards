@@ -16,7 +16,7 @@ class CardImageImpl extends StatefulWidget {
 }
 
 class _CardImageImplState extends State<CardImageImpl> {
-  Future<void> cacheImage() async {
+  Future<void> _cacheImage() async {
     final file = File('${Constants.cachePath}/${widget.cardID}/${widget.face.illustrationId}.png');
     if (!file.existsSync()) {
       final request = await HttpClient().getUrl(widget.face.imageUrl);
@@ -33,7 +33,7 @@ class _CardImageImplState extends State<CardImageImpl> {
       if (!File('${Constants.cachePath}/${widget.cardID}/${widget.face.illustrationId}.png').existsSync()) {
         if (widget.face.imageUrl.toString().isNotEmpty) {
           return FutureBuilder(
-              future: cacheImage(),
+              future: _cacheImage(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return Image.file(File('${Constants.cachePath}/${widget.cardID}/${widget.face.illustrationId}.png'),
