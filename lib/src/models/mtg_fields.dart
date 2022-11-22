@@ -46,12 +46,12 @@ class MTGColor extends MTGField {
     );
   }
 
-  static MTGColor white = MTGColor('W', 'White', 0);
-  static MTGColor blue = MTGColor('U', 'Blue', 1);
-  static MTGColor black = MTGColor('B', 'Black', 2);
-  static MTGColor red = MTGColor('R', 'Red', 3);
-  static MTGColor green = MTGColor('G', 'Green', 4);
-  static MTGColor colorless = MTGColor('C', 'Colorless', 5);
+  static MTGColor get white => MTGColor('W', 'White', 0);
+  static MTGColor get blue => MTGColor('U', 'Blue', 1);
+  static MTGColor get black => MTGColor('B', 'Black', 2);
+  static MTGColor get red => MTGColor('R', 'Red', 3);
+  static MTGColor get green => MTGColor('G', 'Green', 4);
+  static MTGColor get colorless => MTGColor('C', 'Colorless', 5);
 
   static MTGColor getColorFromName(String color) {
     switch (color) {
@@ -120,10 +120,10 @@ class MTGRarity extends MTGField {
     );
   }
 
-  static MTGRarity common = MTGRarity('common', 'Common', 0);
-  static MTGRarity uncommon = MTGRarity('uncommon', 'Uncommon', 1);
-  static MTGRarity rare = MTGRarity('rare', 'Rare', 2);
-  static MTGRarity mythic = MTGRarity('mythic', 'Mythic Rare', 3);
+  static MTGRarity get common => MTGRarity('common', 'Common', 0);
+  static MTGRarity get uncommon => MTGRarity('uncommon', 'Uncommon', 1);
+  static MTGRarity get rare => MTGRarity('rare', 'Rare', 2);
+  static MTGRarity get mythic => MTGRarity('mythic', 'Mythic Rare', 3);
 
   static MTGRarity getRarityFromName(String rarity) {
     switch (rarity) {

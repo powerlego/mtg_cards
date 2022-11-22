@@ -3,7 +3,7 @@ import 'package:mtg_cards/models.dart';
 class MTGCardType extends MTGField {
   MTGCardType(String name, String display, int sortOrder) : super(name, display, sortOrder);
 
-  static MTGCardType unknown = MTGCardType('unknown', 'Unknown', 255);
+  static MTGCardType get unknown => MTGCardType('unknown', 'Unknown', 255);
 
   @override
   int compareTo(other) {
@@ -41,14 +41,14 @@ class MTGCardSuperType extends MTGCardType {
     );
   }
 
-  static MTGCardSuperType basic = MTGCardSuperType('basic', 'Basic', 0);
-  static MTGCardSuperType legendary = MTGCardSuperType('legendary', 'Legendary', 1);
-  static MTGCardSuperType snow = MTGCardSuperType('snow', 'Snow', 2);
-  static MTGCardSuperType world = MTGCardSuperType('world', 'World', 3);
-  static MTGCardSuperType ongoing = MTGCardSuperType('ongoing', 'Ongoing', 4);
-  static MTGCardSuperType token = MTGCardSuperType('token', "Token", 5);
-  static MTGCardSuperType empty = MTGCardSuperType('', '', 6);
-  static MTGCardSuperType unknown = MTGCardSuperType('unknown', 'Unknown', 7);
+  static MTGCardSuperType get basic => MTGCardSuperType('basic', 'Basic', 0);
+  static MTGCardSuperType get legendary => MTGCardSuperType('legendary', 'Legendary', 1);
+  static MTGCardSuperType get snow => MTGCardSuperType('snow', 'Snow', 2);
+  static MTGCardSuperType get world => MTGCardSuperType('world', 'World', 3);
+  static MTGCardSuperType get ongoing => MTGCardSuperType('ongoing', 'Ongoing', 4);
+  static MTGCardSuperType get token => MTGCardSuperType('token', "Token", 5);
+  static MTGCardSuperType get empty => MTGCardSuperType('', '', 6);
+  static MTGCardSuperType get unknown => MTGCardSuperType('unknown', 'Unknown', 7);
 
   static MTGCardSuperType getSuperTypeFromName(String superType) {
     switch (superType) {
@@ -139,14 +139,14 @@ class MTGCardMainType extends MTGCardType {
     );
   }
 
-  static MTGCardMainType creature = MTGCardMainType('creature', 'Creature', 0);
-  static MTGCardMainType enchantment = MTGCardMainType('enchantment', 'Enchantment', 1);
-  static MTGCardMainType land = MTGCardMainType('land', 'Land', 2);
-  static MTGCardMainType artifact = MTGCardMainType('artifact', 'Artifact', 3);
-  static MTGCardMainType instant = MTGCardMainType('instant', 'Instant', 4);
-  static MTGCardMainType sorcery = MTGCardMainType('sorcery', 'Sorcery', 5);
-  static MTGCardMainType planeswalker = MTGCardMainType('planeswalker', 'Planeswalker', 6);
-  static MTGCardMainType unknown = MTGCardMainType('unknown', 'Unknown', 7);
+  static MTGCardMainType get creature => MTGCardMainType('creature', 'Creature', 0);
+  static MTGCardMainType get enchantment => MTGCardMainType('enchantment', 'Enchantment', 1);
+  static MTGCardMainType get land => MTGCardMainType('land', 'Land', 2);
+  static MTGCardMainType get artifact => MTGCardMainType('artifact', 'Artifact', 3);
+  static MTGCardMainType get instant => MTGCardMainType('instant', 'Instant', 4);
+  static MTGCardMainType get sorcery => MTGCardMainType('sorcery', 'Sorcery', 5);
+  static MTGCardMainType get planeswalker => MTGCardMainType('planeswalker', 'Planeswalker', 6);
+  static MTGCardMainType get unknown => MTGCardMainType('unknown', 'Unknown', 7);
 
   static MTGCardMainType getTypeFromName(String type) {
     switch (type) {
@@ -231,7 +231,7 @@ class MTGCardMainType extends MTGCardType {
 class MTGCardSubType extends MTGField {
   MTGCardSubType(String name, String display, int sortOrder) : super(name, display, sortOrder);
 
-  static MTGCardSubType unknown = MTGCardSubType('unknown', 'Unknown', 255);
+  static MTGCardSubType get unknown => MTGCardSubType('unknown', 'Unknown', 255);
 
   MTGCardSubType copyWith({String? name, String? display, int? sortOrder}) {
     return MTGCardSubType(
@@ -261,7 +261,7 @@ class MTGCreatureSubType extends MTGCardSubType {
     );
   }
 
-  static MTGCreatureSubType unknown = MTGCreatureSubType('unknown', 'Unknown', 0);
+  static MTGCreatureSubType get unknown => MTGCreatureSubType('unknown', 'Unknown', 0);
 
   @override
   MTGCardSubType copyWith({String? name, String? display, int? sortOrder}) {
@@ -308,10 +308,10 @@ class MTGEnchantmentSubType extends MTGCardSubType {
     );
   }
 
-  static MTGEnchantmentSubType aura = MTGEnchantmentSubType('aura', 'Aura', 0);
-  static MTGEnchantmentSubType curse = MTGEnchantmentSubType('curse', 'Curse', 1);
-  static MTGEnchantmentSubType shrine = MTGEnchantmentSubType('shrine', 'Shrine', 2);
-  static MTGEnchantmentSubType unknown = MTGEnchantmentSubType('unknown', 'Unknown', 3);
+  static MTGEnchantmentSubType get aura => MTGEnchantmentSubType('aura', 'Aura', 0);
+  static MTGEnchantmentSubType get curse => MTGEnchantmentSubType('curse', 'Curse', 1);
+  static MTGEnchantmentSubType get shrine => MTGEnchantmentSubType('shrine', 'Shrine', 2);
+  static MTGEnchantmentSubType get unknown => MTGEnchantmentSubType('unknown', 'Unknown', 3);
 
   static MTGEnchantmentSubType getSubTypeFromName(String subType) {
     switch (subType) {
@@ -380,11 +380,11 @@ class MTGLandSubType extends MTGCardSubType {
     );
   }
 
-  static MTGLandSubType basic = MTGLandSubType('basic', 'Basic', 0);
-  static MTGLandSubType legendary = MTGLandSubType('legendary', 'Legendary', 1);
-  static MTGLandSubType snow = MTGLandSubType('snow', 'Snow', 2);
-  static MTGLandSubType world = MTGLandSubType('world', 'World', 3);
-  static MTGLandSubType unknown = MTGLandSubType('unknown', 'Unknown', 4);
+  static MTGLandSubType get basic => MTGLandSubType('basic', 'Basic', 0);
+  static MTGLandSubType get legendary => MTGLandSubType('legendary', 'Legendary', 1);
+  static MTGLandSubType get snow => MTGLandSubType('snow', 'Snow', 2);
+  static MTGLandSubType get world => MTGLandSubType('world', 'World', 3);
+  static MTGLandSubType get unknown => MTGLandSubType('unknown', 'Unknown', 4);
 
   static MTGLandSubType getSubTypeFromName(String subType) {
     switch (subType) {
@@ -459,8 +459,8 @@ class MTGArtifactSubType extends MTGCardSubType {
     );
   }
 
-  static MTGArtifactSubType equipment = MTGArtifactSubType('equipment', 'Equipment', 0);
-  static MTGArtifactSubType unknown = MTGArtifactSubType('unknown', 'Unknown', 1);
+  static MTGArtifactSubType get equipment => MTGArtifactSubType('equipment', 'Equipment', 0);
+  static MTGArtifactSubType get unknown => MTGArtifactSubType('unknown', 'Unknown', 1);
 
   static MTGArtifactSubType getSubTypeFromName(String subType) {
     switch (subType) {
@@ -500,7 +500,7 @@ class MTGInstantSubType extends MTGCardSubType {
     );
   }
 
-  static MTGInstantSubType unknown = MTGInstantSubType('unknown', 'Unknown', 0);
+  static MTGInstantSubType get unknown => MTGInstantSubType('unknown', 'Unknown', 0);
 
   static MTGInstantSubType getSubTypeFromName(String subType) {
     return unknown;
@@ -547,7 +547,7 @@ class MTGSorcerySubType extends MTGCardSubType {
     );
   }
 
-  static MTGSorcerySubType unknown = MTGSorcerySubType('unknown', 'Unknown', 0);
+  static MTGSorcerySubType get unknown => MTGSorcerySubType('unknown', 'Unknown', 0);
 
   static MTGSorcerySubType getSubTypeFromName(String subType) {
     return unknown;
@@ -594,17 +594,17 @@ class MTGPlaneswalkerSubType extends MTGCardSubType {
     );
   }
 
-  static MTGPlaneswalkerSubType ajani = MTGPlaneswalkerSubType('ajani', 'Ajani', 0);
-  static MTGPlaneswalkerSubType chandra = MTGPlaneswalkerSubType('chandra', 'Chandra', 1);
-  static MTGPlaneswalkerSubType domri = MTGPlaneswalkerSubType('domri', 'Domri', 2);
-  static MTGPlaneswalkerSubType elspeth = MTGPlaneswalkerSubType('elspeth', 'Elspeth', 3);
-  static MTGPlaneswalkerSubType garruk = MTGPlaneswalkerSubType('garruk', 'Garruk', 4);
-  static MTGPlaneswalkerSubType jace = MTGPlaneswalkerSubType('jace', 'Jace', 5);
-  static MTGPlaneswalkerSubType karn = MTGPlaneswalkerSubType('karn', 'Karn', 6);
-  static MTGPlaneswalkerSubType nissa = MTGPlaneswalkerSubType('nissa', 'Nissa', 7);
-  static MTGPlaneswalkerSubType sorin = MTGPlaneswalkerSubType('sorin', 'Sorin', 8);
-  static MTGPlaneswalkerSubType teferi = MTGPlaneswalkerSubType('teferi', 'Teferi', 9);
-  static MTGPlaneswalkerSubType unknown = MTGPlaneswalkerSubType('unknown', 'Unknown', 10);
+  static MTGPlaneswalkerSubType get ajani => MTGPlaneswalkerSubType('ajani', 'Ajani', 0);
+  static MTGPlaneswalkerSubType get chandra => MTGPlaneswalkerSubType('chandra', 'Chandra', 1);
+  static MTGPlaneswalkerSubType get domri => MTGPlaneswalkerSubType('domri', 'Domri', 2);
+  static MTGPlaneswalkerSubType get elspeth => MTGPlaneswalkerSubType('elspeth', 'Elspeth', 3);
+  static MTGPlaneswalkerSubType get garruk => MTGPlaneswalkerSubType('garruk', 'Garruk', 4);
+  static MTGPlaneswalkerSubType get jace => MTGPlaneswalkerSubType('jace', 'Jace', 5);
+  static MTGPlaneswalkerSubType get karn => MTGPlaneswalkerSubType('karn', 'Karn', 6);
+  static MTGPlaneswalkerSubType get nissa => MTGPlaneswalkerSubType('nissa', 'Nissa', 7);
+  static MTGPlaneswalkerSubType get sorin => MTGPlaneswalkerSubType('sorin', 'Sorin', 8);
+  static MTGPlaneswalkerSubType get teferi => MTGPlaneswalkerSubType('teferi', 'Teferi', 9);
+  static MTGPlaneswalkerSubType get unknown => MTGPlaneswalkerSubType('unknown', 'Unknown', 10);
 
   static MTGPlaneswalkerSubType getSubTypeFromName(String subType) {
     switch (subType) {
@@ -721,7 +721,7 @@ class MTGCardTypeLine extends MTGField {
     return _MTGCardTypeParser.parseCardTypeLine(typeLine);
   }
 
-  static MTGCardTypeLine unknown = MTGCardTypeLine([MTGCardType.unknown], [MTGCardSubType.unknown]);
+  static MTGCardTypeLine get unknown => MTGCardTypeLine([MTGCardType.unknown], [MTGCardSubType.unknown]);
 
   @override
   Map<String, dynamic> toJson() {
