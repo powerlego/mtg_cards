@@ -7,7 +7,7 @@ class FinishesSelection extends StatefulWidget {
     required this.card,
     required this.onChanged,
   });
-  final MTGCard card;
+  final MTGCardOld card;
   final Function(String?)? onChanged;
 
   @override

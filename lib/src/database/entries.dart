@@ -5,7 +5,7 @@ import 'package:mongo_dart/mongo_dart.dart';
 
 class CardEntry {
   final ObjectId id;
-  final MTGCard card;
+  final MTGCardOld card;
   final int quantity;
   final String finish;
   final Decimal price;
@@ -22,7 +22,7 @@ class CardEntry {
   CardEntry.empty()
       : this(
           id: ObjectId(),
-          card: MTGCard.empty(),
+          card: MTGCardOld.empty(),
           quantity: 0,
           finish: '',
           price: Decimal.zero,
@@ -32,7 +32,7 @@ class CardEntry {
   factory CardEntry.fromJson(Map<String, dynamic> json) {
     return CardEntry(
       id: (json["_id"] is ObjectId) ? json["_id"] : ObjectId.fromHexString(json["_id"]["\$oid"]),
-      card: MTGCard.fromJson(json["card"]),
+      card: MTGCardOld.fromJson(json["card"]),
       quantity: json["quantity"],
       finish: json["finish"],
       price: (json["price"] is Decimal)
@@ -62,7 +62,7 @@ class CardEntry {
 
   CardEntry copyWith({
     ObjectId? id,
-    MTGCard? card,
+    MTGCardOld? card,
     int? quantity,
     String? finish,
     Decimal? price,
@@ -109,7 +109,7 @@ class CurrencyEntry {
 
   Map<String, dynamic> toJson() => {
         '_id': {'\$oid': id.toHexString()},
-        'currency': currency,
+        'currency': currency.toLowerCase(),
         'date': date.toIso8601String(),
         'exchangeRate': exchangeRate,
       };

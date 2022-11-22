@@ -19,7 +19,7 @@ const double fontSize = 17;
 class CardDetailsSearch extends StatelessWidget {
   const CardDetailsSearch({Key? key, required this.card}) : super(key: key);
 
-  final MTGCard card;
+  final MTGCardOld card;
 
   void showAddDialog(BuildContext context) async {
     final result = await showDialog<CardEntry>(
@@ -452,7 +452,7 @@ class CardDetailsCollection extends StatefulWidget {
 
 class _CardDetailsCollectionState extends State<CardDetailsCollection> {
   int _quantity = 1;
-  MTGCard _card = MTGCard.empty();
+  MTGCardOld _card = MTGCardOld.empty();
 
   @override
   void initState() {
@@ -1019,7 +1019,7 @@ class CardLegalities extends StatelessWidget {
     required this.card,
   }) : super(key: key);
 
-  final MTGCard card;
+  final MTGCardOld card;
 
   @override
   Widget build(BuildContext context) {
@@ -1077,7 +1077,7 @@ class CardPrices extends StatelessWidget {
     required this.card,
   }) : super(key: key);
 
-  final MTGCard card;
+  final MTGCardOld card;
 
   @override
   Widget build(BuildContext context) {

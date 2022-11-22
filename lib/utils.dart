@@ -16,10 +16,10 @@ class Utils {
     }
   }
 
-  static Future<MTGCard> refreshCard(MTGCard card) async {
+  static Future<MTGCardOld> refreshCard(MTGCardOld card) async {
     final response = await http.get(card.cardUrl);
     if (response.statusCode == 200) {
-      return MTGCard.fromJson(jsonDecode(response.body)).copyWith(isFoil: card.isFoil);
+      return MTGCardOld.fromJson(jsonDecode(response.body)).copyWith(isFoil: card.isFoil);
     } else {
       throw Exception('Failed to load card');
     }
@@ -419,21 +419,6 @@ class Utils {
       }
     } else {
       throw Exception('Failed to load exchange rates');
-    }
-  }
-
-  static String convertRarityOptionToInternal(String option) {
-    switch (option) {
-      case 'Common':
-        return 'common';
-      case 'Uncommon':
-        return 'uncommon';
-      case 'Rare':
-        return 'rare';
-      case 'Mythic Rare':
-        return 'mythic';
-      default:
-        return 'common';
     }
   }
 }
