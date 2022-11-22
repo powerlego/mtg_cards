@@ -7,7 +7,7 @@ import 'package:mtg_cards/keys.dart';
 
 /// A database for storing the collection of Magic: The Gathering cards
 class CardDatabaseImpl extends Database {
-  final String connectionString = '$webConnectionString/cards';
+  final String _connectionString = '$webConnectionString/cards';
 
   CardDatabaseImpl();
 
@@ -22,7 +22,7 @@ class CardDatabaseImpl extends Database {
   @override
   Future<List<Map<String, dynamic>>> getCollection() async {
     Console console = window.console;
-    final response = await HttpRequest.request("$connectionString/collection/", method: 'GET').then(
+    final response = await HttpRequest.request("$_connectionString/collection/", method: 'GET').then(
       (HttpRequest response) {
         if (response.status == HttpStatus.ok) {
           return response.response as String;
@@ -48,7 +48,7 @@ class CardDatabaseImpl extends Database {
     Console console = window.console;
     CardEntry entry = document as CardEntry;
     await HttpRequest.request(
-      "$connectionString/insert/",
+      "$_connectionString/insert/",
       method: "POST",
       sendData: jsonEncode(entry.toJson()),
       requestHeaders: {"Content-Type": "application/json"},
@@ -74,7 +74,7 @@ class CardDatabaseImpl extends Database {
       entries.add(entry.toJson());
     }
     await HttpRequest.request(
-      "$connectionString/insert_all/",
+      "$_connectionString/insert_all/",
       method: "POST",
       sendData: jsonEncode(entries),
       requestHeaders: {"Content-Type": "application/json"},
@@ -100,7 +100,7 @@ class CardDatabaseImpl extends Database {
       "update": entry.toJson(),
     };
     await HttpRequest.request(
-      "$connectionString/update/",
+      "$_connectionString/update/",
       method: "POST",
       sendData: jsonEncode(payload),
       requestHeaders: {"Content-Type": "application/json"},
@@ -122,7 +122,7 @@ class CardDatabaseImpl extends Database {
     Console console = window.console;
     CardEntry entry = document as CardEntry;
     await HttpRequest.request(
-      "$connectionString/delete/",
+      "$_connectionString/delete/",
       method: "POST",
       sendData: jsonEncode(entry.toJson()),
       requestHeaders: {"Content-Type": "application/json"},
@@ -146,7 +146,7 @@ class CardDatabaseImpl extends Database {
 
   Future<int> totalCardCount() async {
     Console console = window.console;
-    final response = await HttpRequest.request("$connectionString/get_total_card_count/", method: "GET").then(
+    final response = await HttpRequest.request("$_connectionString/get_total_card_count/", method: "GET").then(
       (HttpRequest response) {
         if (response.status == HttpStatus.ok) {
           return response.response as String;
@@ -168,7 +168,7 @@ class CardDatabaseImpl extends Database {
   Future<bool> checkDuplicate(CardEntry card) async {
     Console console = window.console;
     final result = await HttpRequest.request(
-      "$connectionString/check_duplicates/",
+      "$_connectionString/check_duplicates/",
       method: "POST",
       sendData: jsonEncode(card.toJson()),
       requestHeaders: {"Content-Type": "application/json"},
@@ -189,7 +189,7 @@ class CardDatabaseImpl extends Database {
   /// Gets the most expensive card in the database
   Future<CardEntry> getMostExpensiveCard() async {
     Console console = window.console;
-    String response = await HttpRequest.request("$connectionString/get_most_expensive_card/", method: "GET").then(
+    String response = await HttpRequest.request("$_connectionString/get_most_expensive_card/", method: "GET").then(
       (HttpRequest response) {
         if (response.status == HttpStatus.ok) {
           return response.response as String;
@@ -211,7 +211,7 @@ class CardDatabaseImpl extends Database {
 
   Future<String> getTotalCollectionPrice() async {
     Console console = window.console;
-    String response = await HttpRequest.request("$connectionString/get_total_collection_price/", method: "GET").then(
+    String response = await HttpRequest.request("$_connectionString/get_total_collection_price/", method: "GET").then(
       (HttpRequest response) {
         if (response.status == HttpStatus.ok) {
           return response.response as String;
@@ -233,7 +233,7 @@ class CardDatabaseImpl extends Database {
 
   Future<Map<String, int>> getColorCount() async {
     Console console = window.console;
-    String response = await HttpRequest.request("$connectionString/get_color_count/", method: "GET").then(
+    String response = await HttpRequest.request("$_connectionString/get_color_count/", method: "GET").then(
       (HttpRequest response) {
         if (response.status == HttpStatus.ok) {
           return response.response as String;

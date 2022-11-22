@@ -10,8 +10,8 @@ class CurrencyPage extends StatefulWidget {
 }
 
 class _CurrencyPageState extends State<CurrencyPage> {
-  late String currency;
-  final List<String> currencies = [
+  late String _currency;
+  final List<String> _currencies = [
     "aed",
     "afn",
     "all",
@@ -186,7 +186,7 @@ class _CurrencyPageState extends State<CurrencyPage> {
   @override
   void initState() {
     super.initState();
-    currency = settings.currency;
+    _currency = settings.currency;
   }
 
   @override
@@ -201,11 +201,11 @@ class _CurrencyPageState extends State<CurrencyPage> {
             Expanded(
               child: ListView(
                 children: [
-                  for (final currency in currencies)
+                  for (final currency in _currencies)
                     ListTile.selectable(
                       title: Text(currency.toUpperCase()),
-                      selected: this.currency == currency,
-                      onPressed: () => setState(() => this.currency = currency),
+                      selected: _currency == currency,
+                      onPressed: () => setState(() => _currency = currency),
                     ),
                 ],
               ),
@@ -225,7 +225,7 @@ class _CurrencyPageState extends State<CurrencyPage> {
                   Expanded(
                     child: Button(
                       onPressed: () {
-                        settingsNotifier.currency = currency;
+                        settingsNotifier.currency = _currency;
                         settings.saveSettings();
                         Navigator.of(context).pop();
                       },
