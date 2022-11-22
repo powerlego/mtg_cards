@@ -359,10 +359,11 @@ class _CardCollectionState extends State<CardCollection> {
 
                             for (final item in items) {
                               if (collectionNotifier.filteringRarity) {
-                                if (collectionNotifier.rarityFilter[item.card.rarity.toLowerCase()]! &&
+                                if (collectionNotifier.rarityFilter[MTGRarity.getRarityFromName(item.card.rarity)]! &&
                                     !filteredList.contains(item)) {
                                   filteredList.add(item);
-                                } else if (!collectionNotifier.rarityFilter[item.card.rarity.toLowerCase()]! &&
+                                } else if (!collectionNotifier
+                                        .rarityFilter[MTGRarity.getRarityFromName(item.card.rarity)]! &&
                                     filteredList.contains(item)) {
                                   filteredList.remove(item);
                                 }
