@@ -39,6 +39,7 @@ cards.json
 **/.env
 **/*.sqlite*
 pubspec.lock
+dartdoc_options.yaml
 
 # Symbolication related
 app.*.symbols
