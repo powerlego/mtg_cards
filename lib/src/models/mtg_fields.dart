@@ -10,7 +10,12 @@ abstract class MTGField extends Comparable {
 
   @override
   int compareTo(other) {
-    return sortOrder.compareTo(other.sortOrder);
+    final result = sortOrder.compareTo(other.sortOrder);
+    if (result == 0) {
+      return name.compareTo(other.name);
+    } else {
+      return result;
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -803,6 +808,16 @@ class MTGPrice extends MTGField {
   @override
   String toString() {
     return '$display: $price';
+  }
+
+  @override
+  int compareTo(other) {
+    final result = price.compareTo(other.price);
+    if (result == 0) {
+      return sortOrder.compareTo(other.sortOrder);
+    } else {
+      return result;
+    }
   }
 
   /// Checks if this [MTGPrice] is equal to another [MTGPrice]
