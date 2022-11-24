@@ -276,13 +276,13 @@ class MTGCardMainType extends MTGCardType {
   }
 }
 
-class MTGCardSubType extends MTGField {
-  static MTGCardSubType get unknown => MTGCardSubType('unknown', 'Unknown', 255);
+class MTGCardSubtype extends MTGField {
+  static MTGCardSubtype get unknown => MTGCardSubtype('unknown', 'Unknown', 255);
 
-  MTGCardSubType(String name, String display, int sortOrder) : super(name, display, sortOrder);
+  MTGCardSubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
 
-  MTGCardSubType copyWith({String? name, String? display, int? sortOrder}) {
-    return MTGCardSubType(
+  MTGCardSubtype copyWith({String? name, String? display, int? sortOrder}) {
+    return MTGCardSubtype(
       name ?? this.name,
       display ?? this.display,
       sortOrder ?? this.sortOrder,
@@ -291,343 +291,343 @@ class MTGCardSubType extends MTGField {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) || other is MTGCardSubType && other.name == name;
+    return identical(this, other) || other is MTGCardSubtype && other.name == name;
   }
 
   @override
   int get hashCode => name.hashCode;
 }
 
-class MTGCreatureSubType extends MTGCardSubType {
-  static MTGCreatureSubType get advisor => MTGCreatureSubType('advisor', 'Advisor', 0);
-  static MTGCreatureSubType get aetherborn => MTGCreatureSubType('aetherborn', 'Aetherborn', 1);
-  static MTGCreatureSubType get alicorn => MTGCreatureSubType('alicorn', 'Alicorn', 2);
-  static MTGCreatureSubType get alien => MTGCreatureSubType('alien', 'Alien', 3);
-  static MTGCreatureSubType get ally => MTGCreatureSubType('ally', 'Ally', 4);
-  static MTGCreatureSubType get angel => MTGCreatureSubType('angel', 'Angel', 5);
-  static MTGCreatureSubType get antelope => MTGCreatureSubType('antelope', 'Antelope', 6);
-  static MTGCreatureSubType get ape => MTGCreatureSubType('ape', 'Ape', 7);
-  static MTGCreatureSubType get archer => MTGCreatureSubType('archer', 'Archer', 8);
-  static MTGCreatureSubType get archon => MTGCreatureSubType('archon', 'Archon', 9);
-  static MTGCreatureSubType get army => MTGCreatureSubType('army', 'Army', 10);
-  static MTGCreatureSubType get art => MTGCreatureSubType('art', 'Art', 11);
-  static MTGCreatureSubType get artificer => MTGCreatureSubType('artificer', 'Artificer', 12);
-  static MTGCreatureSubType get assassin => MTGCreatureSubType('assassin', 'Assassin', 13);
-  static MTGCreatureSubType get assemblyworker => MTGCreatureSubType('assemblyworker', 'Assembly-Worker', 14);
-  static MTGCreatureSubType get astartes => MTGCreatureSubType('astartes', 'Astartes', 15);
-  static MTGCreatureSubType get atog => MTGCreatureSubType('atog', 'Atog', 16);
-  static MTGCreatureSubType get aurochs => MTGCreatureSubType('aurochs', 'Aurochs', 17);
-  static MTGCreatureSubType get autobot => MTGCreatureSubType('autobot', 'Autobot', 18);
-  static MTGCreatureSubType get avatar => MTGCreatureSubType('avatar', 'Avatar', 19);
-  static MTGCreatureSubType get azra => MTGCreatureSubType('azra', 'Azra', 20);
-  static MTGCreatureSubType get badger => MTGCreatureSubType('badger', 'Badger', 21);
-  static MTGCreatureSubType get balloon => MTGCreatureSubType('balloon', 'Balloon', 22);
-  static MTGCreatureSubType get barbarian => MTGCreatureSubType('barbarian', 'Barbarian', 23);
-  static MTGCreatureSubType get bard => MTGCreatureSubType('bard', 'Bard', 24);
-  static MTGCreatureSubType get basilisk => MTGCreatureSubType('basilisk', 'Basilisk', 25);
-  static MTGCreatureSubType get bat => MTGCreatureSubType('bat', 'Bat', 26);
-  static MTGCreatureSubType get bear => MTGCreatureSubType('bear', 'Bear', 27);
-  static MTGCreatureSubType get beast => MTGCreatureSubType('beast', 'Beast', 28);
-  static MTGCreatureSubType get beaver => MTGCreatureSubType('beaver', 'Beaver', 29);
-  static MTGCreatureSubType get beeble => MTGCreatureSubType('beeble', 'Beeble', 30);
-  static MTGCreatureSubType get beholder => MTGCreatureSubType('beholder', 'Beholder', 31);
-  static MTGCreatureSubType get berserker => MTGCreatureSubType('berserker', 'Berserker', 32);
-  static MTGCreatureSubType get bird => MTGCreatureSubType('bird', 'Bird', 33);
-  static MTGCreatureSubType get blinkmoth => MTGCreatureSubType('blinkmoth', 'Blinkmoth', 34);
-  static MTGCreatureSubType get boar => MTGCreatureSubType('boar', 'Boar', 35);
-  static MTGCreatureSubType get brainiac => MTGCreatureSubType('brainiac', 'Brainiac', 36);
-  static MTGCreatureSubType get bringer => MTGCreatureSubType('bringer', 'Bringer', 37);
-  static MTGCreatureSubType get brushwagg => MTGCreatureSubType('brushwagg', 'Brushwagg', 38);
-  static MTGCreatureSubType get bureaucrat => MTGCreatureSubType('bureaucrat', 'Bureaucrat', 39);
-  static MTGCreatureSubType get ctan => MTGCreatureSubType('ctan', 'C\'tan', 40);
-  static MTGCreatureSubType get camarid => MTGCreatureSubType('camarid', 'Camarid', 41);
-  static MTGCreatureSubType get camel => MTGCreatureSubType('camel', 'Camel', 42);
-  static MTGCreatureSubType get caribou => MTGCreatureSubType('caribou', 'Caribou', 43);
-  static MTGCreatureSubType get carrier => MTGCreatureSubType('carrier', 'Carrier', 44);
-  static MTGCreatureSubType get cat => MTGCreatureSubType('cat', 'Cat', 45);
-  static MTGCreatureSubType get centaur => MTGCreatureSubType('centaur', 'Centaur', 46);
-  static MTGCreatureSubType get cephalid => MTGCreatureSubType('cephalid', 'Cephalid', 47);
-  static MTGCreatureSubType get chameleon => MTGCreatureSubType('chameleon', 'Chameleon', 48);
-  static MTGCreatureSubType get chicken => MTGCreatureSubType('chicken', 'Chicken', 49);
-  static MTGCreatureSubType get child => MTGCreatureSubType('child', 'Child', 50);
-  static MTGCreatureSubType get chimera => MTGCreatureSubType('chimera', 'Chimera', 51);
-  static MTGCreatureSubType get citizen => MTGCreatureSubType('citizen', 'Citizen', 52);
-  static MTGCreatureSubType get clamfolk => MTGCreatureSubType('clamfolk', 'Clamfolk', 53);
-  static MTGCreatureSubType get cleric => MTGCreatureSubType('cleric', 'Cleric', 54);
-  static MTGCreatureSubType get clown => MTGCreatureSubType('clown', 'Clown', 55);
-  static MTGCreatureSubType get cockatrice => MTGCreatureSubType('cockatrice', 'Cockatrice', 56);
-  static MTGCreatureSubType get construct => MTGCreatureSubType('construct', 'Construct', 57);
-  static MTGCreatureSubType get cow => MTGCreatureSubType('cow', 'Cow', 58);
-  static MTGCreatureSubType get coward => MTGCreatureSubType('coward', 'Coward', 59);
-  static MTGCreatureSubType get crab => MTGCreatureSubType('crab', 'Crab', 60);
-  static MTGCreatureSubType get crocodile => MTGCreatureSubType('crocodile', 'Crocodile', 61);
-  static MTGCreatureSubType get custodes => MTGCreatureSubType('custodes', 'Custodes', 62);
-  static MTGCreatureSubType get cyborg => MTGCreatureSubType('cyborg', 'Cyborg', 63);
-  static MTGCreatureSubType get cyclops => MTGCreatureSubType('cyclops', 'Cyclops', 64);
-  static MTGCreatureSubType get dauthi => MTGCreatureSubType('dauthi', 'Dauthi', 65);
-  static MTGCreatureSubType get deer => MTGCreatureSubType('deer', 'Deer', 66);
-  static MTGCreatureSubType get demigod => MTGCreatureSubType('demigod', 'Demigod', 67);
-  static MTGCreatureSubType get demon => MTGCreatureSubType('demon', 'Demon', 68);
-  static MTGCreatureSubType get deserter => MTGCreatureSubType('deserter', 'Deserter', 69);
-  static MTGCreatureSubType get designer => MTGCreatureSubType('designer', 'Designer', 70);
-  static MTGCreatureSubType get devil => MTGCreatureSubType('devil', 'Devil', 71);
-  static MTGCreatureSubType get dinosaur => MTGCreatureSubType('dinosaur', 'Dinosaur', 72);
-  static MTGCreatureSubType get djinn => MTGCreatureSubType('djinn', 'Djinn', 73);
-  static MTGCreatureSubType get dog => MTGCreatureSubType('dog', 'Dog', 74);
-  static MTGCreatureSubType get donkey => MTGCreatureSubType('donkey', 'Donkey', 75);
-  static MTGCreatureSubType get dragon => MTGCreatureSubType('dragon', 'Dragon', 76);
-  static MTGCreatureSubType get drake => MTGCreatureSubType('drake', 'Drake', 77);
-  static MTGCreatureSubType get dreadnought => MTGCreatureSubType('dreadnought', 'Dreadnought', 78);
-  static MTGCreatureSubType get drone => MTGCreatureSubType('drone', 'Drone', 79);
-  static MTGCreatureSubType get druid => MTGCreatureSubType('druid', 'Druid', 80);
-  static MTGCreatureSubType get dryad => MTGCreatureSubType('dryad', 'Dryad', 81);
-  static MTGCreatureSubType get dwarf => MTGCreatureSubType('dwarf', 'Dwarf', 82);
-  static MTGCreatureSubType get efreet => MTGCreatureSubType('efreet', 'Efreet', 83);
-  static MTGCreatureSubType get egg => MTGCreatureSubType('egg', 'Egg', 84);
-  static MTGCreatureSubType get elder => MTGCreatureSubType('elder', 'Elder', 85);
-  static MTGCreatureSubType get eldrazi => MTGCreatureSubType('eldrazi', 'Eldrazi', 86);
-  static MTGCreatureSubType get elemental => MTGCreatureSubType('elemental', 'Elemental', 87);
-  static MTGCreatureSubType get elementalQuestion => MTGCreatureSubType('elementalQuestion', 'Elemental?', 88);
-  static MTGCreatureSubType get elephant => MTGCreatureSubType('elephant', 'Elephant', 89);
-  static MTGCreatureSubType get elf => MTGCreatureSubType('elf', 'Elf', 90);
-  static MTGCreatureSubType get elk => MTGCreatureSubType('elk', 'Elk', 91);
-  static MTGCreatureSubType get elves => MTGCreatureSubType('elves', 'Elves', 92);
-  static MTGCreatureSubType get employee => MTGCreatureSubType('employee', 'Employee', 93);
-  static MTGCreatureSubType get etiquette => MTGCreatureSubType('etiquette', 'Etiquette', 94);
-  static MTGCreatureSubType get eye => MTGCreatureSubType('eye', 'Eye', 95);
-  static MTGCreatureSubType get faerie => MTGCreatureSubType('faerie', 'Faerie', 96);
-  static MTGCreatureSubType get ferret => MTGCreatureSubType('ferret', 'Ferret', 97);
-  static MTGCreatureSubType get fish => MTGCreatureSubType('fish', 'Fish', 98);
-  static MTGCreatureSubType get flagbearer => MTGCreatureSubType('flagbearer', 'Flagbearer', 99);
-  static MTGCreatureSubType get fox => MTGCreatureSubType('fox', 'Fox', 100);
-  static MTGCreatureSubType get fractal => MTGCreatureSubType('fractal', 'Fractal', 101);
-  static MTGCreatureSubType get frog => MTGCreatureSubType('frog', 'Frog', 102);
-  static MTGCreatureSubType get fungus => MTGCreatureSubType('fungus', 'Fungus', 103);
-  static MTGCreatureSubType get gamer => MTGCreatureSubType('gamer', 'Gamer', 104);
-  static MTGCreatureSubType get gargoyle => MTGCreatureSubType('gargoyle', 'Gargoyle', 105);
-  static MTGCreatureSubType get germ => MTGCreatureSubType('germ', 'Germ', 106);
-  static MTGCreatureSubType get giant => MTGCreatureSubType('giant', 'Giant', 107);
-  static MTGCreatureSubType get gith => MTGCreatureSubType('gith', 'Gith', 108);
-  static MTGCreatureSubType get gnoll => MTGCreatureSubType('gnoll', 'Gnoll', 109);
-  static MTGCreatureSubType get gnome => MTGCreatureSubType('gnome', 'Gnome', 110);
-  static MTGCreatureSubType get goat => MTGCreatureSubType('goat', 'Goat', 111);
-  static MTGCreatureSubType get goblin => MTGCreatureSubType('goblin', 'Goblin', 112);
-  static MTGCreatureSubType get god => MTGCreatureSubType('god', 'God', 113);
-  static MTGCreatureSubType get golem => MTGCreatureSubType('golem', 'Golem', 114);
-  static MTGCreatureSubType get gorgon => MTGCreatureSubType('gorgon', 'Gorgon', 115);
-  static MTGCreatureSubType get grandchild => MTGCreatureSubType('grandchild', 'Grandchild', 116);
-  static MTGCreatureSubType get graveborn => MTGCreatureSubType('graveborn', 'Graveborn', 117);
-  static MTGCreatureSubType get gremlin => MTGCreatureSubType('gremlin', 'Gremlin', 118);
-  static MTGCreatureSubType get griffin => MTGCreatureSubType('griffin', 'Griffin', 119);
-  static MTGCreatureSubType get guest => MTGCreatureSubType('guest', 'Guest', 120);
-  static MTGCreatureSubType get gus => MTGCreatureSubType('gus', 'Gus', 121);
-  static MTGCreatureSubType get hag => MTGCreatureSubType('hag', 'Hag', 122);
-  static MTGCreatureSubType get halfling => MTGCreatureSubType('halfling', 'Halfling', 123);
-  static MTGCreatureSubType get hamster => MTGCreatureSubType('hamster', 'Hamster', 124);
-  static MTGCreatureSubType get harpy => MTGCreatureSubType('harpy', 'Harpy', 125);
-  static MTGCreatureSubType get hatificer => MTGCreatureSubType('hatificer', 'Hatificer', 126);
-  static MTGCreatureSubType get head => MTGCreatureSubType('head', 'Head', 127);
-  static MTGCreatureSubType get hellion => MTGCreatureSubType('hellion', 'Hellion', 128);
-  static MTGCreatureSubType get hero => MTGCreatureSubType('hero', 'Hero', 129);
-  static MTGCreatureSubType get hippo => MTGCreatureSubType('hippo', 'Hippo', 130);
-  static MTGCreatureSubType get hippogriff => MTGCreatureSubType('hippogriff', 'Hippogriff', 131);
-  static MTGCreatureSubType get homarid => MTGCreatureSubType('homarid', 'Homarid', 132);
-  static MTGCreatureSubType get homunculus => MTGCreatureSubType('homunculus', 'Homunculus', 133);
-  static MTGCreatureSubType get hornet => MTGCreatureSubType('hornet', 'Hornet', 134);
-  static MTGCreatureSubType get horror => MTGCreatureSubType('horror', 'Horror', 135);
-  static MTGCreatureSubType get horse => MTGCreatureSubType('horse', 'Horse', 136);
-  static MTGCreatureSubType get human => MTGCreatureSubType('human', 'Human', 137);
-  static MTGCreatureSubType get hydra => MTGCreatureSubType('hydra', 'Hydra', 138);
-  static MTGCreatureSubType get hyena => MTGCreatureSubType('hyena', 'Hyena', 139);
-  static MTGCreatureSubType get illusion => MTGCreatureSubType('illusion', 'Illusion', 140);
-  static MTGCreatureSubType get imp => MTGCreatureSubType('imp', 'Imp', 141);
-  static MTGCreatureSubType get incarnation => MTGCreatureSubType('incarnation', 'Incarnation', 142);
-  static MTGCreatureSubType get inkling => MTGCreatureSubType('inkling', 'Inkling', 143);
-  static MTGCreatureSubType get inquisitor => MTGCreatureSubType('inquisitor', 'Inquisitor', 144);
-  static MTGCreatureSubType get insect => MTGCreatureSubType('insect', 'Insect', 145);
-  static MTGCreatureSubType get jackal => MTGCreatureSubType('jackal', 'Jackal', 146);
-  static MTGCreatureSubType get jellyfish => MTGCreatureSubType('jellyfish', 'Jellyfish', 147);
-  static MTGCreatureSubType get juggernaut => MTGCreatureSubType('juggernaut', 'Juggernaut', 148);
-  static MTGCreatureSubType get kangaroo => MTGCreatureSubType('kangaroo', 'Kangaroo', 149);
-  static MTGCreatureSubType get kavu => MTGCreatureSubType('kavu', 'Kavu', 150);
-  static MTGCreatureSubType get killbot => MTGCreatureSubType('killbot', 'Killbot', 151);
-  static MTGCreatureSubType get kirin => MTGCreatureSubType('kirin', 'Kirin', 152);
-  static MTGCreatureSubType get kithkin => MTGCreatureSubType('kithkin', 'Kithkin', 153);
-  static MTGCreatureSubType get knight => MTGCreatureSubType('knight', 'Knight', 154);
-  static MTGCreatureSubType get kobold => MTGCreatureSubType('kobold', 'Kobold', 155);
-  static MTGCreatureSubType get kor => MTGCreatureSubType('kor', 'Kor', 156);
-  static MTGCreatureSubType get kraken => MTGCreatureSubType('kraken', 'Kraken', 157);
-  static MTGCreatureSubType get lady => MTGCreatureSubType('lady', 'Lady', 158);
-  static MTGCreatureSubType get lamia => MTGCreatureSubType('lamia', 'Lamia', 159);
-  static MTGCreatureSubType get lammasu => MTGCreatureSubType('lammasu', 'Lammasu', 160);
-  static MTGCreatureSubType get leech => MTGCreatureSubType('leech', 'Leech', 161);
-  static MTGCreatureSubType get leviathan => MTGCreatureSubType('leviathan', 'Leviathan', 162);
-  static MTGCreatureSubType get lhurgoyf => MTGCreatureSubType('lhurgoyf', 'Lhurgoyf', 163);
-  static MTGCreatureSubType get licid => MTGCreatureSubType('licid', 'Licid', 164);
-  static MTGCreatureSubType get lizard => MTGCreatureSubType('lizard', 'Lizard', 165);
-  static MTGCreatureSubType get lobster => MTGCreatureSubType('lobster', 'Lobster', 166);
-  static MTGCreatureSubType get mammoth => MTGCreatureSubType('mammoth', 'Mammoth', 167);
-  static MTGCreatureSubType get manticore => MTGCreatureSubType('manticore', 'Manticore', 168);
-  static MTGCreatureSubType get masticore => MTGCreatureSubType('masticore', 'Masticore', 169);
-  static MTGCreatureSubType get mercenary => MTGCreatureSubType('mercenary', 'Mercenary', 170);
-  static MTGCreatureSubType get merfolk => MTGCreatureSubType('merfolk', 'Merfolk', 171);
-  static MTGCreatureSubType get metathran => MTGCreatureSubType('metathran', 'Metathran', 172);
-  static MTGCreatureSubType get mime => MTGCreatureSubType('mime', 'Mime', 173);
-  static MTGCreatureSubType get minion => MTGCreatureSubType('minion', 'Minion', 174);
-  static MTGCreatureSubType get minotaur => MTGCreatureSubType('minotaur', 'Minotaur', 175);
-  static MTGCreatureSubType get mole => MTGCreatureSubType('mole', 'Mole', 176);
-  static MTGCreatureSubType get monger => MTGCreatureSubType('monger', 'Monger', 177);
-  static MTGCreatureSubType get mongoose => MTGCreatureSubType('mongoose', 'Mongoose', 178);
-  static MTGCreatureSubType get monk => MTGCreatureSubType('monk', 'Monk', 179);
-  static MTGCreatureSubType get monkey => MTGCreatureSubType('monkey', 'Monkey', 180);
-  static MTGCreatureSubType get moonfolk => MTGCreatureSubType('moonfolk', 'Moonfolk', 181);
-  static MTGCreatureSubType get mouse => MTGCreatureSubType('mouse', 'Mouse', 182);
-  static MTGCreatureSubType get mummy => MTGCreatureSubType('mummy', 'Mummy', 183);
-  static MTGCreatureSubType get mutant => MTGCreatureSubType('mutant', 'Mutant', 184);
-  static MTGCreatureSubType get myr => MTGCreatureSubType('myr', 'Myr', 185);
-  static MTGCreatureSubType get mystic => MTGCreatureSubType('mystic', 'Mystic', 186);
-  static MTGCreatureSubType get naga => MTGCreatureSubType('naga', 'Naga', 187);
-  static MTGCreatureSubType get nautilus => MTGCreatureSubType('nautilus', 'Nautilus', 188);
-  static MTGCreatureSubType get necron => MTGCreatureSubType('necron', 'Necron', 189);
-  static MTGCreatureSubType get nephilim => MTGCreatureSubType('nephilim', 'Nephilim', 190);
-  static MTGCreatureSubType get nightmare => MTGCreatureSubType('nightmare', 'Nightmare', 191);
-  static MTGCreatureSubType get nightstalker => MTGCreatureSubType('nightstalker', 'Nightstalker', 192);
-  static MTGCreatureSubType get ninja => MTGCreatureSubType('ninja', 'Ninja', 193);
-  static MTGCreatureSubType get noble => MTGCreatureSubType('noble', 'Noble', 194);
-  static MTGCreatureSubType get noggle => MTGCreatureSubType('noggle', 'Noggle', 195);
-  static MTGCreatureSubType get nomad => MTGCreatureSubType('nomad', 'Nomad', 196);
-  static MTGCreatureSubType get nymph => MTGCreatureSubType('nymph', 'Nymph', 197);
-  static MTGCreatureSubType get octopus => MTGCreatureSubType('octopus', 'Octopus', 198);
-  static MTGCreatureSubType get ogre => MTGCreatureSubType('ogre', 'Ogre', 199);
-  static MTGCreatureSubType get ooze => MTGCreatureSubType('ooze', 'Ooze', 200);
-  static MTGCreatureSubType get orb => MTGCreatureSubType('orb', 'Orb', 201);
-  static MTGCreatureSubType get orc => MTGCreatureSubType('orc', 'Orc', 202);
-  static MTGCreatureSubType get orgg => MTGCreatureSubType('orgg', 'Orgg', 203);
-  static MTGCreatureSubType get otter => MTGCreatureSubType('otter', 'Otter', 204);
-  static MTGCreatureSubType get ouphe => MTGCreatureSubType('ouphe', 'Ouphe', 205);
-  static MTGCreatureSubType get ox => MTGCreatureSubType('ox', 'Ox', 206);
-  static MTGCreatureSubType get oyster => MTGCreatureSubType('oyster', 'Oyster', 207);
-  static MTGCreatureSubType get pangolin => MTGCreatureSubType('pangolin', 'Pangolin', 208);
-  static MTGCreatureSubType get paratrooper => MTGCreatureSubType('paratrooper', 'Paratrooper', 209);
-  static MTGCreatureSubType get peasant => MTGCreatureSubType('peasant', 'Peasant', 210);
-  static MTGCreatureSubType get pegasus => MTGCreatureSubType('pegasus', 'Pegasus', 211);
-  static MTGCreatureSubType get pentavite => MTGCreatureSubType('pentavite', 'Pentavite', 212);
-  static MTGCreatureSubType get performer => MTGCreatureSubType('performer', 'Performer', 213);
-  static MTGCreatureSubType get pest => MTGCreatureSubType('pest', 'Pest', 214);
-  static MTGCreatureSubType get phelddagrif => MTGCreatureSubType('phelddagrif', 'Phelddagrif', 215);
-  static MTGCreatureSubType get phoenix => MTGCreatureSubType('phoenix', 'Phoenix', 216);
-  static MTGCreatureSubType get phyrexian => MTGCreatureSubType('phyrexian', 'Phyrexian', 217);
-  static MTGCreatureSubType get pilot => MTGCreatureSubType('pilot', 'Pilot', 218);
-  static MTGCreatureSubType get pincher => MTGCreatureSubType('pincher', 'Pincher', 219);
-  static MTGCreatureSubType get pirate => MTGCreatureSubType('pirate', 'Pirate', 220);
-  static MTGCreatureSubType get plant => MTGCreatureSubType('plant', 'Plant', 221);
-  static MTGCreatureSubType get porcupine => MTGCreatureSubType('porcupine', 'Porcupine', 222);
-  static MTGCreatureSubType get praetor => MTGCreatureSubType('praetor', 'Praetor', 223);
-  static MTGCreatureSubType get primarch => MTGCreatureSubType('primarch', 'Primarch', 224);
-  static MTGCreatureSubType get prism => MTGCreatureSubType('prism', 'Prism', 225);
-  static MTGCreatureSubType get processor => MTGCreatureSubType('processor', 'Processor', 226);
-  static MTGCreatureSubType get proper => MTGCreatureSubType('proper', 'Proper', 227);
-  static MTGCreatureSubType get rabbit => MTGCreatureSubType('rabbit', 'Rabbit', 228);
-  static MTGCreatureSubType get raccoon => MTGCreatureSubType('raccoon', 'Raccoon', 229);
-  static MTGCreatureSubType get ranger => MTGCreatureSubType('ranger', 'Ranger', 230);
-  static MTGCreatureSubType get rat => MTGCreatureSubType('rat', 'Rat', 231);
-  static MTGCreatureSubType get rebel => MTGCreatureSubType('rebel', 'Rebel', 232);
-  static MTGCreatureSubType get reflection => MTGCreatureSubType('reflection', 'Reflection', 233);
-  static MTGCreatureSubType get reveler => MTGCreatureSubType('reveler', 'Reveler', 234);
-  static MTGCreatureSubType get rhino => MTGCreatureSubType('rhino', 'Rhino', 235);
-  static MTGCreatureSubType get rigger => MTGCreatureSubType('rigger', 'Rigger', 236);
-  static MTGCreatureSubType get robot => MTGCreatureSubType('robot', 'Robot', 237);
-  static MTGCreatureSubType get rogue => MTGCreatureSubType('rogue', 'Rogue', 238);
-  static MTGCreatureSubType get sable => MTGCreatureSubType('sable', 'Sable', 239);
-  static MTGCreatureSubType get salamander => MTGCreatureSubType('salamander', 'Salamander', 240);
-  static MTGCreatureSubType get samurai => MTGCreatureSubType('samurai', 'Samurai', 241);
-  static MTGCreatureSubType get sand => MTGCreatureSubType('sand', 'Sand', 242);
-  static MTGCreatureSubType get saproling => MTGCreatureSubType('saproling', 'Saproling', 243);
-  static MTGCreatureSubType get satyr => MTGCreatureSubType('satyr', 'Satyr', 244);
-  static MTGCreatureSubType get scarecrow => MTGCreatureSubType('scarecrow', 'Scarecrow', 245);
-  static MTGCreatureSubType get scientist => MTGCreatureSubType('scientist', 'Scientist', 246);
-  static MTGCreatureSubType get scion => MTGCreatureSubType('scion', 'Scion', 247);
-  static MTGCreatureSubType get scorpion => MTGCreatureSubType('scorpion', 'Scorpion', 248);
-  static MTGCreatureSubType get scout => MTGCreatureSubType('scout', 'Scout', 249);
-  static MTGCreatureSubType get sculpture => MTGCreatureSubType('sculpture', 'Sculpture', 250);
-  static MTGCreatureSubType get serf => MTGCreatureSubType('serf', 'Serf', 251);
-  static MTGCreatureSubType get serpent => MTGCreatureSubType('serpent', 'Serpent', 252);
-  static MTGCreatureSubType get servo => MTGCreatureSubType('servo', 'Servo', 253);
-  static MTGCreatureSubType get shade => MTGCreatureSubType('shade', 'Shade', 254);
-  static MTGCreatureSubType get shaman => MTGCreatureSubType('shaman', 'Shaman', 255);
-  static MTGCreatureSubType get shapeshifter => MTGCreatureSubType('shapeshifter', 'Shapeshifter', 256);
-  static MTGCreatureSubType get shark => MTGCreatureSubType('shark', 'Shark', 257);
-  static MTGCreatureSubType get sheep => MTGCreatureSubType('sheep', 'Sheep', 258);
-  static MTGCreatureSubType get ship => MTGCreatureSubType('ship', 'Ship', 259);
-  static MTGCreatureSubType get siren => MTGCreatureSubType('siren', 'Siren', 260);
-  static MTGCreatureSubType get skeleton => MTGCreatureSubType('skeleton', 'Skeleton', 261);
-  static MTGCreatureSubType get slith => MTGCreatureSubType('slith', 'Slith', 262);
-  static MTGCreatureSubType get sliver => MTGCreatureSubType('sliver', 'Sliver', 263);
-  static MTGCreatureSubType get slug => MTGCreatureSubType('slug', 'Slug', 264);
-  static MTGCreatureSubType get snake => MTGCreatureSubType('snake', 'Snake', 265);
-  static MTGCreatureSubType get soldier => MTGCreatureSubType('soldier', 'Soldier', 266);
-  static MTGCreatureSubType get soltari => MTGCreatureSubType('soltari', 'Soltari', 267);
-  static MTGCreatureSubType get spawn => MTGCreatureSubType('spawn', 'Spawn', 268);
-  static MTGCreatureSubType get specter => MTGCreatureSubType('specter', 'Specter', 269);
-  static MTGCreatureSubType get spellshaper => MTGCreatureSubType('spellshaper', 'Spellshaper', 270);
-  static MTGCreatureSubType get sphinx => MTGCreatureSubType('sphinx', 'Sphinx', 271);
-  static MTGCreatureSubType get spider => MTGCreatureSubType('spider', 'Spider', 272);
-  static MTGCreatureSubType get spike => MTGCreatureSubType('spike', 'Spike', 273);
-  static MTGCreatureSubType get spirit => MTGCreatureSubType('spirit', 'Spirit', 274);
-  static MTGCreatureSubType get splinter => MTGCreatureSubType('splinter', 'Splinter', 275);
-  static MTGCreatureSubType get sponge => MTGCreatureSubType('sponge', 'Sponge', 276);
-  static MTGCreatureSubType get spy => MTGCreatureSubType('spy', 'Spy', 277);
-  static MTGCreatureSubType get squid => MTGCreatureSubType('squid', 'Squid', 278);
-  static MTGCreatureSubType get squirrel => MTGCreatureSubType('squirrel', 'Squirrel', 279);
-  static MTGCreatureSubType get starfish => MTGCreatureSubType('starfish', 'Starfish', 280);
-  static MTGCreatureSubType get surrakar => MTGCreatureSubType('surrakar', 'Surrakar', 281);
-  static MTGCreatureSubType get survivor => MTGCreatureSubType('survivor', 'Survivor', 282);
-  static MTGCreatureSubType get teddy => MTGCreatureSubType('teddy', 'Teddy', 283);
-  static MTGCreatureSubType get tentacle => MTGCreatureSubType('tentacle', 'Tentacle', 284);
-  static MTGCreatureSubType get tetravite => MTGCreatureSubType('tetravite', 'Tetravite', 285);
-  static MTGCreatureSubType get thalakos => MTGCreatureSubType('thalakos', 'Thalakos', 286);
-  static MTGCreatureSubType get the => MTGCreatureSubType('the', 'The', 287);
-  static MTGCreatureSubType get thopter => MTGCreatureSubType('thopter', 'Thopter', 288);
-  static MTGCreatureSubType get thrull => MTGCreatureSubType('thrull', 'Thrull', 289);
-  static MTGCreatureSubType get tiefling => MTGCreatureSubType('tiefling', 'Tiefling', 290);
-  static MTGCreatureSubType get townsfolk => MTGCreatureSubType('townsfolk', 'Townsfolk', 291);
-  static MTGCreatureSubType get treefolk => MTGCreatureSubType('treefolk', 'Treefolk', 292);
-  static MTGCreatureSubType get trilobite => MTGCreatureSubType('trilobite', 'Trilobite', 293);
-  static MTGCreatureSubType get triskelavite => MTGCreatureSubType('triskelavite', 'Triskelavite', 294);
-  static MTGCreatureSubType get troll => MTGCreatureSubType('troll', 'Troll', 295);
-  static MTGCreatureSubType get turtle => MTGCreatureSubType('turtle', 'Turtle', 296);
-  static MTGCreatureSubType get tyranid => MTGCreatureSubType('tyranid', 'Tyranid', 297);
-  static MTGCreatureSubType get unicorn => MTGCreatureSubType('unicorn', 'Unicorn', 298);
-  static MTGCreatureSubType get vampire => MTGCreatureSubType('vampire', 'Vampire', 299);
-  static MTGCreatureSubType get vampyre => MTGCreatureSubType('vampyre', 'Vampyre', 300);
-  static MTGCreatureSubType get vedalken => MTGCreatureSubType('vedalken', 'Vedalken', 301);
-  static MTGCreatureSubType get viashino => MTGCreatureSubType('viashino', 'Viashino', 302);
-  static MTGCreatureSubType get villain => MTGCreatureSubType('villain', 'Villain', 303);
-  static MTGCreatureSubType get volver => MTGCreatureSubType('volver', 'Volver', 304);
-  static MTGCreatureSubType get waiter => MTGCreatureSubType('waiter', 'Waiter', 305);
-  static MTGCreatureSubType get wall => MTGCreatureSubType('wall', 'Wall', 306);
-  static MTGCreatureSubType get walrus => MTGCreatureSubType('walrus', 'Walrus', 307);
-  static MTGCreatureSubType get warlock => MTGCreatureSubType('warlock', 'Warlock', 308);
-  static MTGCreatureSubType get warrior => MTGCreatureSubType('warrior', 'Warrior', 309);
-  static MTGCreatureSubType get wasp => MTGCreatureSubType('wasp', 'Wasp', 310);
-  static MTGCreatureSubType get weird => MTGCreatureSubType('weird', 'Weird', 311);
-  static MTGCreatureSubType get werewolf => MTGCreatureSubType('werewolf', 'Werewolf', 312);
-  static MTGCreatureSubType get whale => MTGCreatureSubType('whale', 'Whale', 313);
-  static MTGCreatureSubType get wizard => MTGCreatureSubType('wizard', 'Wizard', 314);
-  static MTGCreatureSubType get wolf => MTGCreatureSubType('wolf', 'Wolf', 315);
-  static MTGCreatureSubType get wolverine => MTGCreatureSubType('wolverine', 'Wolverine', 316);
-  static MTGCreatureSubType get wombat => MTGCreatureSubType('wombat', 'Wombat', 317);
-  static MTGCreatureSubType get worm => MTGCreatureSubType('worm', 'Worm', 318);
-  static MTGCreatureSubType get wraith => MTGCreatureSubType('wraith', 'Wraith', 319);
-  static MTGCreatureSubType get wrestler => MTGCreatureSubType('wrestler', 'Wrestler', 320);
-  static MTGCreatureSubType get wurm => MTGCreatureSubType('wurm', 'Wurm', 321);
-  static MTGCreatureSubType get yeti => MTGCreatureSubType('yeti', 'Yeti', 322);
-  static MTGCreatureSubType get zombie => MTGCreatureSubType('zombie', 'Zombie', 323);
-  static MTGCreatureSubType get zubera => MTGCreatureSubType('zubera', 'Zubera', 324);
+class MTGCreatureSubtype extends MTGCardSubtype {
+  static MTGCreatureSubtype get advisor => MTGCreatureSubtype('advisor', 'Advisor', 0);
+  static MTGCreatureSubtype get aetherborn => MTGCreatureSubtype('aetherborn', 'Aetherborn', 1);
+  static MTGCreatureSubtype get alicorn => MTGCreatureSubtype('alicorn', 'Alicorn', 2);
+  static MTGCreatureSubtype get alien => MTGCreatureSubtype('alien', 'Alien', 3);
+  static MTGCreatureSubtype get ally => MTGCreatureSubtype('ally', 'Ally', 4);
+  static MTGCreatureSubtype get angel => MTGCreatureSubtype('angel', 'Angel', 5);
+  static MTGCreatureSubtype get antelope => MTGCreatureSubtype('antelope', 'Antelope', 6);
+  static MTGCreatureSubtype get ape => MTGCreatureSubtype('ape', 'Ape', 7);
+  static MTGCreatureSubtype get archer => MTGCreatureSubtype('archer', 'Archer', 8);
+  static MTGCreatureSubtype get archon => MTGCreatureSubtype('archon', 'Archon', 9);
+  static MTGCreatureSubtype get army => MTGCreatureSubtype('army', 'Army', 10);
+  static MTGCreatureSubtype get art => MTGCreatureSubtype('art', 'Art', 11);
+  static MTGCreatureSubtype get artificer => MTGCreatureSubtype('artificer', 'Artificer', 12);
+  static MTGCreatureSubtype get assassin => MTGCreatureSubtype('assassin', 'Assassin', 13);
+  static MTGCreatureSubtype get assemblyworker => MTGCreatureSubtype('assemblyworker', 'Assembly-Worker', 14);
+  static MTGCreatureSubtype get astartes => MTGCreatureSubtype('astartes', 'Astartes', 15);
+  static MTGCreatureSubtype get atog => MTGCreatureSubtype('atog', 'Atog', 16);
+  static MTGCreatureSubtype get aurochs => MTGCreatureSubtype('aurochs', 'Aurochs', 17);
+  static MTGCreatureSubtype get autobot => MTGCreatureSubtype('autobot', 'Autobot', 18);
+  static MTGCreatureSubtype get avatar => MTGCreatureSubtype('avatar', 'Avatar', 19);
+  static MTGCreatureSubtype get azra => MTGCreatureSubtype('azra', 'Azra', 20);
+  static MTGCreatureSubtype get badger => MTGCreatureSubtype('badger', 'Badger', 21);
+  static MTGCreatureSubtype get balloon => MTGCreatureSubtype('balloon', 'Balloon', 22);
+  static MTGCreatureSubtype get barbarian => MTGCreatureSubtype('barbarian', 'Barbarian', 23);
+  static MTGCreatureSubtype get bard => MTGCreatureSubtype('bard', 'Bard', 24);
+  static MTGCreatureSubtype get basilisk => MTGCreatureSubtype('basilisk', 'Basilisk', 25);
+  static MTGCreatureSubtype get bat => MTGCreatureSubtype('bat', 'Bat', 26);
+  static MTGCreatureSubtype get bear => MTGCreatureSubtype('bear', 'Bear', 27);
+  static MTGCreatureSubtype get beast => MTGCreatureSubtype('beast', 'Beast', 28);
+  static MTGCreatureSubtype get beaver => MTGCreatureSubtype('beaver', 'Beaver', 29);
+  static MTGCreatureSubtype get beeble => MTGCreatureSubtype('beeble', 'Beeble', 30);
+  static MTGCreatureSubtype get beholder => MTGCreatureSubtype('beholder', 'Beholder', 31);
+  static MTGCreatureSubtype get berserker => MTGCreatureSubtype('berserker', 'Berserker', 32);
+  static MTGCreatureSubtype get bird => MTGCreatureSubtype('bird', 'Bird', 33);
+  static MTGCreatureSubtype get blinkmoth => MTGCreatureSubtype('blinkmoth', 'Blinkmoth', 34);
+  static MTGCreatureSubtype get boar => MTGCreatureSubtype('boar', 'Boar', 35);
+  static MTGCreatureSubtype get brainiac => MTGCreatureSubtype('brainiac', 'Brainiac', 36);
+  static MTGCreatureSubtype get bringer => MTGCreatureSubtype('bringer', 'Bringer', 37);
+  static MTGCreatureSubtype get brushwagg => MTGCreatureSubtype('brushwagg', 'Brushwagg', 38);
+  static MTGCreatureSubtype get bureaucrat => MTGCreatureSubtype('bureaucrat', 'Bureaucrat', 39);
+  static MTGCreatureSubtype get ctan => MTGCreatureSubtype('ctan', 'C\'tan', 40);
+  static MTGCreatureSubtype get camarid => MTGCreatureSubtype('camarid', 'Camarid', 41);
+  static MTGCreatureSubtype get camel => MTGCreatureSubtype('camel', 'Camel', 42);
+  static MTGCreatureSubtype get caribou => MTGCreatureSubtype('caribou', 'Caribou', 43);
+  static MTGCreatureSubtype get carrier => MTGCreatureSubtype('carrier', 'Carrier', 44);
+  static MTGCreatureSubtype get cat => MTGCreatureSubtype('cat', 'Cat', 45);
+  static MTGCreatureSubtype get centaur => MTGCreatureSubtype('centaur', 'Centaur', 46);
+  static MTGCreatureSubtype get cephalid => MTGCreatureSubtype('cephalid', 'Cephalid', 47);
+  static MTGCreatureSubtype get chameleon => MTGCreatureSubtype('chameleon', 'Chameleon', 48);
+  static MTGCreatureSubtype get chicken => MTGCreatureSubtype('chicken', 'Chicken', 49);
+  static MTGCreatureSubtype get child => MTGCreatureSubtype('child', 'Child', 50);
+  static MTGCreatureSubtype get chimera => MTGCreatureSubtype('chimera', 'Chimera', 51);
+  static MTGCreatureSubtype get citizen => MTGCreatureSubtype('citizen', 'Citizen', 52);
+  static MTGCreatureSubtype get clamfolk => MTGCreatureSubtype('clamfolk', 'Clamfolk', 53);
+  static MTGCreatureSubtype get cleric => MTGCreatureSubtype('cleric', 'Cleric', 54);
+  static MTGCreatureSubtype get clown => MTGCreatureSubtype('clown', 'Clown', 55);
+  static MTGCreatureSubtype get cockatrice => MTGCreatureSubtype('cockatrice', 'Cockatrice', 56);
+  static MTGCreatureSubtype get construct => MTGCreatureSubtype('construct', 'Construct', 57);
+  static MTGCreatureSubtype get cow => MTGCreatureSubtype('cow', 'Cow', 58);
+  static MTGCreatureSubtype get coward => MTGCreatureSubtype('coward', 'Coward', 59);
+  static MTGCreatureSubtype get crab => MTGCreatureSubtype('crab', 'Crab', 60);
+  static MTGCreatureSubtype get crocodile => MTGCreatureSubtype('crocodile', 'Crocodile', 61);
+  static MTGCreatureSubtype get custodes => MTGCreatureSubtype('custodes', 'Custodes', 62);
+  static MTGCreatureSubtype get cyborg => MTGCreatureSubtype('cyborg', 'Cyborg', 63);
+  static MTGCreatureSubtype get cyclops => MTGCreatureSubtype('cyclops', 'Cyclops', 64);
+  static MTGCreatureSubtype get dauthi => MTGCreatureSubtype('dauthi', 'Dauthi', 65);
+  static MTGCreatureSubtype get deer => MTGCreatureSubtype('deer', 'Deer', 66);
+  static MTGCreatureSubtype get demigod => MTGCreatureSubtype('demigod', 'Demigod', 67);
+  static MTGCreatureSubtype get demon => MTGCreatureSubtype('demon', 'Demon', 68);
+  static MTGCreatureSubtype get deserter => MTGCreatureSubtype('deserter', 'Deserter', 69);
+  static MTGCreatureSubtype get designer => MTGCreatureSubtype('designer', 'Designer', 70);
+  static MTGCreatureSubtype get devil => MTGCreatureSubtype('devil', 'Devil', 71);
+  static MTGCreatureSubtype get dinosaur => MTGCreatureSubtype('dinosaur', 'Dinosaur', 72);
+  static MTGCreatureSubtype get djinn => MTGCreatureSubtype('djinn', 'Djinn', 73);
+  static MTGCreatureSubtype get dog => MTGCreatureSubtype('dog', 'Dog', 74);
+  static MTGCreatureSubtype get donkey => MTGCreatureSubtype('donkey', 'Donkey', 75);
+  static MTGCreatureSubtype get dragon => MTGCreatureSubtype('dragon', 'Dragon', 76);
+  static MTGCreatureSubtype get drake => MTGCreatureSubtype('drake', 'Drake', 77);
+  static MTGCreatureSubtype get dreadnought => MTGCreatureSubtype('dreadnought', 'Dreadnought', 78);
+  static MTGCreatureSubtype get drone => MTGCreatureSubtype('drone', 'Drone', 79);
+  static MTGCreatureSubtype get druid => MTGCreatureSubtype('druid', 'Druid', 80);
+  static MTGCreatureSubtype get dryad => MTGCreatureSubtype('dryad', 'Dryad', 81);
+  static MTGCreatureSubtype get dwarf => MTGCreatureSubtype('dwarf', 'Dwarf', 82);
+  static MTGCreatureSubtype get efreet => MTGCreatureSubtype('efreet', 'Efreet', 83);
+  static MTGCreatureSubtype get egg => MTGCreatureSubtype('egg', 'Egg', 84);
+  static MTGCreatureSubtype get elder => MTGCreatureSubtype('elder', 'Elder', 85);
+  static MTGCreatureSubtype get eldrazi => MTGCreatureSubtype('eldrazi', 'Eldrazi', 86);
+  static MTGCreatureSubtype get elemental => MTGCreatureSubtype('elemental', 'Elemental', 87);
+  static MTGCreatureSubtype get elementalQuestion => MTGCreatureSubtype('elementalQuestion', 'Elemental?', 88);
+  static MTGCreatureSubtype get elephant => MTGCreatureSubtype('elephant', 'Elephant', 89);
+  static MTGCreatureSubtype get elf => MTGCreatureSubtype('elf', 'Elf', 90);
+  static MTGCreatureSubtype get elk => MTGCreatureSubtype('elk', 'Elk', 91);
+  static MTGCreatureSubtype get elves => MTGCreatureSubtype('elves', 'Elves', 92);
+  static MTGCreatureSubtype get employee => MTGCreatureSubtype('employee', 'Employee', 93);
+  static MTGCreatureSubtype get etiquette => MTGCreatureSubtype('etiquette', 'Etiquette', 94);
+  static MTGCreatureSubtype get eye => MTGCreatureSubtype('eye', 'Eye', 95);
+  static MTGCreatureSubtype get faerie => MTGCreatureSubtype('faerie', 'Faerie', 96);
+  static MTGCreatureSubtype get ferret => MTGCreatureSubtype('ferret', 'Ferret', 97);
+  static MTGCreatureSubtype get fish => MTGCreatureSubtype('fish', 'Fish', 98);
+  static MTGCreatureSubtype get flagbearer => MTGCreatureSubtype('flagbearer', 'Flagbearer', 99);
+  static MTGCreatureSubtype get fox => MTGCreatureSubtype('fox', 'Fox', 100);
+  static MTGCreatureSubtype get fractal => MTGCreatureSubtype('fractal', 'Fractal', 101);
+  static MTGCreatureSubtype get frog => MTGCreatureSubtype('frog', 'Frog', 102);
+  static MTGCreatureSubtype get fungus => MTGCreatureSubtype('fungus', 'Fungus', 103);
+  static MTGCreatureSubtype get gamer => MTGCreatureSubtype('gamer', 'Gamer', 104);
+  static MTGCreatureSubtype get gargoyle => MTGCreatureSubtype('gargoyle', 'Gargoyle', 105);
+  static MTGCreatureSubtype get germ => MTGCreatureSubtype('germ', 'Germ', 106);
+  static MTGCreatureSubtype get giant => MTGCreatureSubtype('giant', 'Giant', 107);
+  static MTGCreatureSubtype get gith => MTGCreatureSubtype('gith', 'Gith', 108);
+  static MTGCreatureSubtype get gnoll => MTGCreatureSubtype('gnoll', 'Gnoll', 109);
+  static MTGCreatureSubtype get gnome => MTGCreatureSubtype('gnome', 'Gnome', 110);
+  static MTGCreatureSubtype get goat => MTGCreatureSubtype('goat', 'Goat', 111);
+  static MTGCreatureSubtype get goblin => MTGCreatureSubtype('goblin', 'Goblin', 112);
+  static MTGCreatureSubtype get god => MTGCreatureSubtype('god', 'God', 113);
+  static MTGCreatureSubtype get golem => MTGCreatureSubtype('golem', 'Golem', 114);
+  static MTGCreatureSubtype get gorgon => MTGCreatureSubtype('gorgon', 'Gorgon', 115);
+  static MTGCreatureSubtype get grandchild => MTGCreatureSubtype('grandchild', 'Grandchild', 116);
+  static MTGCreatureSubtype get graveborn => MTGCreatureSubtype('graveborn', 'Graveborn', 117);
+  static MTGCreatureSubtype get gremlin => MTGCreatureSubtype('gremlin', 'Gremlin', 118);
+  static MTGCreatureSubtype get griffin => MTGCreatureSubtype('griffin', 'Griffin', 119);
+  static MTGCreatureSubtype get guest => MTGCreatureSubtype('guest', 'Guest', 120);
+  static MTGCreatureSubtype get gus => MTGCreatureSubtype('gus', 'Gus', 121);
+  static MTGCreatureSubtype get hag => MTGCreatureSubtype('hag', 'Hag', 122);
+  static MTGCreatureSubtype get halfling => MTGCreatureSubtype('halfling', 'Halfling', 123);
+  static MTGCreatureSubtype get hamster => MTGCreatureSubtype('hamster', 'Hamster', 124);
+  static MTGCreatureSubtype get harpy => MTGCreatureSubtype('harpy', 'Harpy', 125);
+  static MTGCreatureSubtype get hatificer => MTGCreatureSubtype('hatificer', 'Hatificer', 126);
+  static MTGCreatureSubtype get head => MTGCreatureSubtype('head', 'Head', 127);
+  static MTGCreatureSubtype get hellion => MTGCreatureSubtype('hellion', 'Hellion', 128);
+  static MTGCreatureSubtype get hero => MTGCreatureSubtype('hero', 'Hero', 129);
+  static MTGCreatureSubtype get hippo => MTGCreatureSubtype('hippo', 'Hippo', 130);
+  static MTGCreatureSubtype get hippogriff => MTGCreatureSubtype('hippogriff', 'Hippogriff', 131);
+  static MTGCreatureSubtype get homarid => MTGCreatureSubtype('homarid', 'Homarid', 132);
+  static MTGCreatureSubtype get homunculus => MTGCreatureSubtype('homunculus', 'Homunculus', 133);
+  static MTGCreatureSubtype get hornet => MTGCreatureSubtype('hornet', 'Hornet', 134);
+  static MTGCreatureSubtype get horror => MTGCreatureSubtype('horror', 'Horror', 135);
+  static MTGCreatureSubtype get horse => MTGCreatureSubtype('horse', 'Horse', 136);
+  static MTGCreatureSubtype get human => MTGCreatureSubtype('human', 'Human', 137);
+  static MTGCreatureSubtype get hydra => MTGCreatureSubtype('hydra', 'Hydra', 138);
+  static MTGCreatureSubtype get hyena => MTGCreatureSubtype('hyena', 'Hyena', 139);
+  static MTGCreatureSubtype get illusion => MTGCreatureSubtype('illusion', 'Illusion', 140);
+  static MTGCreatureSubtype get imp => MTGCreatureSubtype('imp', 'Imp', 141);
+  static MTGCreatureSubtype get incarnation => MTGCreatureSubtype('incarnation', 'Incarnation', 142);
+  static MTGCreatureSubtype get inkling => MTGCreatureSubtype('inkling', 'Inkling', 143);
+  static MTGCreatureSubtype get inquisitor => MTGCreatureSubtype('inquisitor', 'Inquisitor', 144);
+  static MTGCreatureSubtype get insect => MTGCreatureSubtype('insect', 'Insect', 145);
+  static MTGCreatureSubtype get jackal => MTGCreatureSubtype('jackal', 'Jackal', 146);
+  static MTGCreatureSubtype get jellyfish => MTGCreatureSubtype('jellyfish', 'Jellyfish', 147);
+  static MTGCreatureSubtype get juggernaut => MTGCreatureSubtype('juggernaut', 'Juggernaut', 148);
+  static MTGCreatureSubtype get kangaroo => MTGCreatureSubtype('kangaroo', 'Kangaroo', 149);
+  static MTGCreatureSubtype get kavu => MTGCreatureSubtype('kavu', 'Kavu', 150);
+  static MTGCreatureSubtype get killbot => MTGCreatureSubtype('killbot', 'Killbot', 151);
+  static MTGCreatureSubtype get kirin => MTGCreatureSubtype('kirin', 'Kirin', 152);
+  static MTGCreatureSubtype get kithkin => MTGCreatureSubtype('kithkin', 'Kithkin', 153);
+  static MTGCreatureSubtype get knight => MTGCreatureSubtype('knight', 'Knight', 154);
+  static MTGCreatureSubtype get kobold => MTGCreatureSubtype('kobold', 'Kobold', 155);
+  static MTGCreatureSubtype get kor => MTGCreatureSubtype('kor', 'Kor', 156);
+  static MTGCreatureSubtype get kraken => MTGCreatureSubtype('kraken', 'Kraken', 157);
+  static MTGCreatureSubtype get lady => MTGCreatureSubtype('lady', 'Lady', 158);
+  static MTGCreatureSubtype get lamia => MTGCreatureSubtype('lamia', 'Lamia', 159);
+  static MTGCreatureSubtype get lammasu => MTGCreatureSubtype('lammasu', 'Lammasu', 160);
+  static MTGCreatureSubtype get leech => MTGCreatureSubtype('leech', 'Leech', 161);
+  static MTGCreatureSubtype get leviathan => MTGCreatureSubtype('leviathan', 'Leviathan', 162);
+  static MTGCreatureSubtype get lhurgoyf => MTGCreatureSubtype('lhurgoyf', 'Lhurgoyf', 163);
+  static MTGCreatureSubtype get licid => MTGCreatureSubtype('licid', 'Licid', 164);
+  static MTGCreatureSubtype get lizard => MTGCreatureSubtype('lizard', 'Lizard', 165);
+  static MTGCreatureSubtype get lobster => MTGCreatureSubtype('lobster', 'Lobster', 166);
+  static MTGCreatureSubtype get mammoth => MTGCreatureSubtype('mammoth', 'Mammoth', 167);
+  static MTGCreatureSubtype get manticore => MTGCreatureSubtype('manticore', 'Manticore', 168);
+  static MTGCreatureSubtype get masticore => MTGCreatureSubtype('masticore', 'Masticore', 169);
+  static MTGCreatureSubtype get mercenary => MTGCreatureSubtype('mercenary', 'Mercenary', 170);
+  static MTGCreatureSubtype get merfolk => MTGCreatureSubtype('merfolk', 'Merfolk', 171);
+  static MTGCreatureSubtype get metathran => MTGCreatureSubtype('metathran', 'Metathran', 172);
+  static MTGCreatureSubtype get mime => MTGCreatureSubtype('mime', 'Mime', 173);
+  static MTGCreatureSubtype get minion => MTGCreatureSubtype('minion', 'Minion', 174);
+  static MTGCreatureSubtype get minotaur => MTGCreatureSubtype('minotaur', 'Minotaur', 175);
+  static MTGCreatureSubtype get mole => MTGCreatureSubtype('mole', 'Mole', 176);
+  static MTGCreatureSubtype get monger => MTGCreatureSubtype('monger', 'Monger', 177);
+  static MTGCreatureSubtype get mongoose => MTGCreatureSubtype('mongoose', 'Mongoose', 178);
+  static MTGCreatureSubtype get monk => MTGCreatureSubtype('monk', 'Monk', 179);
+  static MTGCreatureSubtype get monkey => MTGCreatureSubtype('monkey', 'Monkey', 180);
+  static MTGCreatureSubtype get moonfolk => MTGCreatureSubtype('moonfolk', 'Moonfolk', 181);
+  static MTGCreatureSubtype get mouse => MTGCreatureSubtype('mouse', 'Mouse', 182);
+  static MTGCreatureSubtype get mummy => MTGCreatureSubtype('mummy', 'Mummy', 183);
+  static MTGCreatureSubtype get mutant => MTGCreatureSubtype('mutant', 'Mutant', 184);
+  static MTGCreatureSubtype get myr => MTGCreatureSubtype('myr', 'Myr', 185);
+  static MTGCreatureSubtype get mystic => MTGCreatureSubtype('mystic', 'Mystic', 186);
+  static MTGCreatureSubtype get naga => MTGCreatureSubtype('naga', 'Naga', 187);
+  static MTGCreatureSubtype get nautilus => MTGCreatureSubtype('nautilus', 'Nautilus', 188);
+  static MTGCreatureSubtype get necron => MTGCreatureSubtype('necron', 'Necron', 189);
+  static MTGCreatureSubtype get nephilim => MTGCreatureSubtype('nephilim', 'Nephilim', 190);
+  static MTGCreatureSubtype get nightmare => MTGCreatureSubtype('nightmare', 'Nightmare', 191);
+  static MTGCreatureSubtype get nightstalker => MTGCreatureSubtype('nightstalker', 'Nightstalker', 192);
+  static MTGCreatureSubtype get ninja => MTGCreatureSubtype('ninja', 'Ninja', 193);
+  static MTGCreatureSubtype get noble => MTGCreatureSubtype('noble', 'Noble', 194);
+  static MTGCreatureSubtype get noggle => MTGCreatureSubtype('noggle', 'Noggle', 195);
+  static MTGCreatureSubtype get nomad => MTGCreatureSubtype('nomad', 'Nomad', 196);
+  static MTGCreatureSubtype get nymph => MTGCreatureSubtype('nymph', 'Nymph', 197);
+  static MTGCreatureSubtype get octopus => MTGCreatureSubtype('octopus', 'Octopus', 198);
+  static MTGCreatureSubtype get ogre => MTGCreatureSubtype('ogre', 'Ogre', 199);
+  static MTGCreatureSubtype get ooze => MTGCreatureSubtype('ooze', 'Ooze', 200);
+  static MTGCreatureSubtype get orb => MTGCreatureSubtype('orb', 'Orb', 201);
+  static MTGCreatureSubtype get orc => MTGCreatureSubtype('orc', 'Orc', 202);
+  static MTGCreatureSubtype get orgg => MTGCreatureSubtype('orgg', 'Orgg', 203);
+  static MTGCreatureSubtype get otter => MTGCreatureSubtype('otter', 'Otter', 204);
+  static MTGCreatureSubtype get ouphe => MTGCreatureSubtype('ouphe', 'Ouphe', 205);
+  static MTGCreatureSubtype get ox => MTGCreatureSubtype('ox', 'Ox', 206);
+  static MTGCreatureSubtype get oyster => MTGCreatureSubtype('oyster', 'Oyster', 207);
+  static MTGCreatureSubtype get pangolin => MTGCreatureSubtype('pangolin', 'Pangolin', 208);
+  static MTGCreatureSubtype get paratrooper => MTGCreatureSubtype('paratrooper', 'Paratrooper', 209);
+  static MTGCreatureSubtype get peasant => MTGCreatureSubtype('peasant', 'Peasant', 210);
+  static MTGCreatureSubtype get pegasus => MTGCreatureSubtype('pegasus', 'Pegasus', 211);
+  static MTGCreatureSubtype get pentavite => MTGCreatureSubtype('pentavite', 'Pentavite', 212);
+  static MTGCreatureSubtype get performer => MTGCreatureSubtype('performer', 'Performer', 213);
+  static MTGCreatureSubtype get pest => MTGCreatureSubtype('pest', 'Pest', 214);
+  static MTGCreatureSubtype get phelddagrif => MTGCreatureSubtype('phelddagrif', 'Phelddagrif', 215);
+  static MTGCreatureSubtype get phoenix => MTGCreatureSubtype('phoenix', 'Phoenix', 216);
+  static MTGCreatureSubtype get phyrexian => MTGCreatureSubtype('phyrexian', 'Phyrexian', 217);
+  static MTGCreatureSubtype get pilot => MTGCreatureSubtype('pilot', 'Pilot', 218);
+  static MTGCreatureSubtype get pincher => MTGCreatureSubtype('pincher', 'Pincher', 219);
+  static MTGCreatureSubtype get pirate => MTGCreatureSubtype('pirate', 'Pirate', 220);
+  static MTGCreatureSubtype get plant => MTGCreatureSubtype('plant', 'Plant', 221);
+  static MTGCreatureSubtype get porcupine => MTGCreatureSubtype('porcupine', 'Porcupine', 222);
+  static MTGCreatureSubtype get praetor => MTGCreatureSubtype('praetor', 'Praetor', 223);
+  static MTGCreatureSubtype get primarch => MTGCreatureSubtype('primarch', 'Primarch', 224);
+  static MTGCreatureSubtype get prism => MTGCreatureSubtype('prism', 'Prism', 225);
+  static MTGCreatureSubtype get processor => MTGCreatureSubtype('processor', 'Processor', 226);
+  static MTGCreatureSubtype get proper => MTGCreatureSubtype('proper', 'Proper', 227);
+  static MTGCreatureSubtype get rabbit => MTGCreatureSubtype('rabbit', 'Rabbit', 228);
+  static MTGCreatureSubtype get raccoon => MTGCreatureSubtype('raccoon', 'Raccoon', 229);
+  static MTGCreatureSubtype get ranger => MTGCreatureSubtype('ranger', 'Ranger', 230);
+  static MTGCreatureSubtype get rat => MTGCreatureSubtype('rat', 'Rat', 231);
+  static MTGCreatureSubtype get rebel => MTGCreatureSubtype('rebel', 'Rebel', 232);
+  static MTGCreatureSubtype get reflection => MTGCreatureSubtype('reflection', 'Reflection', 233);
+  static MTGCreatureSubtype get reveler => MTGCreatureSubtype('reveler', 'Reveler', 234);
+  static MTGCreatureSubtype get rhino => MTGCreatureSubtype('rhino', 'Rhino', 235);
+  static MTGCreatureSubtype get rigger => MTGCreatureSubtype('rigger', 'Rigger', 236);
+  static MTGCreatureSubtype get robot => MTGCreatureSubtype('robot', 'Robot', 237);
+  static MTGCreatureSubtype get rogue => MTGCreatureSubtype('rogue', 'Rogue', 238);
+  static MTGCreatureSubtype get sable => MTGCreatureSubtype('sable', 'Sable', 239);
+  static MTGCreatureSubtype get salamander => MTGCreatureSubtype('salamander', 'Salamander', 240);
+  static MTGCreatureSubtype get samurai => MTGCreatureSubtype('samurai', 'Samurai', 241);
+  static MTGCreatureSubtype get sand => MTGCreatureSubtype('sand', 'Sand', 242);
+  static MTGCreatureSubtype get saproling => MTGCreatureSubtype('saproling', 'Saproling', 243);
+  static MTGCreatureSubtype get satyr => MTGCreatureSubtype('satyr', 'Satyr', 244);
+  static MTGCreatureSubtype get scarecrow => MTGCreatureSubtype('scarecrow', 'Scarecrow', 245);
+  static MTGCreatureSubtype get scientist => MTGCreatureSubtype('scientist', 'Scientist', 246);
+  static MTGCreatureSubtype get scion => MTGCreatureSubtype('scion', 'Scion', 247);
+  static MTGCreatureSubtype get scorpion => MTGCreatureSubtype('scorpion', 'Scorpion', 248);
+  static MTGCreatureSubtype get scout => MTGCreatureSubtype('scout', 'Scout', 249);
+  static MTGCreatureSubtype get sculpture => MTGCreatureSubtype('sculpture', 'Sculpture', 250);
+  static MTGCreatureSubtype get serf => MTGCreatureSubtype('serf', 'Serf', 251);
+  static MTGCreatureSubtype get serpent => MTGCreatureSubtype('serpent', 'Serpent', 252);
+  static MTGCreatureSubtype get servo => MTGCreatureSubtype('servo', 'Servo', 253);
+  static MTGCreatureSubtype get shade => MTGCreatureSubtype('shade', 'Shade', 254);
+  static MTGCreatureSubtype get shaman => MTGCreatureSubtype('shaman', 'Shaman', 255);
+  static MTGCreatureSubtype get shapeshifter => MTGCreatureSubtype('shapeshifter', 'Shapeshifter', 256);
+  static MTGCreatureSubtype get shark => MTGCreatureSubtype('shark', 'Shark', 257);
+  static MTGCreatureSubtype get sheep => MTGCreatureSubtype('sheep', 'Sheep', 258);
+  static MTGCreatureSubtype get ship => MTGCreatureSubtype('ship', 'Ship', 259);
+  static MTGCreatureSubtype get siren => MTGCreatureSubtype('siren', 'Siren', 260);
+  static MTGCreatureSubtype get skeleton => MTGCreatureSubtype('skeleton', 'Skeleton', 261);
+  static MTGCreatureSubtype get slith => MTGCreatureSubtype('slith', 'Slith', 262);
+  static MTGCreatureSubtype get sliver => MTGCreatureSubtype('sliver', 'Sliver', 263);
+  static MTGCreatureSubtype get slug => MTGCreatureSubtype('slug', 'Slug', 264);
+  static MTGCreatureSubtype get snake => MTGCreatureSubtype('snake', 'Snake', 265);
+  static MTGCreatureSubtype get soldier => MTGCreatureSubtype('soldier', 'Soldier', 266);
+  static MTGCreatureSubtype get soltari => MTGCreatureSubtype('soltari', 'Soltari', 267);
+  static MTGCreatureSubtype get spawn => MTGCreatureSubtype('spawn', 'Spawn', 268);
+  static MTGCreatureSubtype get specter => MTGCreatureSubtype('specter', 'Specter', 269);
+  static MTGCreatureSubtype get spellshaper => MTGCreatureSubtype('spellshaper', 'Spellshaper', 270);
+  static MTGCreatureSubtype get sphinx => MTGCreatureSubtype('sphinx', 'Sphinx', 271);
+  static MTGCreatureSubtype get spider => MTGCreatureSubtype('spider', 'Spider', 272);
+  static MTGCreatureSubtype get spike => MTGCreatureSubtype('spike', 'Spike', 273);
+  static MTGCreatureSubtype get spirit => MTGCreatureSubtype('spirit', 'Spirit', 274);
+  static MTGCreatureSubtype get splinter => MTGCreatureSubtype('splinter', 'Splinter', 275);
+  static MTGCreatureSubtype get sponge => MTGCreatureSubtype('sponge', 'Sponge', 276);
+  static MTGCreatureSubtype get spy => MTGCreatureSubtype('spy', 'Spy', 277);
+  static MTGCreatureSubtype get squid => MTGCreatureSubtype('squid', 'Squid', 278);
+  static MTGCreatureSubtype get squirrel => MTGCreatureSubtype('squirrel', 'Squirrel', 279);
+  static MTGCreatureSubtype get starfish => MTGCreatureSubtype('starfish', 'Starfish', 280);
+  static MTGCreatureSubtype get surrakar => MTGCreatureSubtype('surrakar', 'Surrakar', 281);
+  static MTGCreatureSubtype get survivor => MTGCreatureSubtype('survivor', 'Survivor', 282);
+  static MTGCreatureSubtype get teddy => MTGCreatureSubtype('teddy', 'Teddy', 283);
+  static MTGCreatureSubtype get tentacle => MTGCreatureSubtype('tentacle', 'Tentacle', 284);
+  static MTGCreatureSubtype get tetravite => MTGCreatureSubtype('tetravite', 'Tetravite', 285);
+  static MTGCreatureSubtype get thalakos => MTGCreatureSubtype('thalakos', 'Thalakos', 286);
+  static MTGCreatureSubtype get the => MTGCreatureSubtype('the', 'The', 287);
+  static MTGCreatureSubtype get thopter => MTGCreatureSubtype('thopter', 'Thopter', 288);
+  static MTGCreatureSubtype get thrull => MTGCreatureSubtype('thrull', 'Thrull', 289);
+  static MTGCreatureSubtype get tiefling => MTGCreatureSubtype('tiefling', 'Tiefling', 290);
+  static MTGCreatureSubtype get townsfolk => MTGCreatureSubtype('townsfolk', 'Townsfolk', 291);
+  static MTGCreatureSubtype get treefolk => MTGCreatureSubtype('treefolk', 'Treefolk', 292);
+  static MTGCreatureSubtype get trilobite => MTGCreatureSubtype('trilobite', 'Trilobite', 293);
+  static MTGCreatureSubtype get triskelavite => MTGCreatureSubtype('triskelavite', 'Triskelavite', 294);
+  static MTGCreatureSubtype get troll => MTGCreatureSubtype('troll', 'Troll', 295);
+  static MTGCreatureSubtype get turtle => MTGCreatureSubtype('turtle', 'Turtle', 296);
+  static MTGCreatureSubtype get tyranid => MTGCreatureSubtype('tyranid', 'Tyranid', 297);
+  static MTGCreatureSubtype get unicorn => MTGCreatureSubtype('unicorn', 'Unicorn', 298);
+  static MTGCreatureSubtype get vampire => MTGCreatureSubtype('vampire', 'Vampire', 299);
+  static MTGCreatureSubtype get vampyre => MTGCreatureSubtype('vampyre', 'Vampyre', 300);
+  static MTGCreatureSubtype get vedalken => MTGCreatureSubtype('vedalken', 'Vedalken', 301);
+  static MTGCreatureSubtype get viashino => MTGCreatureSubtype('viashino', 'Viashino', 302);
+  static MTGCreatureSubtype get villain => MTGCreatureSubtype('villain', 'Villain', 303);
+  static MTGCreatureSubtype get volver => MTGCreatureSubtype('volver', 'Volver', 304);
+  static MTGCreatureSubtype get waiter => MTGCreatureSubtype('waiter', 'Waiter', 305);
+  static MTGCreatureSubtype get wall => MTGCreatureSubtype('wall', 'Wall', 306);
+  static MTGCreatureSubtype get walrus => MTGCreatureSubtype('walrus', 'Walrus', 307);
+  static MTGCreatureSubtype get warlock => MTGCreatureSubtype('warlock', 'Warlock', 308);
+  static MTGCreatureSubtype get warrior => MTGCreatureSubtype('warrior', 'Warrior', 309);
+  static MTGCreatureSubtype get wasp => MTGCreatureSubtype('wasp', 'Wasp', 310);
+  static MTGCreatureSubtype get weird => MTGCreatureSubtype('weird', 'Weird', 311);
+  static MTGCreatureSubtype get werewolf => MTGCreatureSubtype('werewolf', 'Werewolf', 312);
+  static MTGCreatureSubtype get whale => MTGCreatureSubtype('whale', 'Whale', 313);
+  static MTGCreatureSubtype get wizard => MTGCreatureSubtype('wizard', 'Wizard', 314);
+  static MTGCreatureSubtype get wolf => MTGCreatureSubtype('wolf', 'Wolf', 315);
+  static MTGCreatureSubtype get wolverine => MTGCreatureSubtype('wolverine', 'Wolverine', 316);
+  static MTGCreatureSubtype get wombat => MTGCreatureSubtype('wombat', 'Wombat', 317);
+  static MTGCreatureSubtype get worm => MTGCreatureSubtype('worm', 'Worm', 318);
+  static MTGCreatureSubtype get wraith => MTGCreatureSubtype('wraith', 'Wraith', 319);
+  static MTGCreatureSubtype get wrestler => MTGCreatureSubtype('wrestler', 'Wrestler', 320);
+  static MTGCreatureSubtype get wurm => MTGCreatureSubtype('wurm', 'Wurm', 321);
+  static MTGCreatureSubtype get yeti => MTGCreatureSubtype('yeti', 'Yeti', 322);
+  static MTGCreatureSubtype get zombie => MTGCreatureSubtype('zombie', 'Zombie', 323);
+  static MTGCreatureSubtype get zubera => MTGCreatureSubtype('zubera', 'Zubera', 324);
 
-  static MTGCreatureSubType get unknown => MTGCreatureSubType('unknown', 'Unknown', 65535);
+  static MTGCreatureSubtype get unknown => MTGCreatureSubtype('unknown', 'Unknown', 65535);
 
-  static List<MTGCreatureSubType> get all => [
+  static List<MTGCreatureSubtype> get all => [
         advisor,
         aetherborn,
         alicorn,
@@ -1283,10 +1283,10 @@ class MTGCreatureSubType extends MTGCardSubType {
         zubera.name,
       ];
 
-  MTGCreatureSubType(String name, String display, int sortOrder) : super(name, display, sortOrder);
+  MTGCreatureSubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
 
-  factory MTGCreatureSubType.fromJson(Map<String, dynamic> json) {
-    return MTGCreatureSubType(
+  factory MTGCreatureSubtype.fromJson(Map<String, dynamic> json) {
+    return MTGCreatureSubtype(
       json['name'] as String,
       json['display'] as String,
       json['sortOrder'] as int,
@@ -1294,54 +1294,44 @@ class MTGCreatureSubType extends MTGCardSubType {
   }
 
   @override
-  MTGCardSubType copyWith({String? name, String? display, int? sortOrder}) {
-    return MTGCreatureSubType(
+  MTGCardSubtype copyWith({String? name, String? display, int? sortOrder}) {
+    return MTGCreatureSubtype(
       name ?? this.name,
       display ?? this.display,
       sortOrder ?? this.sortOrder,
     );
   }
 
-  static MTGCreatureSubType getSubTypeFromName(String subType) {
+  static MTGCreatureSubtype getSubTypeFromName(String subType) {
     return unknown;
   }
 
-  static MTGCreatureSubType getSubTypeFromDisplay(String subType) {
+  static MTGCreatureSubtype getSubTypeFromDisplay(String subType) {
     return unknown;
   }
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) || other is MTGCreatureSubType && other.name == name;
+    return identical(this, other) || other is MTGCreatureSubtype && other.name == name;
   }
 
   @override
   int get hashCode => name.hashCode;
 }
 
-class MTGEnchantmentSubType extends MTGCardSubType {
-  MTGEnchantmentSubType(String name, String display, int sortOrder) : super(name, display, sortOrder);
+class MTGEnchantmentSubtype extends MTGCardSubtype {
+  static MTGEnchantmentSubtype get aura => MTGEnchantmentSubtype('aura', 'Aura', 0);
+  static MTGEnchantmentSubtype get background => MTGEnchantmentSubtype('background', 'Background', 1);
+  static MTGEnchantmentSubtype get cartouche => MTGEnchantmentSubtype('cartouche', 'Cartouche', 2);
+  static MTGEnchantmentSubtype get class_ => MTGEnchantmentSubtype('class', 'Class', 3);
+  static MTGEnchantmentSubtype get curse => MTGEnchantmentSubtype('curse', 'Curse', 4);
+  static MTGEnchantmentSubtype get rune => MTGEnchantmentSubtype('rune', 'Rune', 5);
+  static MTGEnchantmentSubtype get saga => MTGEnchantmentSubtype('saga', 'Saga', 6);
+  static MTGEnchantmentSubtype get shard => MTGEnchantmentSubtype('shard', 'Shard', 7);
+  static MTGEnchantmentSubtype get shrine => MTGEnchantmentSubtype('shrine', 'Shrine', 8);
+  static MTGEnchantmentSubtype get unknown => MTGEnchantmentSubtype('unknown', 'Unknown', 255);
 
-  factory MTGEnchantmentSubType.fromJson(Map<String, dynamic> json) {
-    return MTGEnchantmentSubType(
-      json['name'] as String,
-      json['display'] as String,
-      json['sortOrder'] as int,
-    );
-  }
-
-  static MTGEnchantmentSubType get aura => MTGEnchantmentSubType('aura', 'Aura', 0);
-  static MTGEnchantmentSubType get background => MTGEnchantmentSubType('background', 'Background', 1);
-  static MTGEnchantmentSubType get cartouche => MTGEnchantmentSubType('cartouche', 'Cartouche', 2);
-  static MTGEnchantmentSubType get class_ => MTGEnchantmentSubType('class', 'Class', 3);
-  static MTGEnchantmentSubType get curse => MTGEnchantmentSubType('curse', 'Curse', 4);
-  static MTGEnchantmentSubType get rune => MTGEnchantmentSubType('rune', 'Rune', 5);
-  static MTGEnchantmentSubType get saga => MTGEnchantmentSubType('saga', 'Saga', 6);
-  static MTGEnchantmentSubType get shard => MTGEnchantmentSubType('shard', 'Shard', 7);
-  static MTGEnchantmentSubType get shrine => MTGEnchantmentSubType('shrine', 'Shrine', 8);
-  static MTGEnchantmentSubType get unknown => MTGEnchantmentSubType('unknown', 'Unknown', 255);
-
-  static List<MTGEnchantmentSubType> get subTypes => [
+  static List<MTGEnchantmentSubtype> get all => [
         aura,
         background,
         cartouche,
@@ -1353,7 +1343,7 @@ class MTGEnchantmentSubType extends MTGCardSubType {
         shrine,
       ];
 
-  static List<String> get subTypeNames => [
+  static List<String> get allNames => [
         aura.name,
         background.name,
         cartouche.name,
@@ -1365,7 +1355,17 @@ class MTGEnchantmentSubType extends MTGCardSubType {
         shrine.name,
       ];
 
-  static MTGEnchantmentSubType getSubTypeFromName(String subType) {
+  MTGEnchantmentSubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
+
+  factory MTGEnchantmentSubtype.fromJson(Map<String, dynamic> json) {
+    return MTGEnchantmentSubtype(
+      json['name'] as String,
+      json['display'] as String,
+      json['sortOrder'] as int,
+    );
+  }
+
+  static MTGEnchantmentSubtype getSubTypeFromName(String subType) {
     switch (subType) {
       case 'aura':
         return aura;
@@ -1390,7 +1390,7 @@ class MTGEnchantmentSubType extends MTGCardSubType {
     }
   }
 
-  static MTGEnchantmentSubType getSubTypeFromDisplay(String subType) {
+  static MTGEnchantmentSubtype getSubTypeFromDisplay(String subType) {
     switch (subType) {
       case 'Aura':
         return aura;
@@ -1416,8 +1416,8 @@ class MTGEnchantmentSubType extends MTGCardSubType {
   }
 
   @override
-  MTGCardSubType copyWith({String? name, String? display, int? sortOrder}) {
-    return MTGEnchantmentSubType(
+  MTGCardSubtype copyWith({String? name, String? display, int? sortOrder}) {
+    return MTGEnchantmentSubtype(
       name ?? this.name,
       display ?? this.display,
       sortOrder ?? this.sortOrder,
@@ -1426,31 +1426,31 @@ class MTGEnchantmentSubType extends MTGCardSubType {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) || other is MTGEnchantmentSubType && other.name == name;
+    return identical(this, other) || other is MTGEnchantmentSubtype && other.name == name;
   }
 
   @override
   int get hashCode => name.hashCode;
 }
 
-class MTGLandSubType extends MTGCardSubType {
-  MTGLandSubType(String name, String display, int sortOrder) : super(name, display, sortOrder);
+class MTGLandSubtype extends MTGCardSubtype {
+  MTGLandSubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
 
-  factory MTGLandSubType.fromJson(Map<String, dynamic> json) {
-    return MTGLandSubType(
+  factory MTGLandSubtype.fromJson(Map<String, dynamic> json) {
+    return MTGLandSubtype(
       json['name'] as String,
       json['display'] as String,
       json['sortOrder'] as int,
     );
   }
 
-  static MTGLandSubType get basic => MTGLandSubType('basic', 'Basic', 0);
-  static MTGLandSubType get legendary => MTGLandSubType('legendary', 'Legendary', 1);
-  static MTGLandSubType get snow => MTGLandSubType('snow', 'Snow', 2);
-  static MTGLandSubType get world => MTGLandSubType('world', 'World', 3);
-  static MTGLandSubType get unknown => MTGLandSubType('unknown', 'Unknown', 255);
+  static MTGLandSubtype get basic => MTGLandSubtype('basic', 'Basic', 0);
+  static MTGLandSubtype get legendary => MTGLandSubtype('legendary', 'Legendary', 1);
+  static MTGLandSubtype get snow => MTGLandSubtype('snow', 'Snow', 2);
+  static MTGLandSubtype get world => MTGLandSubtype('world', 'World', 3);
+  static MTGLandSubtype get unknown => MTGLandSubtype('unknown', 'Unknown', 255);
 
-  static MTGLandSubType getSubTypeFromName(String subType) {
+  static MTGLandSubtype getSubTypeFromName(String subType) {
     switch (subType) {
       case 'basic':
         return basic;
@@ -1465,7 +1465,7 @@ class MTGLandSubType extends MTGCardSubType {
     }
   }
 
-  static MTGLandSubType getSubTypeFromDisplay(String subType) {
+  static MTGLandSubtype getSubTypeFromDisplay(String subType) {
     switch (subType) {
       case 'Basic':
         return basic;
@@ -1481,8 +1481,8 @@ class MTGLandSubType extends MTGCardSubType {
   }
 
   @override
-  MTGCardSubType copyWith({String? name, String? display, int? sortOrder}) {
-    return MTGLandSubType(
+  MTGCardSubtype copyWith({String? name, String? display, int? sortOrder}) {
+    return MTGLandSubtype(
       name ?? this.name,
       display ?? this.display,
       sortOrder ?? this.sortOrder,
@@ -1491,13 +1491,13 @@ class MTGLandSubType extends MTGCardSubType {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) || other is MTGLandSubType && other.name == name;
+    return identical(this, other) || other is MTGLandSubtype && other.name == name;
   }
 
   @override
   int get hashCode => name.hashCode;
 
-  static List<MTGLandSubType> get subTypes => [
+  static List<MTGLandSubtype> get subTypes => [
         basic,
         legendary,
         snow,
@@ -1512,21 +1512,21 @@ class MTGLandSubType extends MTGCardSubType {
       ];
 }
 
-class MTGArtifactSubType extends MTGCardSubType {
-  MTGArtifactSubType(String name, String display, int sortOrder) : super(name, display, sortOrder);
+class MTGArtifactSubtype extends MTGCardSubtype {
+  MTGArtifactSubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
 
-  factory MTGArtifactSubType.fromJson(Map<String, dynamic> json) {
-    return MTGArtifactSubType(
+  factory MTGArtifactSubtype.fromJson(Map<String, dynamic> json) {
+    return MTGArtifactSubtype(
       json['name'] as String,
       json['display'] as String,
       json['sortOrder'] as int,
     );
   }
 
-  static MTGArtifactSubType get equipment => MTGArtifactSubType('equipment', 'Equipment', 0);
-  static MTGArtifactSubType get unknown => MTGArtifactSubType('unknown', 'Unknown', 255);
+  static MTGArtifactSubtype get equipment => MTGArtifactSubtype('equipment', 'Equipment', 0);
+  static MTGArtifactSubtype get unknown => MTGArtifactSubtype('unknown', 'Unknown', 255);
 
-  static MTGArtifactSubType getSubTypeFromName(String subType) {
+  static MTGArtifactSubtype getSubTypeFromName(String subType) {
     switch (subType) {
       case 'equipment':
         return equipment;
@@ -1535,7 +1535,7 @@ class MTGArtifactSubType extends MTGCardSubType {
     }
   }
 
-  static MTGArtifactSubType getSubTypeFromDisplay(String subType) {
+  static MTGArtifactSubtype getSubTypeFromDisplay(String subType) {
     switch (subType) {
       case 'Equipment':
         return equipment;
@@ -1544,7 +1544,7 @@ class MTGArtifactSubType extends MTGCardSubType {
     }
   }
 
-  static List<MTGArtifactSubType> get subTypes => [
+  static List<MTGArtifactSubtype> get subTypes => [
         equipment,
       ];
 
@@ -1553,30 +1553,30 @@ class MTGArtifactSubType extends MTGCardSubType {
       ];
 }
 
-class MTGInstantSubType extends MTGCardSubType {
-  MTGInstantSubType(String name, String display, int sortOrder) : super(name, display, sortOrder);
+class MTGInstantSubtype extends MTGCardSubtype {
+  MTGInstantSubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
 
-  factory MTGInstantSubType.fromJson(Map<String, dynamic> json) {
-    return MTGInstantSubType(
+  factory MTGInstantSubtype.fromJson(Map<String, dynamic> json) {
+    return MTGInstantSubtype(
       json['name'] as String,
       json['display'] as String,
       json['sortOrder'] as int,
     );
   }
 
-  static MTGInstantSubType get unknown => MTGInstantSubType('unknown', 'Unknown', 255);
+  static MTGInstantSubtype get unknown => MTGInstantSubtype('unknown', 'Unknown', 255);
 
-  static MTGInstantSubType getSubTypeFromName(String subType) {
+  static MTGInstantSubtype getSubTypeFromName(String subType) {
     return unknown;
   }
 
-  static MTGInstantSubType getSubTypeFromDisplay(String subType) {
+  static MTGInstantSubtype getSubTypeFromDisplay(String subType) {
     return unknown;
   }
 
   @override
-  MTGCardSubType copyWith({String? name, String? display, int? sortOrder}) {
-    return MTGInstantSubType(
+  MTGCardSubtype copyWith({String? name, String? display, int? sortOrder}) {
+    return MTGInstantSubtype(
       name ?? this.name,
       display ?? this.display,
       sortOrder ?? this.sortOrder,
@@ -1585,13 +1585,13 @@ class MTGInstantSubType extends MTGCardSubType {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) || other is MTGInstantSubType && other.name == name;
+    return identical(this, other) || other is MTGInstantSubtype && other.name == name;
   }
 
   @override
   int get hashCode => name.hashCode;
 
-  static List<MTGInstantSubType> get subTypes => [
+  static List<MTGInstantSubtype> get subTypes => [
         unknown,
       ];
 
@@ -1600,7 +1600,7 @@ class MTGInstantSubType extends MTGCardSubType {
       ];
 }
 
-class MTGSorcerySubType extends MTGCardSubType {
+class MTGSorcerySubType extends MTGCardSubtype {
   MTGSorcerySubType(String name, String display, int sortOrder) : super(name, display, sortOrder);
 
   factory MTGSorcerySubType.fromJson(Map<String, dynamic> json) {
@@ -1622,7 +1622,7 @@ class MTGSorcerySubType extends MTGCardSubType {
   }
 
   @override
-  MTGCardSubType copyWith({String? name, String? display, int? sortOrder}) {
+  MTGCardSubtype copyWith({String? name, String? display, int? sortOrder}) {
     return MTGSorcerySubType(
       name ?? this.name,
       display ?? this.display,
@@ -1647,30 +1647,30 @@ class MTGSorcerySubType extends MTGCardSubType {
       ];
 }
 
-class MTGPlaneswalkerSubType extends MTGCardSubType {
-  MTGPlaneswalkerSubType(String name, String display, int sortOrder) : super(name, display, sortOrder);
+class MTGPlaneswalkerSubtype extends MTGCardSubtype {
+  MTGPlaneswalkerSubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
 
-  factory MTGPlaneswalkerSubType.fromJson(Map<String, dynamic> json) {
-    return MTGPlaneswalkerSubType(
+  factory MTGPlaneswalkerSubtype.fromJson(Map<String, dynamic> json) {
+    return MTGPlaneswalkerSubtype(
       json['name'] as String,
       json['display'] as String,
       json['sortOrder'] as int,
     );
   }
 
-  static MTGPlaneswalkerSubType get ajani => MTGPlaneswalkerSubType('ajani', 'Ajani', 0);
-  static MTGPlaneswalkerSubType get chandra => MTGPlaneswalkerSubType('chandra', 'Chandra', 1);
-  static MTGPlaneswalkerSubType get domri => MTGPlaneswalkerSubType('domri', 'Domri', 2);
-  static MTGPlaneswalkerSubType get elspeth => MTGPlaneswalkerSubType('elspeth', 'Elspeth', 3);
-  static MTGPlaneswalkerSubType get garruk => MTGPlaneswalkerSubType('garruk', 'Garruk', 4);
-  static MTGPlaneswalkerSubType get jace => MTGPlaneswalkerSubType('jace', 'Jace', 5);
-  static MTGPlaneswalkerSubType get karn => MTGPlaneswalkerSubType('karn', 'Karn', 6);
-  static MTGPlaneswalkerSubType get nissa => MTGPlaneswalkerSubType('nissa', 'Nissa', 7);
-  static MTGPlaneswalkerSubType get sorin => MTGPlaneswalkerSubType('sorin', 'Sorin', 8);
-  static MTGPlaneswalkerSubType get teferi => MTGPlaneswalkerSubType('teferi', 'Teferi', 9);
-  static MTGPlaneswalkerSubType get unknown => MTGPlaneswalkerSubType('unknown', 'Unknown', 255);
+  static MTGPlaneswalkerSubtype get ajani => MTGPlaneswalkerSubtype('ajani', 'Ajani', 0);
+  static MTGPlaneswalkerSubtype get chandra => MTGPlaneswalkerSubtype('chandra', 'Chandra', 1);
+  static MTGPlaneswalkerSubtype get domri => MTGPlaneswalkerSubtype('domri', 'Domri', 2);
+  static MTGPlaneswalkerSubtype get elspeth => MTGPlaneswalkerSubtype('elspeth', 'Elspeth', 3);
+  static MTGPlaneswalkerSubtype get garruk => MTGPlaneswalkerSubtype('garruk', 'Garruk', 4);
+  static MTGPlaneswalkerSubtype get jace => MTGPlaneswalkerSubtype('jace', 'Jace', 5);
+  static MTGPlaneswalkerSubtype get karn => MTGPlaneswalkerSubtype('karn', 'Karn', 6);
+  static MTGPlaneswalkerSubtype get nissa => MTGPlaneswalkerSubtype('nissa', 'Nissa', 7);
+  static MTGPlaneswalkerSubtype get sorin => MTGPlaneswalkerSubtype('sorin', 'Sorin', 8);
+  static MTGPlaneswalkerSubtype get teferi => MTGPlaneswalkerSubtype('teferi', 'Teferi', 9);
+  static MTGPlaneswalkerSubtype get unknown => MTGPlaneswalkerSubtype('unknown', 'Unknown', 255);
 
-  static MTGPlaneswalkerSubType getSubTypeFromName(String subType) {
+  static MTGPlaneswalkerSubtype getSubTypeFromName(String subType) {
     switch (subType) {
       case 'ajani':
         return ajani;
@@ -1697,7 +1697,7 @@ class MTGPlaneswalkerSubType extends MTGCardSubType {
     }
   }
 
-  static MTGPlaneswalkerSubType getSubTypeFromDisplay(String subType) {
+  static MTGPlaneswalkerSubtype getSubTypeFromDisplay(String subType) {
     switch (subType) {
       case 'Ajani':
         return ajani;
@@ -1725,8 +1725,8 @@ class MTGPlaneswalkerSubType extends MTGCardSubType {
   }
 
   @override
-  MTGCardSubType copyWith({String? name, String? display, int? sortOrder}) {
-    return MTGPlaneswalkerSubType(
+  MTGCardSubtype copyWith({String? name, String? display, int? sortOrder}) {
+    return MTGPlaneswalkerSubtype(
       name ?? this.name,
       display ?? this.display,
       sortOrder ?? this.sortOrder,
@@ -1735,13 +1735,13 @@ class MTGPlaneswalkerSubType extends MTGCardSubType {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) || other is MTGPlaneswalkerSubType && other.name == name;
+    return identical(this, other) || other is MTGPlaneswalkerSubtype && other.name == name;
   }
 
   @override
   int get hashCode => name.hashCode;
 
-  static List<MTGPlaneswalkerSubType> get subTypes => [
+  static List<MTGPlaneswalkerSubtype> get subTypes => [
         ajani,
         chandra,
         domri,
@@ -1772,7 +1772,7 @@ class MTGCardTypeLine extends MTGField {
   MTGCardTypeLine(this.cardType, this.subType) : super("typeLine", "Type Line", 0);
 
   final List<MTGCardType> cardType;
-  final List<MTGCardSubType> subType;
+  final List<MTGCardSubtype> subType;
 
   factory MTGCardTypeLine.fromJson(Map<String, dynamic> json) {
     return MTGCardTypeLine(
@@ -1785,7 +1785,7 @@ class MTGCardTypeLine extends MTGField {
     return _MTGCardTypeParser.parseCardTypeLine(typeLine);
   }
 
-  static MTGCardTypeLine get unknown => MTGCardTypeLine([MTGCardType.unknown], [MTGCardSubType.unknown]);
+  static MTGCardTypeLine get unknown => MTGCardTypeLine([MTGCardType.unknown], [MTGCardSubtype.unknown]);
 
   @override
   Map<String, dynamic> toJson() {
@@ -1799,7 +1799,7 @@ class MTGCardTypeLine extends MTGField {
   String toString() {
     if (cardType.length == 1 && cardType[0] == MTGCardType.unknown) {
       return 'Unknown';
-    } else if (subType.length == 1 && subType[0] == MTGCardSubType.unknown) {
+    } else if (subType.length == 1 && subType[0] == MTGCardSubtype.unknown) {
       return cardType.map((e) => e.display).join(' ');
     } else if (subType.isEmpty) {
       return cardType.map((e) => e.display).join(' ');
@@ -1820,30 +1820,30 @@ class _MTGCardTypeParser {
     }
   }
 
-  static MTGCardSubType parseCardSubType(String cardSubType) {
-    if (MTGCreatureSubType.allNames.contains(cardSubType)) {
-      return MTGCreatureSubType.getSubTypeFromName(cardSubType);
-    } else if (MTGEnchantmentSubType.subTypeNames.contains(cardSubType)) {
-      return MTGEnchantmentSubType.getSubTypeFromName(cardSubType);
-    } else if (MTGLandSubType.subTypeNames.contains(cardSubType)) {
-      return MTGLandSubType.getSubTypeFromName(cardSubType);
-    } else if (MTGArtifactSubType.subTypeNames.contains(cardSubType)) {
-      return MTGArtifactSubType.getSubTypeFromName(cardSubType);
-    } else if (MTGInstantSubType.subTypesNames.contains(cardSubType)) {
-      return MTGInstantSubType.getSubTypeFromName(cardSubType);
+  static MTGCardSubtype parseCardSubType(String cardSubType) {
+    if (MTGCreatureSubtype.allNames.contains(cardSubType)) {
+      return MTGCreatureSubtype.getSubTypeFromName(cardSubType);
+    } else if (MTGEnchantmentSubtype.allNames.contains(cardSubType)) {
+      return MTGEnchantmentSubtype.getSubTypeFromName(cardSubType);
+    } else if (MTGLandSubtype.subTypeNames.contains(cardSubType)) {
+      return MTGLandSubtype.getSubTypeFromName(cardSubType);
+    } else if (MTGArtifactSubtype.subTypeNames.contains(cardSubType)) {
+      return MTGArtifactSubtype.getSubTypeFromName(cardSubType);
+    } else if (MTGInstantSubtype.subTypesNames.contains(cardSubType)) {
+      return MTGInstantSubtype.getSubTypeFromName(cardSubType);
     } else if (MTGSorcerySubType.subTypeNames.contains(cardSubType)) {
       return MTGSorcerySubType.getSubTypeFromName(cardSubType);
-    } else if (MTGPlaneswalkerSubType.subTypeNames.contains(cardSubType)) {
-      return MTGPlaneswalkerSubType.getSubTypeFromName(cardSubType);
+    } else if (MTGPlaneswalkerSubtype.subTypeNames.contains(cardSubType)) {
+      return MTGPlaneswalkerSubtype.getSubTypeFromName(cardSubType);
     } else {
-      return MTGCardSubType.unknown;
+      return MTGCardSubtype.unknown;
     }
   }
 
   static MTGCardTypeLine parseCardTypeLine(String cardTypeLine) {
     List<String> cardTypeLineSplit = cardTypeLine.split(' - ');
     List<MTGCardType> cardType = [];
-    List<MTGCardSubType> subType = [];
+    List<MTGCardSubtype> subType = [];
 
     if (cardTypeLineSplit.isNotEmpty) {
       cardType = cardTypeLineSplit[0].split(' ').map((e) => parseCardType(e)).toList();
