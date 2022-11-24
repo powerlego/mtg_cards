@@ -1331,16 +1331,58 @@ class MTGEnchantmentSubType extends MTGCardSubType {
   }
 
   static MTGEnchantmentSubType get aura => MTGEnchantmentSubType('aura', 'Aura', 0);
-  static MTGEnchantmentSubType get curse => MTGEnchantmentSubType('curse', 'Curse', 1);
-  static MTGEnchantmentSubType get shrine => MTGEnchantmentSubType('shrine', 'Shrine', 2);
+  static MTGEnchantmentSubType get background => MTGEnchantmentSubType('background', 'Background', 1);
+  static MTGEnchantmentSubType get cartouche => MTGEnchantmentSubType('cartouche', 'Cartouche', 2);
+  static MTGEnchantmentSubType get class_ => MTGEnchantmentSubType('class', 'Class', 3);
+  static MTGEnchantmentSubType get curse => MTGEnchantmentSubType('curse', 'Curse', 4);
+  static MTGEnchantmentSubType get rune => MTGEnchantmentSubType('rune', 'Rune', 5);
+  static MTGEnchantmentSubType get saga => MTGEnchantmentSubType('saga', 'Saga', 6);
+  static MTGEnchantmentSubType get shard => MTGEnchantmentSubType('shard', 'Shard', 7);
+  static MTGEnchantmentSubType get shrine => MTGEnchantmentSubType('shrine', 'Shrine', 8);
   static MTGEnchantmentSubType get unknown => MTGEnchantmentSubType('unknown', 'Unknown', 255);
+
+  static List<MTGEnchantmentSubType> get subTypes => [
+        aura,
+        background,
+        cartouche,
+        class_,
+        curse,
+        rune,
+        saga,
+        shard,
+        shrine,
+      ];
+
+  static List<String> get subTypeNames => [
+        aura.name,
+        background.name,
+        cartouche.name,
+        class_.name,
+        curse.name,
+        rune.name,
+        saga.name,
+        shard.name,
+        shrine.name,
+      ];
 
   static MTGEnchantmentSubType getSubTypeFromName(String subType) {
     switch (subType) {
       case 'aura':
         return aura;
+      case 'background':
+        return background;
+      case 'cartouche':
+        return cartouche;
+      case 'class':
+        return class_;
       case 'curse':
         return curse;
+      case 'rune':
+        return rune;
+      case 'saga':
+        return saga;
+      case 'shard':
+        return shard;
       case 'shrine':
         return shrine;
       default:
@@ -1352,8 +1394,20 @@ class MTGEnchantmentSubType extends MTGCardSubType {
     switch (subType) {
       case 'Aura':
         return aura;
+      case 'Background':
+        return background;
+      case 'Cartouche':
+        return cartouche;
+      case 'Class':
+        return class_;
       case 'Curse':
         return curse;
+      case 'Rune':
+        return rune;
+      case 'Saga':
+        return saga;
+      case 'Shard':
+        return shard;
       case 'Shrine':
         return shrine;
       default:
@@ -1377,18 +1431,6 @@ class MTGEnchantmentSubType extends MTGCardSubType {
 
   @override
   int get hashCode => name.hashCode;
-
-  static List<MTGEnchantmentSubType> get subTypes => [
-        aura,
-        curse,
-        shrine,
-      ];
-
-  static List<String> get subTypeNames => [
-        aura.name,
-        curse.name,
-        shrine.name,
-      ];
 }
 
 class MTGLandSubType extends MTGCardSubType {
