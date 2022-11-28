@@ -1365,7 +1365,7 @@ class MTGEnchantmentSubtype extends MTGCardSubtype {
     );
   }
 
-  static MTGEnchantmentSubtype getSubTypeFromName(String subType) {
+  static MTGEnchantmentSubtype getSubtypeFromName(String subType) {
     switch (subType) {
       case 'aura':
         return aura;
@@ -1390,7 +1390,7 @@ class MTGEnchantmentSubtype extends MTGCardSubtype {
     }
   }
 
-  static MTGEnchantmentSubtype getSubTypeFromDisplay(String subType) {
+  static MTGEnchantmentSubtype getSubtypeFromDisplay(String subType) {
     switch (subType) {
       case 'Aura':
         return aura;
@@ -1434,6 +1434,53 @@ class MTGEnchantmentSubtype extends MTGCardSubtype {
 }
 
 class MTGLandSubtype extends MTGCardSubtype {
+  static MTGLandSubtype get desert => MTGLandSubtype('desert', 'Desert', 0);
+  static MTGLandSubtype get forest => MTGLandSubtype('forest', 'Forest', 1);
+  static MTGLandSubtype get gate => MTGLandSubtype('gate', 'Gate', 2);
+  static MTGLandSubtype get island => MTGLandSubtype('island', 'Island', 3);
+  static MTGLandSubtype get lair => MTGLandSubtype('lair', 'Lair', 4);
+  static MTGLandSubtype get locus => MTGLandSubtype('locus', 'Locus', 5);
+  static MTGLandSubtype get mine => MTGLandSubtype('mine', 'Mine', 6);
+  static MTGLandSubtype get mountain => MTGLandSubtype('mountain', 'Mountain', 7);
+  static MTGLandSubtype get plains => MTGLandSubtype('plains', 'Plains', 8);
+  static MTGLandSubtype get powerplant => MTGLandSubtype('powerplant', 'Power-Plant', 9);
+  static MTGLandSubtype get swamp => MTGLandSubtype('swamp', 'Swamp', 10);
+  static MTGLandSubtype get tower => MTGLandSubtype('tower', 'Tower', 11);
+  static MTGLandSubtype get urzas => MTGLandSubtype('urzas', "Urza's", 12);
+  static MTGLandSubtype get unknown => MTGLandSubtype('unknown', 'Unknown', 255);
+
+  static List<MTGLandSubtype> get all => [
+        desert,
+        forest,
+        gate,
+        island,
+        lair,
+        locus,
+        mine,
+        mountain,
+        plains,
+        powerplant,
+        swamp,
+        tower,
+        urzas,
+      ];
+
+  static List<String> get allNames => [
+        desert.name,
+        forest.name,
+        gate.name,
+        island.name,
+        lair.name,
+        locus.name,
+        mine.name,
+        mountain.name,
+        plains.name,
+        powerplant.name,
+        swamp.name,
+        tower.name,
+        urzas.name,
+      ];
+
   MTGLandSubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
 
   factory MTGLandSubtype.fromJson(Map<String, dynamic> json) {
@@ -1444,37 +1491,67 @@ class MTGLandSubtype extends MTGCardSubtype {
     );
   }
 
-  static MTGLandSubtype get basic => MTGLandSubtype('basic', 'Basic', 0);
-  static MTGLandSubtype get legendary => MTGLandSubtype('legendary', 'Legendary', 1);
-  static MTGLandSubtype get snow => MTGLandSubtype('snow', 'Snow', 2);
-  static MTGLandSubtype get world => MTGLandSubtype('world', 'World', 3);
-  static MTGLandSubtype get unknown => MTGLandSubtype('unknown', 'Unknown', 255);
-
-  static MTGLandSubtype getSubTypeFromName(String subType) {
+  static MTGLandSubtype getSubtypeFromName(String subType) {
     switch (subType) {
-      case 'basic':
-        return basic;
-      case 'legendary':
-        return legendary;
-      case 'snow':
-        return snow;
-      case 'world':
-        return world;
+      case 'desert':
+        return desert;
+      case 'forest':
+        return forest;
+      case 'gate':
+        return gate;
+      case 'island':
+        return island;
+      case 'lair':
+        return lair;
+      case 'locus':
+        return locus;
+      case 'mine':
+        return mine;
+      case 'mountain':
+        return mountain;
+      case 'plains':
+        return plains;
+      case 'powerplant':
+        return powerplant;
+      case 'swamp':
+        return swamp;
+      case 'tower':
+        return tower;
+      case 'urzas':
+        return urzas;
       default:
         return unknown;
     }
   }
 
-  static MTGLandSubtype getSubTypeFromDisplay(String subType) {
+  static MTGLandSubtype getSubtypeFromDisplay(String subType) {
     switch (subType) {
-      case 'Basic':
-        return basic;
-      case 'Legendary':
-        return legendary;
-      case 'Snow':
-        return snow;
-      case 'World':
-        return world;
+      case 'Desert':
+        return desert;
+      case 'Forest':
+        return forest;
+      case 'Gate':
+        return gate;
+      case 'Island':
+        return island;
+      case 'Lair':
+        return lair;
+      case 'Locus':
+        return locus;
+      case 'Mine':
+        return mine;
+      case 'Mountain':
+        return mountain;
+      case 'Plains':
+        return plains;
+      case 'Power-Plant':
+        return powerplant;
+      case 'Swamp':
+        return swamp;
+      case 'Tower':
+        return tower;
+      case "Urza's":
+        return urzas;
       default:
         return unknown;
     }
@@ -1496,23 +1573,50 @@ class MTGLandSubtype extends MTGCardSubtype {
 
   @override
   int get hashCode => name.hashCode;
-
-  static List<MTGLandSubtype> get subTypes => [
-        basic,
-        legendary,
-        snow,
-        world,
-      ];
-
-  static List<String> get subTypeNames => [
-        basic.name,
-        legendary.name,
-        snow.name,
-        world.name,
-      ];
 }
 
 class MTGArtifactSubtype extends MTGCardSubtype {
+  static MTGArtifactSubtype get attraction => MTGArtifactSubtype('attraction', 'Attraction', 0);
+  static MTGArtifactSubtype get blood => MTGArtifactSubtype('blood', 'Blood', 1);
+  static MTGArtifactSubtype get clue => MTGArtifactSubtype('clue', 'Clue', 2);
+  static MTGArtifactSubtype get contraption => MTGArtifactSubtype('contraption', 'Contraption', 3);
+  static MTGArtifactSubtype get equipment => MTGArtifactSubtype('equipment', 'Equipment', 4);
+  static MTGArtifactSubtype get food => MTGArtifactSubtype('food', 'Food', 5);
+  static MTGArtifactSubtype get fortification => MTGArtifactSubtype('fortification', 'Fortification', 6);
+  static MTGArtifactSubtype get gold => MTGArtifactSubtype('gold', 'Gold', 7);
+  static MTGArtifactSubtype get powerstone => MTGArtifactSubtype('powerstone', 'Powerstone', 8);
+  static MTGArtifactSubtype get treasure => MTGArtifactSubtype('treasure', 'Treasure', 9);
+  static MTGArtifactSubtype get vehicle => MTGArtifactSubtype('vehicle', 'Vehicle', 10);
+  static MTGArtifactSubtype get unknown => MTGArtifactSubtype('unknown', 'Unknown', 255);
+
+  static List<MTGArtifactSubtype> get all => [
+        attraction,
+        blood,
+        clue,
+        contraption,
+        equipment,
+        food,
+        fortification,
+        gold,
+        powerstone,
+        treasure,
+        vehicle,
+      ];
+
+  static List<String> get allNames => [
+        attraction.name,
+        blood.name,
+        clue.name,
+        contraption.name,
+        equipment.name,
+        food.name,
+        fortification.name,
+        gold.name,
+        powerstone.name,
+        treasure.name,
+        vehicle.name,
+      ];
+
   MTGArtifactSubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
 
   factory MTGArtifactSubtype.fromJson(Map<String, dynamic> json) {
@@ -1523,37 +1627,83 @@ class MTGArtifactSubtype extends MTGCardSubtype {
     );
   }
 
-  static MTGArtifactSubtype get equipment => MTGArtifactSubtype('equipment', 'Equipment', 0);
-  static MTGArtifactSubtype get unknown => MTGArtifactSubtype('unknown', 'Unknown', 255);
-
-  static MTGArtifactSubtype getSubTypeFromName(String subType) {
+  static MTGArtifactSubtype getSubtypeFromName(String subType) {
     switch (subType) {
+      case 'attraction':
+        return attraction;
+      case 'blood':
+        return blood;
+      case 'clue':
+        return clue;
+      case 'contraption':
+        return contraption;
       case 'equipment':
         return equipment;
+      case 'food':
+        return food;
+      case 'fortification':
+        return fortification;
+      case 'gold':
+        return gold;
+      case 'powerstone':
+        return powerstone;
+      case 'treasure':
+        return treasure;
+      case 'vehicle':
+        return vehicle;
       default:
         return unknown;
     }
   }
 
-  static MTGArtifactSubtype getSubTypeFromDisplay(String subType) {
+  static MTGArtifactSubtype getSubtypeFromDisplay(String subType) {
     switch (subType) {
+      case 'Attraction':
+        return attraction;
+      case 'Blood':
+        return blood;
+      case 'Clue':
+        return clue;
+      case 'Contraption':
+        return contraption;
       case 'Equipment':
         return equipment;
+      case 'Food':
+        return food;
+      case 'Fortification':
+        return fortification;
+      case 'Gold':
+        return gold;
+      case 'Powerstone':
+        return powerstone;
+      case 'Treasure':
+        return treasure;
+      case 'Vehicle':
+        return vehicle;
       default:
         return unknown;
     }
   }
-
-  static List<MTGArtifactSubtype> get subTypes => [
-        equipment,
-      ];
-
-  static List<String> get subTypeNames => [
-        equipment.name,
-      ];
 }
 
 class MTGInstantSubtype extends MTGCardSubtype {
+  static MTGInstantSubtype get adventure => MTGInstantSubtype('adventure', 'Adventure', 0);
+  static MTGInstantSubtype get arcane => MTGInstantSubtype('arcane', 'Arcane', 1);
+  static MTGInstantSubtype get trap => MTGInstantSubtype('trap', 'Trap', 2);
+  static MTGInstantSubtype get unknown => MTGInstantSubtype('unknown', 'Unknown', 255);
+
+  static List<MTGInstantSubtype> get all => [
+        adventure,
+        arcane,
+        trap,
+      ];
+
+  static List<String> get allNames => [
+        adventure.name,
+        arcane.name,
+        trap.name,
+      ];
+
   MTGInstantSubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
 
   factory MTGInstantSubtype.fromJson(Map<String, dynamic> json) {
@@ -1564,14 +1714,30 @@ class MTGInstantSubtype extends MTGCardSubtype {
     );
   }
 
-  static MTGInstantSubtype get unknown => MTGInstantSubtype('unknown', 'Unknown', 255);
-
-  static MTGInstantSubtype getSubTypeFromName(String subType) {
-    return unknown;
+  static MTGInstantSubtype getSubtypeFromName(String subType) {
+    switch (subType) {
+      case 'adventure':
+        return adventure;
+      case 'arcane':
+        return arcane;
+      case 'trap':
+        return trap;
+      default:
+        return unknown;
+    }
   }
 
-  static MTGInstantSubtype getSubTypeFromDisplay(String subType) {
-    return unknown;
+  static MTGInstantSubtype getSubtypeFromDisplay(String subType) {
+    switch (subType) {
+      case 'Adventure':
+        return adventure;
+      case 'Arcane':
+        return arcane;
+      case 'Trap':
+        return trap;
+      default:
+        return unknown;
+    }
   }
 
   @override
@@ -1590,40 +1756,64 @@ class MTGInstantSubtype extends MTGCardSubtype {
 
   @override
   int get hashCode => name.hashCode;
-
-  static List<MTGInstantSubtype> get subTypes => [
-        unknown,
-      ];
-
-  static List<String> get subTypesNames => [
-        unknown.name,
-      ];
 }
 
-class MTGSorcerySubType extends MTGCardSubtype {
-  MTGSorcerySubType(String name, String display, int sortOrder) : super(name, display, sortOrder);
+class MTGSorcerySubtype extends MTGCardSubtype {
+  static MTGSorcerySubtype get adventure => MTGSorcerySubtype('adventure', 'Adventure', 0);
+  static MTGSorcerySubtype get arcane => MTGSorcerySubtype('arcane', 'Arcane', 1);
+  static MTGSorcerySubtype get lesson => MTGSorcerySubtype('lesson', 'Lesson', 2);
+  static MTGSorcerySubtype get unknown => MTGSorcerySubtype('unknown', 'Unknown', 255);
+  static List<MTGSorcerySubtype> get all => [
+        adventure,
+        arcane,
+        lesson,
+      ];
 
-  factory MTGSorcerySubType.fromJson(Map<String, dynamic> json) {
-    return MTGSorcerySubType(
+  static List<String> get allNames => [
+        adventure.name,
+        arcane.name,
+        lesson.name,
+      ];
+
+  MTGSorcerySubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
+
+  factory MTGSorcerySubtype.fromJson(Map<String, dynamic> json) {
+    return MTGSorcerySubtype(
       json['name'] as String,
       json['display'] as String,
       json['sortOrder'] as int,
     );
   }
 
-  static MTGSorcerySubType get unknown => MTGSorcerySubType('unknown', 'Unknown', 255);
-
-  static MTGSorcerySubType getSubTypeFromName(String subType) {
-    return unknown;
+  static MTGSorcerySubtype getSubtypeFromName(String subType) {
+    switch (subType) {
+      case 'adventure':
+        return adventure;
+      case 'arcane':
+        return arcane;
+      case 'lesson':
+        return lesson;
+      default:
+        return unknown;
+    }
   }
 
-  static MTGSorcerySubType getSubTypeFromDisplay(String subType) {
-    return unknown;
+  static MTGSorcerySubtype getSubtypeFromDisplay(String subType) {
+    switch (subType) {
+      case 'Adventure':
+        return adventure;
+      case 'Arcane':
+        return arcane;
+      case 'Lesson':
+        return lesson;
+      default:
+        return unknown;
+    }
   }
 
   @override
   MTGCardSubtype copyWith({String? name, String? display, int? sortOrder}) {
-    return MTGSorcerySubType(
+    return MTGSorcerySubtype(
       name ?? this.name,
       display ?? this.display,
       sortOrder ?? this.sortOrder,
@@ -1632,32 +1822,14 @@ class MTGSorcerySubType extends MTGCardSubtype {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) || other is MTGSorcerySubType && other.name == name;
+    return identical(this, other) || other is MTGSorcerySubtype && other.name == name;
   }
 
   @override
   int get hashCode => name.hashCode;
-
-  static List<MTGSorcerySubType> get subTypes => [
-        unknown,
-      ];
-
-  static List<String> get subTypeNames => [
-        unknown.name,
-      ];
 }
 
 class MTGPlaneswalkerSubtype extends MTGCardSubtype {
-  MTGPlaneswalkerSubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
-
-  factory MTGPlaneswalkerSubtype.fromJson(Map<String, dynamic> json) {
-    return MTGPlaneswalkerSubtype(
-      json['name'] as String,
-      json['display'] as String,
-      json['sortOrder'] as int,
-    );
-  }
-
   static MTGPlaneswalkerSubtype get ajani => MTGPlaneswalkerSubtype('ajani', 'Ajani', 0);
   static MTGPlaneswalkerSubtype get chandra => MTGPlaneswalkerSubtype('chandra', 'Chandra', 1);
   static MTGPlaneswalkerSubtype get domri => MTGPlaneswalkerSubtype('domri', 'Domri', 2);
@@ -1670,7 +1842,43 @@ class MTGPlaneswalkerSubtype extends MTGCardSubtype {
   static MTGPlaneswalkerSubtype get teferi => MTGPlaneswalkerSubtype('teferi', 'Teferi', 9);
   static MTGPlaneswalkerSubtype get unknown => MTGPlaneswalkerSubtype('unknown', 'Unknown', 255);
 
-  static MTGPlaneswalkerSubtype getSubTypeFromName(String subType) {
+  static List<MTGPlaneswalkerSubtype> get all => [
+        ajani,
+        chandra,
+        domri,
+        elspeth,
+        garruk,
+        jace,
+        karn,
+        nissa,
+        sorin,
+        teferi,
+      ];
+
+  static List<String> get allNames => [
+        ajani.name,
+        chandra.name,
+        domri.name,
+        elspeth.name,
+        garruk.name,
+        jace.name,
+        karn.name,
+        nissa.name,
+        sorin.name,
+        teferi.name,
+      ];
+
+  MTGPlaneswalkerSubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
+
+  factory MTGPlaneswalkerSubtype.fromJson(Map<String, dynamic> json) {
+    return MTGPlaneswalkerSubtype(
+      json['name'] as String,
+      json['display'] as String,
+      json['sortOrder'] as int,
+    );
+  }
+
+  static MTGPlaneswalkerSubtype getSubtypeFromName(String subType) {
     switch (subType) {
       case 'ajani':
         return ajani;
@@ -1697,7 +1905,7 @@ class MTGPlaneswalkerSubtype extends MTGCardSubtype {
     }
   }
 
-  static MTGPlaneswalkerSubtype getSubTypeFromDisplay(String subType) {
+  static MTGPlaneswalkerSubtype getSubtypeFromDisplay(String subType) {
     switch (subType) {
       case 'Ajani':
         return ajani;
@@ -1740,32 +1948,6 @@ class MTGPlaneswalkerSubtype extends MTGCardSubtype {
 
   @override
   int get hashCode => name.hashCode;
-
-  static List<MTGPlaneswalkerSubtype> get subTypes => [
-        ajani,
-        chandra,
-        domri,
-        elspeth,
-        garruk,
-        jace,
-        karn,
-        nissa,
-        sorin,
-        teferi,
-      ];
-
-  static List<String> get subTypeNames => [
-        ajani.name,
-        chandra.name,
-        domri.name,
-        elspeth.name,
-        garruk.name,
-        jace.name,
-        karn.name,
-        nissa.name,
-        sorin.name,
-        teferi.name,
-      ];
 }
 
 class MTGCardTypeLine extends MTGField {
@@ -1824,17 +2006,17 @@ class _MTGCardTypeParser {
     if (MTGCreatureSubtype.allNames.contains(cardSubType)) {
       return MTGCreatureSubtype.getSubTypeFromName(cardSubType);
     } else if (MTGEnchantmentSubtype.allNames.contains(cardSubType)) {
-      return MTGEnchantmentSubtype.getSubTypeFromName(cardSubType);
-    } else if (MTGLandSubtype.subTypeNames.contains(cardSubType)) {
-      return MTGLandSubtype.getSubTypeFromName(cardSubType);
-    } else if (MTGArtifactSubtype.subTypeNames.contains(cardSubType)) {
-      return MTGArtifactSubtype.getSubTypeFromName(cardSubType);
-    } else if (MTGInstantSubtype.subTypesNames.contains(cardSubType)) {
-      return MTGInstantSubtype.getSubTypeFromName(cardSubType);
-    } else if (MTGSorcerySubType.subTypeNames.contains(cardSubType)) {
-      return MTGSorcerySubType.getSubTypeFromName(cardSubType);
-    } else if (MTGPlaneswalkerSubtype.subTypeNames.contains(cardSubType)) {
-      return MTGPlaneswalkerSubtype.getSubTypeFromName(cardSubType);
+      return MTGEnchantmentSubtype.getSubtypeFromName(cardSubType);
+    } else if (MTGLandSubtype.allNames.contains(cardSubType)) {
+      return MTGLandSubtype.getSubtypeFromName(cardSubType);
+    } else if (MTGArtifactSubtype.allNames.contains(cardSubType)) {
+      return MTGArtifactSubtype.getSubtypeFromName(cardSubType);
+    } else if (MTGInstantSubtype.allNames.contains(cardSubType)) {
+      return MTGInstantSubtype.getSubtypeFromName(cardSubType);
+    } else if (MTGSorcerySubtype.allNames.contains(cardSubType)) {
+      return MTGSorcerySubtype.getSubtypeFromName(cardSubType);
+    } else if (MTGPlaneswalkerSubtype.allNames.contains(cardSubType)) {
+      return MTGPlaneswalkerSubtype.getSubtypeFromName(cardSubType);
     } else {
       return MTGCardSubtype.unknown;
     }
