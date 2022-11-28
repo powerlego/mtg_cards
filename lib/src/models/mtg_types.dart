@@ -136,6 +136,7 @@ class MTGCardMainType extends MTGCardType {
   static MTGCardMainType get sorcery => MTGCardMainType('sorcery', 'Sorcery', 12);
   static MTGCardMainType get tribal => MTGCardMainType('tribal', 'Tribal', 13);
   static MTGCardMainType get vanguard => MTGCardMainType('vanguard', 'Vanguard', 14);
+  static MTGCardMainType get dungeon => MTGCardMainType('dungeon', 'Dungeon', 15);
   static MTGCardMainType get unknown => MTGCardMainType('unknown', 'Unknown', 255);
 
   static List<MTGCardMainType> get all => [
@@ -1830,42 +1831,258 @@ class MTGSorcerySubtype extends MTGCardSubtype {
 }
 
 class MTGPlaneswalkerSubtype extends MTGCardSubtype {
-  static MTGPlaneswalkerSubtype get ajani => MTGPlaneswalkerSubtype('ajani', 'Ajani', 0);
-  static MTGPlaneswalkerSubtype get chandra => MTGPlaneswalkerSubtype('chandra', 'Chandra', 1);
-  static MTGPlaneswalkerSubtype get domri => MTGPlaneswalkerSubtype('domri', 'Domri', 2);
-  static MTGPlaneswalkerSubtype get elspeth => MTGPlaneswalkerSubtype('elspeth', 'Elspeth', 3);
-  static MTGPlaneswalkerSubtype get garruk => MTGPlaneswalkerSubtype('garruk', 'Garruk', 4);
-  static MTGPlaneswalkerSubtype get jace => MTGPlaneswalkerSubtype('jace', 'Jace', 5);
-  static MTGPlaneswalkerSubtype get karn => MTGPlaneswalkerSubtype('karn', 'Karn', 6);
-  static MTGPlaneswalkerSubtype get nissa => MTGPlaneswalkerSubtype('nissa', 'Nissa', 7);
-  static MTGPlaneswalkerSubtype get sorin => MTGPlaneswalkerSubtype('sorin', 'Sorin', 8);
-  static MTGPlaneswalkerSubtype get teferi => MTGPlaneswalkerSubtype('teferi', 'Teferi', 9);
+  static MTGPlaneswalkerSubtype get abian => MTGPlaneswalkerSubtype('abian', 'Abian', 0);
+  static MTGPlaneswalkerSubtype get ajani => MTGPlaneswalkerSubtype('ajani', 'Ajani', 1);
+  static MTGPlaneswalkerSubtype get aminatou => MTGPlaneswalkerSubtype('aminatou', 'Aminatou', 2);
+  static MTGPlaneswalkerSubtype get angrath => MTGPlaneswalkerSubtype('angrath', 'Angrath', 3);
+  static MTGPlaneswalkerSubtype get arlinn => MTGPlaneswalkerSubtype('arlinn', 'Arlinn', 4);
+  static MTGPlaneswalkerSubtype get ashiok => MTGPlaneswalkerSubtype('ashiok', 'Ashiok', 5);
+  static MTGPlaneswalkerSubtype get bob => MTGPlaneswalkerSubtype('bob', 'B.O.B.', 6);
+  static MTGPlaneswalkerSubtype get bahamut => MTGPlaneswalkerSubtype('bahamut', 'Bahamut', 7);
+  static MTGPlaneswalkerSubtype get basri => MTGPlaneswalkerSubtype('basri', 'Basri', 8);
+  static MTGPlaneswalkerSubtype get bolas => MTGPlaneswalkerSubtype('bolas', 'Bolas', 9);
+  static MTGPlaneswalkerSubtype get calix => MTGPlaneswalkerSubtype('calix', 'Calix', 10);
+  static MTGPlaneswalkerSubtype get chandra => MTGPlaneswalkerSubtype('chandra', 'Chandra', 11);
+  static MTGPlaneswalkerSubtype get comet => MTGPlaneswalkerSubtype('comet', 'Comet', 12);
+  static MTGPlaneswalkerSubtype get dack => MTGPlaneswalkerSubtype('dack', 'Dack', 13);
+  static MTGPlaneswalkerSubtype get dakkon => MTGPlaneswalkerSubtype('dakkon', 'Dakkon', 14);
+  static MTGPlaneswalkerSubtype get daretti => MTGPlaneswalkerSubtype('daretti', 'Daretti', 15);
+  static MTGPlaneswalkerSubtype get davriel => MTGPlaneswalkerSubtype('davriel', 'Davriel', 16);
+  static MTGPlaneswalkerSubtype get dihada => MTGPlaneswalkerSubtype('dihada', 'Dihada', 17);
+  static MTGPlaneswalkerSubtype get domri => MTGPlaneswalkerSubtype('domri', 'Domri', 18);
+  static MTGPlaneswalkerSubtype get dovin => MTGPlaneswalkerSubtype('dovin', 'Dovin', 19);
+  static MTGPlaneswalkerSubtype get duck => MTGPlaneswalkerSubtype('duck', 'Duck', 20);
+  static MTGPlaneswalkerSubtype get dungeon => MTGPlaneswalkerSubtype('dungeon', 'Dungeon', 21);
+  static MTGPlaneswalkerSubtype get ellywick => MTGPlaneswalkerSubtype('ellywick', 'Ellywick', 22);
+  static MTGPlaneswalkerSubtype get elminster => MTGPlaneswalkerSubtype('elminster', 'Elminster', 23);
+  static MTGPlaneswalkerSubtype get elspeth => MTGPlaneswalkerSubtype('elspeth', 'Elspeth', 24);
+  static MTGPlaneswalkerSubtype get estrid => MTGPlaneswalkerSubtype('estrid', 'Estrid', 25);
+  static MTGPlaneswalkerSubtype get freyalise => MTGPlaneswalkerSubtype('freyalise', 'Freyalise', 26);
+  static MTGPlaneswalkerSubtype get garruk => MTGPlaneswalkerSubtype('garruk', 'Garruk', 27);
+  static MTGPlaneswalkerSubtype get gideon => MTGPlaneswalkerSubtype('gideon', 'Gideon', 28);
+  static MTGPlaneswalkerSubtype get grist => MTGPlaneswalkerSubtype('grist', 'Grist', 29);
+  static MTGPlaneswalkerSubtype get huatli => MTGPlaneswalkerSubtype('huatli', 'Huatli', 30);
+  static MTGPlaneswalkerSubtype get inzerva => MTGPlaneswalkerSubtype('inzerva', 'Inzerva', 31);
+  static MTGPlaneswalkerSubtype get jace => MTGPlaneswalkerSubtype('jace', 'Jace', 32);
+  static MTGPlaneswalkerSubtype get jared => MTGPlaneswalkerSubtype('jared', 'Jared', 33);
+  static MTGPlaneswalkerSubtype get jaya => MTGPlaneswalkerSubtype('jaya', 'Jaya', 34);
+  static MTGPlaneswalkerSubtype get jeska => MTGPlaneswalkerSubtype('jeska', 'Jeska', 35);
+  static MTGPlaneswalkerSubtype get kaito => MTGPlaneswalkerSubtype('kaito', 'Kaito', 36);
+  static MTGPlaneswalkerSubtype get karn => MTGPlaneswalkerSubtype('karn', 'Karn', 37);
+  static MTGPlaneswalkerSubtype get kasmina => MTGPlaneswalkerSubtype('kasmina', 'Kasmina', 38);
+  static MTGPlaneswalkerSubtype get kaya => MTGPlaneswalkerSubtype('kaya', 'Kaya', 39);
+  static MTGPlaneswalkerSubtype get kiora => MTGPlaneswalkerSubtype('kiora', 'Kiora', 40);
+  static MTGPlaneswalkerSubtype get koth => MTGPlaneswalkerSubtype('koth', 'Koth', 41);
+  static MTGPlaneswalkerSubtype get liliana => MTGPlaneswalkerSubtype('liliana', 'Liliana', 42);
+  static MTGPlaneswalkerSubtype get lolth => MTGPlaneswalkerSubtype('lolth', 'Lolth', 43);
+  static MTGPlaneswalkerSubtype get lukka => MTGPlaneswalkerSubtype('lukka', 'Lukka', 44);
+  static MTGPlaneswalkerSubtype get master => MTGPlaneswalkerSubtype('master', 'Master', 45);
+  static MTGPlaneswalkerSubtype get minsc => MTGPlaneswalkerSubtype('minsc', 'Minsc', 46);
+  static MTGPlaneswalkerSubtype get mordenkainen => MTGPlaneswalkerSubtype('mordenkainen', 'Mordenkainen', 47);
+  static MTGPlaneswalkerSubtype get nahiri => MTGPlaneswalkerSubtype('nahiri', 'Nahiri', 48);
+  static MTGPlaneswalkerSubtype get narset => MTGPlaneswalkerSubtype('narset', 'Narset', 49);
+  static MTGPlaneswalkerSubtype get niko => MTGPlaneswalkerSubtype('niko', 'Niko', 50);
+  static MTGPlaneswalkerSubtype get nissa => MTGPlaneswalkerSubtype('nissa', 'Nissa', 51);
+  static MTGPlaneswalkerSubtype get nixilis => MTGPlaneswalkerSubtype('nixilis', 'Nixilis', 52);
+  static MTGPlaneswalkerSubtype get oko => MTGPlaneswalkerSubtype('oko', 'Oko', 53);
+  static MTGPlaneswalkerSubtype get ral => MTGPlaneswalkerSubtype('ral', 'Ral', 54);
+  static MTGPlaneswalkerSubtype get rowan => MTGPlaneswalkerSubtype('rowan', 'Rowan', 55);
+  static MTGPlaneswalkerSubtype get saheeli => MTGPlaneswalkerSubtype('saheeli', 'Saheeli', 56);
+  static MTGPlaneswalkerSubtype get samut => MTGPlaneswalkerSubtype('samut', 'Samut', 57);
+  static MTGPlaneswalkerSubtype get sarkhan => MTGPlaneswalkerSubtype('sarkhan', 'Sarkhan', 58);
+  static MTGPlaneswalkerSubtype get serra => MTGPlaneswalkerSubtype('serra', 'Serra', 59);
+  static MTGPlaneswalkerSubtype get sivitri => MTGPlaneswalkerSubtype('sivitri', 'Sivitri', 60);
+  static MTGPlaneswalkerSubtype get sorin => MTGPlaneswalkerSubtype('sorin', 'Sorin', 61);
+  static MTGPlaneswalkerSubtype get szat => MTGPlaneswalkerSubtype('szat', 'Szat', 62);
+  static MTGPlaneswalkerSubtype get tamiyo => MTGPlaneswalkerSubtype('tamiyo', 'Tamiyo', 63);
+  static MTGPlaneswalkerSubtype get tasha => MTGPlaneswalkerSubtype('tasha', 'Tasha', 64);
+  static MTGPlaneswalkerSubtype get teferi => MTGPlaneswalkerSubtype('teferi', 'Teferi', 65);
+  static MTGPlaneswalkerSubtype get teyo => MTGPlaneswalkerSubtype('teyo', 'Teyo', 66);
+  static MTGPlaneswalkerSubtype get tezzeret => MTGPlaneswalkerSubtype('tezzeret', 'Tezzeret', 67);
+  static MTGPlaneswalkerSubtype get tibalt => MTGPlaneswalkerSubtype('tibalt', 'Tibalt', 68);
+  static MTGPlaneswalkerSubtype get tyvar => MTGPlaneswalkerSubtype('tyvar', 'Tyvar', 69);
+  static MTGPlaneswalkerSubtype get ugin => MTGPlaneswalkerSubtype('ugin', 'Ugin', 70);
+  static MTGPlaneswalkerSubtype get urza => MTGPlaneswalkerSubtype('urza', 'Urza', 71);
+  static MTGPlaneswalkerSubtype get venser => MTGPlaneswalkerSubtype('venser', 'Venser', 72);
+  static MTGPlaneswalkerSubtype get vivien => MTGPlaneswalkerSubtype('vivien', 'Vivien', 73);
+  static MTGPlaneswalkerSubtype get vraska => MTGPlaneswalkerSubtype('vraska', 'Vraska', 74);
+  static MTGPlaneswalkerSubtype get will => MTGPlaneswalkerSubtype('will', 'Will', 75);
+  static MTGPlaneswalkerSubtype get windgrace => MTGPlaneswalkerSubtype('windgrace', 'Windgrace', 76);
+  static MTGPlaneswalkerSubtype get wrenn => MTGPlaneswalkerSubtype('wrenn', 'Wrenn', 77);
+  static MTGPlaneswalkerSubtype get xenagos => MTGPlaneswalkerSubtype('xenagos', 'Xenagos', 78);
+  static MTGPlaneswalkerSubtype get yanggu => MTGPlaneswalkerSubtype('yanggu', 'Yanggu', 79);
+  static MTGPlaneswalkerSubtype get yanling => MTGPlaneswalkerSubtype('yanling', 'Yanling', 80);
+  static MTGPlaneswalkerSubtype get zariel => MTGPlaneswalkerSubtype('zariel', 'Zariel', 81);
   static MTGPlaneswalkerSubtype get unknown => MTGPlaneswalkerSubtype('unknown', 'Unknown', 255);
 
   static List<MTGPlaneswalkerSubtype> get all => [
+        abian,
         ajani,
+        aminatou,
+        angrath,
+        arlinn,
+        ashiok,
+        bob,
+        bahamut,
+        basri,
+        bolas,
+        calix,
         chandra,
+        comet,
+        dack,
+        dakkon,
+        daretti,
+        davriel,
+        dihada,
         domri,
+        dovin,
+        duck,
+        dungeon,
+        ellywick,
+        elminster,
         elspeth,
+        estrid,
+        freyalise,
         garruk,
+        gideon,
+        grist,
+        huatli,
+        inzerva,
         jace,
+        jared,
+        jaya,
+        jeska,
+        kaito,
         karn,
+        kasmina,
+        kaya,
+        kiora,
+        koth,
+        liliana,
+        lolth,
+        lukka,
+        master,
+        minsc,
+        mordenkainen,
+        nahiri,
+        narset,
+        niko,
         nissa,
+        nixilis,
+        oko,
+        ral,
+        rowan,
+        saheeli,
+        samut,
+        sarkhan,
+        serra,
+        sivitri,
         sorin,
+        szat,
+        tamiyo,
+        tasha,
         teferi,
+        teyo,
+        tezzeret,
+        tibalt,
+        tyvar,
+        ugin,
+        urza,
+        venser,
+        vivien,
+        vraska,
+        will,
+        windgrace,
+        wrenn,
+        xenagos,
+        yanggu,
+        yanling,
+        zariel,
       ];
 
   static List<String> get allNames => [
+        abian.name,
         ajani.name,
+        aminatou.name,
+        angrath.name,
+        arlinn.name,
+        ashiok.name,
+        bob.name,
+        bahamut.name,
+        basri.name,
+        bolas.name,
+        calix.name,
         chandra.name,
+        comet.name,
+        dack.name,
+        dakkon.name,
+        daretti.name,
+        davriel.name,
+        dihada.name,
         domri.name,
+        dovin.name,
+        duck.name,
+        dungeon.name,
+        ellywick.name,
+        elminster.name,
         elspeth.name,
+        estrid.name,
+        freyalise.name,
         garruk.name,
+        gideon.name,
+        grist.name,
+        huatli.name,
+        inzerva.name,
         jace.name,
+        jared.name,
+        jaya.name,
+        jeska.name,
+        kaito.name,
         karn.name,
+        kasmina.name,
+        kaya.name,
+        kiora.name,
+        koth.name,
+        liliana.name,
+        lolth.name,
+        lukka.name,
+        master.name,
+        minsc.name,
+        mordenkainen.name,
+        nahiri.name,
+        narset.name,
+        niko.name,
         nissa.name,
+        nixilis.name,
+        oko.name,
+        ral.name,
+        rowan.name,
+        saheeli.name,
+        samut.name,
+        sarkhan.name,
+        serra.name,
+        sivitri.name,
         sorin.name,
+        szat.name,
+        tamiyo.name,
+        tasha.name,
         teferi.name,
+        teyo.name,
+        tezzeret.name,
+        tibalt.name,
+        tyvar.name,
+        ugin.name,
+        urza.name,
+        venser.name,
+        vivien.name,
+        vraska.name,
+        will.name,
+        windgrace.name,
+        wrenn.name,
+        xenagos.name,
+        yanggu.name,
+        yanling.name,
+        zariel.name,
       ];
 
   MTGPlaneswalkerSubtype(String name, String display, int sortOrder) : super(name, display, sortOrder);
@@ -1880,26 +2097,170 @@ class MTGPlaneswalkerSubtype extends MTGCardSubtype {
 
   static MTGPlaneswalkerSubtype getSubtypeFromName(String subType) {
     switch (subType) {
+      case 'abian':
+        return abian;
       case 'ajani':
         return ajani;
+      case 'aminatou':
+        return aminatou;
+      case 'angrath':
+        return angrath;
+      case 'arlinn':
+        return arlinn;
+      case 'ashiok':
+        return ashiok;
+      case 'bob':
+        return bob;
+      case 'bahamut':
+        return bahamut;
+      case 'basri':
+        return basri;
+      case 'bolas':
+        return bolas;
+      case 'calix':
+        return calix;
       case 'chandra':
         return chandra;
+      case 'comet':
+        return comet;
+      case 'dack':
+        return dack;
+      case 'dakkon':
+        return dakkon;
+      case 'daretti':
+        return daretti;
+      case 'davriel':
+        return davriel;
+      case 'dihada':
+        return dihada;
       case 'domri':
         return domri;
+      case 'dovin':
+        return dovin;
+      case 'duck':
+        return duck;
+      case 'dungeon':
+        return dungeon;
+      case 'ellywick':
+        return ellywick;
+      case 'elminster':
+        return elminster;
       case 'elspeth':
         return elspeth;
+      case 'estrid':
+        return estrid;
+      case 'freyalise':
+        return freyalise;
       case 'garruk':
         return garruk;
+      case 'gideon':
+        return gideon;
+      case 'grist':
+        return grist;
+      case 'huatli':
+        return huatli;
+      case 'inzerva':
+        return inzerva;
       case 'jace':
         return jace;
+      case 'jared':
+        return jared;
+      case 'jaya':
+        return jaya;
+      case 'jeska':
+        return jeska;
+      case 'kaito':
+        return kaito;
       case 'karn':
         return karn;
+      case 'kasmina':
+        return kasmina;
+      case 'kaya':
+        return kaya;
+      case 'kiora':
+        return kiora;
+      case 'koth':
+        return koth;
+      case 'liliana':
+        return liliana;
+      case 'lolth':
+        return lolth;
+      case 'lukka':
+        return lukka;
+      case 'master':
+        return master;
+      case 'minsc':
+        return minsc;
+      case 'mordenkainen':
+        return mordenkainen;
+      case 'nahiri':
+        return nahiri;
+      case 'narset':
+        return narset;
+      case 'niko':
+        return niko;
       case 'nissa':
         return nissa;
+      case 'nixilis':
+        return nixilis;
+      case 'oko':
+        return oko;
+      case 'ral':
+        return ral;
+      case 'rowan':
+        return rowan;
+      case 'saheeli':
+        return saheeli;
+      case 'samut':
+        return samut;
+      case 'sarkhan':
+        return sarkhan;
+      case 'serra':
+        return serra;
+      case 'sivitri':
+        return sivitri;
       case 'sorin':
         return sorin;
+      case 'szat':
+        return szat;
+      case 'tamiyo':
+        return tamiyo;
+      case 'tasha':
+        return tasha;
       case 'teferi':
         return teferi;
+      case 'teyo':
+        return teyo;
+      case 'tezzeret':
+        return tezzeret;
+      case 'tibalt':
+        return tibalt;
+      case 'tyvar':
+        return tyvar;
+      case 'ugin':
+        return ugin;
+      case 'urza':
+        return urza;
+      case 'venser':
+        return venser;
+      case 'vivien':
+        return vivien;
+      case 'vraska':
+        return vraska;
+      case 'will':
+        return will;
+      case 'windgrace':
+        return windgrace;
+      case 'wrenn':
+        return wrenn;
+      case 'xenagos':
+        return xenagos;
+      case 'yanggu':
+        return yanggu;
+      case 'yanling':
+        return yanling;
+      case 'zariel':
+        return zariel;
       default:
         return unknown;
     }
@@ -1907,26 +2268,170 @@ class MTGPlaneswalkerSubtype extends MTGCardSubtype {
 
   static MTGPlaneswalkerSubtype getSubtypeFromDisplay(String subType) {
     switch (subType) {
+      case 'Abian':
+        return abian;
       case 'Ajani':
         return ajani;
+      case 'Aminatou':
+        return aminatou;
+      case 'Angrath':
+        return angrath;
+      case 'Arlinn':
+        return arlinn;
+      case 'Ashiok':
+        return ashiok;
+      case 'B.O.B.':
+        return bob;
+      case 'Bahamut':
+        return bahamut;
+      case 'Basri':
+        return basri;
+      case 'Bolas':
+        return bolas;
+      case 'Calix':
+        return calix;
       case 'Chandra':
         return chandra;
+      case 'Comet':
+        return comet;
+      case 'Dack':
+        return dack;
+      case 'Dakkon':
+        return dakkon;
+      case 'Daretti':
+        return daretti;
+      case 'Davriel':
+        return davriel;
+      case 'Dihada':
+        return dihada;
       case 'Domri':
         return domri;
+      case 'Dovin':
+        return dovin;
+      case 'Duck':
+        return duck;
+      case 'Dungeon':
+        return dungeon;
+      case 'Ellywick':
+        return ellywick;
+      case 'Elminster':
+        return elminster;
       case 'Elspeth':
         return elspeth;
+      case 'Estrid':
+        return estrid;
+      case 'Freyalise':
+        return freyalise;
       case 'Garruk':
         return garruk;
+      case 'Gideon':
+        return gideon;
+      case 'Grist':
+        return grist;
+      case 'Huatli':
+        return huatli;
+      case 'Inzerva':
+        return inzerva;
       case 'Jace':
         return jace;
+      case 'Jared':
+        return jared;
+      case 'Jaya':
+        return jaya;
+      case 'Jeska':
+        return jeska;
+      case 'Kaito':
+        return kaito;
       case 'Karn':
         return karn;
+      case 'Kasmina':
+        return kasmina;
+      case 'Kaya':
+        return kaya;
+      case 'Kiora':
+        return kiora;
+      case 'Koth':
+        return koth;
+      case 'Liliana':
+        return liliana;
+      case 'Lolth':
+        return lolth;
+      case 'Lukka':
+        return lukka;
+      case 'Master':
+        return master;
+      case 'Minsc':
+        return minsc;
+      case 'Mordenkainen':
+        return mordenkainen;
+      case 'Nahiri':
+        return nahiri;
+      case 'Narset':
+        return narset;
+      case 'Niko':
+        return niko;
       case 'Nissa':
         return nissa;
+      case 'Nixilis':
+        return nixilis;
+      case 'Oko':
+        return oko;
+      case 'Ral':
+        return ral;
+      case 'Rowan':
+        return rowan;
+      case 'Saheeli':
+        return saheeli;
+      case 'Samut':
+        return samut;
+      case 'Sarkhan':
+        return sarkhan;
+      case 'Serra':
+        return serra;
+      case 'Sivitri':
+        return sivitri;
       case 'Sorin':
         return sorin;
+      case 'Szat':
+        return szat;
+      case 'Tamiyo':
+        return tamiyo;
+      case 'Tasha':
+        return tasha;
       case 'Teferi':
         return teferi;
+      case 'Teyo':
+        return teyo;
+      case 'Tezzeret':
+        return tezzeret;
+      case 'Tibalt':
+        return tibalt;
+      case 'Tyvar':
+        return tyvar;
+      case 'Ugin':
+        return ugin;
+      case 'Urza':
+        return urza;
+      case 'Venser':
+        return venser;
+      case 'Vivien':
+        return vivien;
+      case 'Vraska':
+        return vraska;
+      case 'Will':
+        return will;
+      case 'Windgrace':
+        return windgrace;
+      case 'Wrenn':
+        return wrenn;
+      case 'Xenagos':
+        return xenagos;
+      case 'Yanggu':
+        return yanggu;
+      case 'Yanling':
+        return yanling;
+      case 'Zariel':
+        return zariel;
       default:
         return unknown;
     }
