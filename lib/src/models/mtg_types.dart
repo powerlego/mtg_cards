@@ -2513,7 +2513,7 @@ class _MTGCardTypeParser {
     }
   }
 
-  static MTGCardSubtype parseCardSubType(String cardSubType) {
+  static MTGCardSubtype parseCardSubType(String cardSubType, {bool isInstant = false}) {
     if (MTGCreatureSubtype.allNames.contains(cardSubType)) {
       return MTGCreatureSubtype.getSubTypeFromName(cardSubType);
     } else if (MTGEnchantmentSubtype.allNames.contains(cardSubType)) {
@@ -2522,6 +2522,12 @@ class _MTGCardTypeParser {
       return MTGLandSubtype.getSubtypeFromName(cardSubType);
     } else if (MTGArtifactSubtype.allNames.contains(cardSubType)) {
       return MTGArtifactSubtype.getSubtypeFromName(cardSubType);
+    } else if (MTGInstantSubtype.allNames.contains(cardSubType) && MTGSorcerySubtype.allNames.contains(cardSubType)) {
+      if (isInstant) {
+        return MTGInstantSubtype.getSubtypeFromName(cardSubType);
+      } else {
+        return MTGSorcerySubtype.getSubtypeFromName(cardSubType);
+      }
     } else if (MTGInstantSubtype.allNames.contains(cardSubType)) {
       return MTGInstantSubtype.getSubtypeFromName(cardSubType);
     } else if (MTGSorcerySubtype.allNames.contains(cardSubType)) {
@@ -2537,13 +2543,19 @@ class _MTGCardTypeParser {
     List<String> cardTypeLineSplit = cardTypeLine.split(' - ');
     List<MTGCardType> cardType = [];
     List<MTGCardSubtype> subType = [];
+    bool isInstant = false;
 
     if (cardTypeLineSplit.isNotEmpty) {
-      cardType = cardTypeLineSplit[0].split(' ').map((e) => parseCardType(e)).toList();
+      cardTypeLineSplit[0].split(' ').forEach((element) {
+        cardType.add(parseCardType(element));
+        if (element == 'Instant') {
+          isInstant = true;
+        }
+      });
     }
 
     if (cardTypeLineSplit.length > 1) {
-      subType = cardTypeLineSplit[1].split(' ').map((e) => parseCardSubType(e)).toList();
+      subType = cardTypeLineSplit[1].split(' ').map((e) => parseCardSubType(e, isInstant: isInstant)).toList();
     }
 
     return MTGCardTypeLine(cardType, subType);
