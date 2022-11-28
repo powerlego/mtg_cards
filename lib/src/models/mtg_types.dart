@@ -155,6 +155,7 @@ class MTGCardMainType extends MTGCardType {
         sorcery,
         tribal,
         vanguard,
+        dungeon,
       ];
 
   static List<String> get allNames => [
@@ -173,6 +174,7 @@ class MTGCardMainType extends MTGCardType {
         sorcery.name,
         tribal.name,
         vanguard.name,
+        dungeon.name,
       ];
 
   MTGCardMainType(String name, String display, int sortOrder) : super(name, display, sortOrder);
@@ -217,6 +219,8 @@ class MTGCardMainType extends MTGCardType {
         return tribal;
       case 'vanguard':
         return vanguard;
+      case 'dungeon':
+        return dungeon;
       default:
         return unknown;
     }
@@ -254,6 +258,8 @@ class MTGCardMainType extends MTGCardType {
         return tribal;
       case 'Vanguard':
         return vanguard;
+      case 'Dungeon':
+        return dungeon;
       default:
         return unknown;
     }
