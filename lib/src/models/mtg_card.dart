@@ -25,7 +25,7 @@ class ScryfallParser {
       MTGFace face = parseScryfallFaceJson(json);
       return MTGCard(
         json["name"],
-        MTGCardTypeLine.fromString(json["type_line"]),
+        [MTGCardTypeLine.fromString(json["type_line"])],
         json["set_name"],
         json["set"],
         json["collector_number"],
@@ -56,7 +56,7 @@ class ScryfallParser {
     } else {
       return MTGCard(
         json["name"],
-        MTGCardTypeLine.fromString(json["type_line"]),
+        json["type_line"].split(" // ").map((e) => MTGCardTypeLine.fromString(e)).toList(),
         json["set_name"],
         json["set"],
         json["collector_number"],
@@ -165,7 +165,7 @@ class MTGCard {
   String name;
 
   /// The type of this card.
-  MTGCardTypeLine type;
+  List<MTGCardTypeLine> type;
 
   /// The set of this card.
   String set;
@@ -229,10 +229,74 @@ class MTGCard {
     this.prices,
   );
 
+  static MTGCard fromOldCard(MTGCardOld oldCard) {
+    List<MTGPrice> prices = [];
+    oldCard.prices.forEach((e) {
+      if (e.currency == "usd") {
+        if (e.price.isNotEmpty) {
+          prices.add(MTGPrice.from("nonfoil", Decimal.parse(e.price)));
+        } else {
+          prices.add(MTGPrice.from("nonfoil", Decimal.parse("0")));
+        }
+      } else if (e.currency == "usd_foil") {
+        if (e.price.isNotEmpty) {
+          prices.add(MTGPrice.from('foil', Decimal.parse(e.price)));
+        } else {
+          prices.add(MTGPrice.from('foil', Decimal.parse("0")));
+        }
+      } else if (e.currency == "usd_etched") {
+        if (e.price.isNotEmpty) {
+          prices.add(MTGPrice.from('etched', Decimal.parse(e.price)));
+        } else {
+          prices.add(MTGPrice.from('etched', Decimal.parse("0")));
+        }
+      }
+    });
+    if (oldCard.faces.length > 1) {
+      return MTGCard(
+        oldCard.name,
+        oldCard.type.split(" // ").map((e) => MTGCardTypeLine.fromString(e)).toList(),
+        oldCard.setName,
+        oldCard.set,
+        oldCard.collectorNumber,
+        oldCard.cardUrl,
+        oldCard.id,
+        oldCard.cmc,
+        MTGRarity.fromName(oldCard.rarity),
+        oldCard.isFoil,
+        oldCard.faces.map((e) => MTGFace.fromOldFace(e)).toList(),
+        oldCard.finishes.map((e) => MTGFinish.fromName(e)).toList(),
+        oldCard.colorIdentity.map((e) => MTGColor.fromName(e)).toList(),
+        oldCard.keywords,
+        oldCard.legalities.map((e) => MTGLegality.from(e.format, e.legality)).toList(),
+        prices,
+      );
+    } else {
+      return MTGCard(
+        oldCard.name,
+        [MTGCardTypeLine.fromString(oldCard.type)],
+        oldCard.setName,
+        oldCard.set,
+        oldCard.collectorNumber,
+        oldCard.cardUrl,
+        oldCard.id,
+        oldCard.cmc,
+        MTGRarity.fromName(oldCard.rarity),
+        oldCard.isFoil,
+        oldCard.faces.map((e) => MTGFace.fromOldFace(e)).toList(),
+        oldCard.finishes.map((e) => MTGFinish.fromName(e)).toList(),
+        oldCard.colorIdentity.map((e) => MTGColor.fromName(e)).toList(),
+        oldCard.keywords,
+        oldCard.legalities.map((e) => MTGLegality.from(e.format, e.legality)).toList(),
+        prices,
+      );
+    }
+  }
+
   /// Creates a new empty [MTGCard]
   MTGCard.empty()
       : name = '',
-        type = MTGCardTypeLine.empty(),
+        type = [MTGCardTypeLine.empty()],
         set = '',
         setCode = '',
         collectorNumber = "",
@@ -454,7 +518,7 @@ class MTGCard {
   /// * [prices] is the new prices of this [MTGCard]
   MTGCard copyWith({
     String? name,
-    MTGCardTypeLine? type,
+    List<MTGCardTypeLine>? type,
     String? set,
     String? setCode,
     String? collectorNumber,
@@ -571,6 +635,22 @@ class MTGFace {
     this.illustrationId,
     this.colors,
   );
+
+  static MTGFace fromOldFace(MTGFaceOld oldFace) {
+    return MTGFace(
+      oldFace.name,
+      oldFace.manaCost,
+      MTGCardTypeLine.fromString(oldFace.type),
+      oldFace.oracleText,
+      oldFace.power,
+      oldFace.toughness,
+      oldFace.loyalty,
+      oldFace.producedMana,
+      oldFace.imageUrl,
+      oldFace.illustrationId,
+      oldFace.colors.map((e) => MTGColor.fromName(e)).toList(),
+    );
+  }
 
   /// Creates a new empty [MTGFace]
   MTGFace.empty()
