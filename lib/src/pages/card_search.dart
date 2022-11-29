@@ -196,7 +196,7 @@ class _CardSearchState extends State<CardSearch> {
                                             Expanded(
                                               child: CardWidget(
                                                 card: card,
-                                                side: Side.front,
+                                                side: SideOld.front,
                                               ),
                                             ),
                                           ],

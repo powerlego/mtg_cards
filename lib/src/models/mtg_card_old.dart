@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:decimal/decimal.dart';
 import 'package:mtg_cards/utils.dart';
 
-enum Side {
+enum SideOld {
   front,
   back,
 }
@@ -276,11 +276,11 @@ class MTGCardOld {
   }
 
   /// Gets the [MTGFaceOld] of this [MTGCardOld] at the given index
-  MTGFaceOld operator [](Side side) {
+  MTGFaceOld operator [](SideOld side) {
     switch (side) {
-      case Side.front:
+      case SideOld.front:
         return faces[0];
-      case Side.back:
+      case SideOld.back:
         return faces[1];
       default:
         return faces[0];

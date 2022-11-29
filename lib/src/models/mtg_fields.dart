@@ -58,7 +58,7 @@ class MTGColor extends MTGField {
   static MTGColor get green => MTGColor('G', 'Green', 4);
   static MTGColor get colorless => MTGColor('C', 'Colorless', 5);
 
-  static MTGColor getColorFromName(String color) {
+  static MTGColor fromName(String color) {
     switch (color) {
       case 'W':
         return white;
@@ -77,7 +77,7 @@ class MTGColor extends MTGField {
     }
   }
 
-  static MTGColor getColorFromDisplay(String color) {
+  static MTGColor fromDisplay(String color) {
     switch (color) {
       case 'White':
         return white;
@@ -129,8 +129,9 @@ class MTGRarity extends MTGField {
   static MTGRarity get uncommon => MTGRarity('uncommon', 'Uncommon', 1);
   static MTGRarity get rare => MTGRarity('rare', 'Rare', 2);
   static MTGRarity get mythic => MTGRarity('mythic', 'Mythic Rare', 3);
+  static MTGRarity get unknown => MTGRarity('unknown', 'Unknown', 255);
 
-  static MTGRarity getRarityFromName(String rarity) {
+  static MTGRarity fromName(String rarity) {
     switch (rarity) {
       case 'common':
         return common;
@@ -141,11 +142,11 @@ class MTGRarity extends MTGField {
       case 'mythic':
         return mythic;
       default:
-        return common;
+        return unknown;
     }
   }
 
-  static MTGRarity getRarityFromDisplay(String rarity) {
+  static MTGRarity fromDisplay(String rarity) {
     switch (rarity) {
       case 'Common':
         return common;
@@ -156,7 +157,7 @@ class MTGRarity extends MTGField {
       case 'Mythic Rare':
         return mythic;
       default:
-        return common;
+        return unknown;
     }
   }
 
@@ -828,4 +829,78 @@ class MTGPrice extends MTGField {
   /// Gets the hash code of this [MTGPrice]
   @override
   int get hashCode => name.hashCode ^ price.hashCode;
+}
+
+class MTGFinish extends MTGField {
+  static MTGFinish get normal => MTGFinish('normal', 'Normal', 0);
+  static MTGFinish get foil => MTGFinish('foil', 'Foil', 1);
+  static MTGFinish get etched => MTGFinish('etched', 'Etched', 2);
+  static MTGFinish get glossy => MTGFinish('glossy', 'Glossy', 3);
+  static MTGFinish get unknown => MTGFinish('unknown', 'Unknown', 255);
+
+  MTGFinish(super.name, super.display, super.sortOrder);
+
+  /// Gets the JSON representation of this [MTGFinish]
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'display': display,
+      'sortOrder': sortOrder,
+    };
+  }
+
+  /// Gets the string representation of this [MTGFinish]
+  ///
+  /// Returns the display name of this [MTGFinish]
+  @override
+  String toString() {
+    return display;
+  }
+
+  /// Checks if this [MTGFinish] is equal to another [MTGFinish]
+  ///
+  /// Returns true if the name of this [MTGFinish] is equal to the name of the other [MTGFinish]
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is MTGFinish && name == other.name;
+
+  /// Gets the hash code of this [MTGFinish]
+  @override
+  int get hashCode => name.hashCode;
+
+  /// Gets the [MTGFinish] from the given [name]
+  ///
+  /// Returns the [MTGFinish] with the given [name] or [MTGFinish.unknown] if no [MTGFinish] with the given [name] exists
+  static MTGFinish fromName(String name) {
+    switch (name) {
+      case 'normal':
+        return normal;
+      case 'foil':
+        return foil;
+      case 'etched':
+        return etched;
+      case 'glossy':
+        return glossy;
+      default:
+        return unknown;
+    }
+  }
+
+  /// Gets the [MTGFinish] from the given [display]
+  ///
+  /// Returns the [MTGFinish] with the given [display] or [MTGFinish.unknown] if no [MTGFinish] with the given [display] exists
+  static MTGFinish fromDisplay(String display) {
+    switch (display) {
+      case 'Normal':
+        return normal;
+      case 'Foil':
+        return foil;
+      case 'Etched':
+        return etched;
+      case 'Glossy':
+        return glossy;
+      default:
+        return unknown;
+    }
+  }
 }

@@ -2464,6 +2464,8 @@ class MTGPlaneswalkerSubtype extends MTGCardSubtype {
 class MTGCardTypeLine extends MTGField {
   MTGCardTypeLine(this.cardType, this.subType) : super("typeLine", "Type Line", 0);
 
+  MTGCardTypeLine.empty() : this([MTGCardType.unknown], [MTGCardSubtype.unknown]);
+
   final List<MTGCardType> cardType;
   final List<MTGCardSubtype> subType;
 

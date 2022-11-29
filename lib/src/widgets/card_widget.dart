@@ -43,12 +43,12 @@ class _FlippableCardWidgetState extends State<FlippableCardWidget> {
           front: CardWidget(
             key: const ValueKey(true),
             card: widget.card,
-            side: Side.front,
+            side: SideOld.front,
           ),
           back: CardWidget(
             key: const ValueKey(false),
             card: widget.card,
-            side: Side.back,
+            side: SideOld.back,
           ),
         ),
       ),
@@ -114,7 +114,7 @@ class CardWidget extends StatelessWidget {
   const CardWidget({super.key, required this.card, required this.side});
 
   final MTGCardOld card;
-  final Side side;
+  final SideOld side;
 
   @override
   Widget build(BuildContext context) {

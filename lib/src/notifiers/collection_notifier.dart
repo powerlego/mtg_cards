@@ -48,7 +48,7 @@ class CollectionNotifier extends ChangeNotifier {
   Map<MTGRarity, bool> get rarityFilter => _rarityFilter;
 
   void setRarityFilterFromDisplay(String key, bool value) {
-    _rarityFilter[MTGRarity.getRarityFromDisplay(key)] = value;
+    _rarityFilter[MTGRarity.fromDisplay(key)] = value;
     for (var i in _rarityFilter.values) {
       if (i) {
         _filteringRarity = true;
@@ -60,7 +60,7 @@ class CollectionNotifier extends ChangeNotifier {
   }
 
   void setRarityFilterFromName(String key, bool value) {
-    _rarityFilter[MTGRarity.getRarityFromName(key)] = value;
+    _rarityFilter[MTGRarity.fromName(key)] = value;
     for (var i in _rarityFilter.values) {
       if (i) {
         _filteringRarity = true;
@@ -112,7 +112,7 @@ class CollectionNotifier extends ChangeNotifier {
   }
 
   void setColorFilterFromDisplay(String key, bool value) {
-    _colorFilter[MTGColor.getColorFromDisplay(key)] = value;
+    _colorFilter[MTGColor.fromDisplay(key)] = value;
     for (var i in _colorFilter.values) {
       if (i) {
         _filteringColor = true;
@@ -124,7 +124,7 @@ class CollectionNotifier extends ChangeNotifier {
   }
 
   void setColorFilterFromName(String key, bool value) {
-    _colorFilter[MTGColor.getColorFromName(key)] = value;
+    _colorFilter[MTGColor.fromName(key)] = value;
     for (var i in _colorFilter.values) {
       if (i) {
         _filteringColor = true;

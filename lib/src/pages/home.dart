@@ -298,7 +298,7 @@ class _HomePageState extends State<HomePage> {
                                             padding: const EdgeInsets.all(8.0),
                                             child: CardWidget(
                                               card: card,
-                                              side: Side.front,
+                                              side: SideOld.front,
                                             ),
                                           ),
                                   ),

@@ -364,28 +364,26 @@ class _CardCollectionState extends State<CardCollection> {
                             List<CardEntry> filteredList = [];
                             for (final item in _originalItems) {
                               if (collectionNotifier.filteringRarity) {
-                                if (collectionNotifier.rarityFilter[MTGRarity.getRarityFromName(item.card.rarity)]! &&
+                                if (collectionNotifier.rarityFilter[MTGRarity.fromName(item.card.rarity)]! &&
                                     !filteredList.contains(item)) {
                                   filteredList.add(item);
-                                } else if (!collectionNotifier
-                                        .rarityFilter[MTGRarity.getRarityFromName(item.card.rarity)]! &&
+                                } else if (!collectionNotifier.rarityFilter[MTGRarity.fromName(item.card.rarity)]! &&
                                     filteredList.contains(item)) {
                                   filteredList.remove(item);
-                                } else if (!collectionNotifier
-                                        .rarityFilter[MTGRarity.getRarityFromName(item.card.rarity)]! &&
+                                } else if (!collectionNotifier.rarityFilter[MTGRarity.fromName(item.card.rarity)]! &&
                                     !filteredList.contains(item)) {
                                   continue;
                                 }
                               }
                               if (collectionNotifier.filteringColor) {
                                 for (final color in item.card.colorIdentity) {
-                                  if (collectionNotifier.colorFilter[MTGColor.getColorFromName(color)]! &&
+                                  if (collectionNotifier.colorFilter[MTGColor.fromName(color)]! &&
                                       !filteredList.contains(item)) {
                                     filteredList.add(item);
-                                  } else if (!collectionNotifier.colorFilter[MTGColor.getColorFromName(color)]! &&
+                                  } else if (!collectionNotifier.colorFilter[MTGColor.fromName(color)]! &&
                                       filteredList.contains(item)) {
                                     filteredList.remove(item);
-                                  } else if (!collectionNotifier.colorFilter[MTGColor.getColorFromName(color)]! &&
+                                  } else if (!collectionNotifier.colorFilter[MTGColor.fromName(color)]! &&
                                       !filteredList.contains(item)) {
                                     continue;
                                   }
@@ -470,7 +468,7 @@ class _CardCollectionState extends State<CardCollection> {
                                     Expanded(
                                       child: CardWidget(
                                         card: card,
-                                        side: Side.front,
+                                        side: SideOld.front,
                                       ),
                                     ),
                                   ],

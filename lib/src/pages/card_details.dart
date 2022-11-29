@@ -207,148 +207,151 @@ class CardDetailsSearch extends StatelessWidget {
                                     if (cardNotifier.isFlipped) {
                                       if (card.faces[1].name.isNotEmpty) {
                                         widgets.add(
-                                          CardInfoText(title: 'Name:', value: card[Side.back].name),
+                                          CardInfoText(title: 'Name:', value: card[SideOld.back].name),
                                         );
                                       }
                                       if (card.faces[1].manaCost.isNotEmpty) {
                                         widgets.add(
-                                          CardInfoMana(title: 'Mana Cost:', manaString: card[Side.back].manaCost),
+                                          CardInfoMana(title: 'Mana Cost:', manaString: card[SideOld.back].manaCost),
                                         );
                                       }
                                       if (card.faces[1].type.isNotEmpty) {
                                         widgets.add(
-                                          CardInfoText(title: 'Type Line:', value: card[Side.back].type),
+                                          CardInfoText(title: 'Type Line:', value: card[SideOld.back].type),
                                         );
                                       }
-                                      if (card[Side.back].oracleText.isNotEmpty) {
+                                      if (card[SideOld.back].oracleText.isNotEmpty) {
                                         widgets.add(
                                           CardInfoMana(
                                             title: 'Oracle Text:',
-                                            manaString: card[Side.back].oracleText,
+                                            manaString: card[SideOld.back].oracleText,
                                             textAlign: TextAlign.justify,
                                           ),
                                         );
                                       }
-                                      if (card[Side.back].producedMana.isNotEmpty) {
+                                      if (card[SideOld.back].producedMana.isNotEmpty) {
                                         widgets.add(
                                           CardInfoMana(
                                             title: 'Produced Mana:',
-                                            manaString: card[Side.back].producedMana.join(''),
+                                            manaString: card[SideOld.back].producedMana.join(''),
                                           ),
                                         );
                                       }
-                                      if (card[Side.back].power.isNotEmpty && card[Side.back].toughness.isNotEmpty) {
+                                      if (card[SideOld.back].power.isNotEmpty &&
+                                          card[SideOld.back].toughness.isNotEmpty) {
                                         widgets.add(
                                           CardInfoText(
                                             title: 'Power/Toughness:',
-                                            value: '${card[Side.back].power}/${card[Side.back].toughness}',
+                                            value: '${card[SideOld.back].power}/${card[SideOld.back].toughness}',
                                           ),
                                         );
                                       }
-                                      if (card[Side.back].loyalty.isNotEmpty) {
+                                      if (card[SideOld.back].loyalty.isNotEmpty) {
                                         widgets.add(
                                           CardInfoText(
                                             title: 'Loyalty:',
-                                            value: card[Side.back].loyalty,
+                                            value: card[SideOld.back].loyalty,
                                           ),
                                         );
                                       }
                                     } else {
-                                      if (card[Side.front].name.isNotEmpty) {
+                                      if (card[SideOld.front].name.isNotEmpty) {
                                         widgets.add(
-                                          CardInfoText(title: 'Name:', value: card[Side.front].name),
+                                          CardInfoText(title: 'Name:', value: card[SideOld.front].name),
                                         );
                                       }
-                                      if (card[Side.front].manaCost.isNotEmpty) {
+                                      if (card[SideOld.front].manaCost.isNotEmpty) {
                                         widgets.add(
-                                          CardInfoMana(title: 'Mana Cost:', manaString: card[Side.front].manaCost),
+                                          CardInfoMana(title: 'Mana Cost:', manaString: card[SideOld.front].manaCost),
                                         );
                                       }
-                                      if (card[Side.front].type.isNotEmpty) {
+                                      if (card[SideOld.front].type.isNotEmpty) {
                                         widgets.add(
-                                          CardInfoText(title: 'Type Line:', value: card[Side.front].type),
+                                          CardInfoText(title: 'Type Line:', value: card[SideOld.front].type),
                                         );
                                       }
-                                      if (card[Side.front].oracleText.isNotEmpty) {
+                                      if (card[SideOld.front].oracleText.isNotEmpty) {
                                         widgets.add(
                                           CardInfoMana(
                                             title: 'Oracle Text:',
-                                            manaString: card[Side.front].oracleText,
+                                            manaString: card[SideOld.front].oracleText,
                                             textAlign: TextAlign.justify,
                                           ),
                                         );
                                       }
-                                      if (card[Side.front].producedMana.isNotEmpty) {
+                                      if (card[SideOld.front].producedMana.isNotEmpty) {
                                         widgets.add(
                                           CardInfoMana(
                                             title: 'Produced Mana:',
-                                            manaString: card[Side.front].producedMana.join(''),
+                                            manaString: card[SideOld.front].producedMana.join(''),
                                           ),
                                         );
                                       }
-                                      if (card[Side.front].power.isNotEmpty && card[Side.front].toughness.isNotEmpty) {
+                                      if (card[SideOld.front].power.isNotEmpty &&
+                                          card[SideOld.front].toughness.isNotEmpty) {
                                         widgets.add(
                                           CardInfoText(
                                             title: 'Power/Toughness:',
-                                            value: '${card[Side.front].power}/${card[Side.front].toughness}',
+                                            value: '${card[SideOld.front].power}/${card[SideOld.front].toughness}',
                                           ),
                                         );
                                       }
-                                      if (card[Side.front].loyalty.isNotEmpty) {
+                                      if (card[SideOld.front].loyalty.isNotEmpty) {
                                         widgets.add(
                                           CardInfoText(
                                             title: 'Loyalty:',
-                                            value: card[Side.front].loyalty,
+                                            value: card[SideOld.front].loyalty,
                                           ),
                                         );
                                       }
                                     }
                                   } else {
-                                    if (card[Side.front].name.isNotEmpty) {
+                                    if (card[SideOld.front].name.isNotEmpty) {
                                       widgets.add(
-                                        CardInfoText(title: 'Name:', value: card[Side.front].name),
+                                        CardInfoText(title: 'Name:', value: card[SideOld.front].name),
                                       );
                                     }
-                                    if (card[Side.front].manaCost.isNotEmpty) {
+                                    if (card[SideOld.front].manaCost.isNotEmpty) {
                                       widgets.add(
-                                        CardInfoMana(title: 'Mana Cost:', manaString: card[Side.front].manaCost),
+                                        CardInfoMana(title: 'Mana Cost:', manaString: card[SideOld.front].manaCost),
                                       );
                                     }
-                                    if (card[Side.front].type.isNotEmpty) {
+                                    if (card[SideOld.front].type.isNotEmpty) {
                                       widgets.add(
-                                        CardInfoText(title: 'Type Line:', value: card[Side.front].type),
+                                        CardInfoText(title: 'Type Line:', value: card[SideOld.front].type),
                                       );
                                     }
-                                    if (card[Side.front].oracleText.isNotEmpty) {
+                                    if (card[SideOld.front].oracleText.isNotEmpty) {
                                       widgets.add(
                                         CardInfoMana(
                                           title: 'Oracle Text:',
-                                          manaString: card[Side.front].oracleText,
+                                          manaString: card[SideOld.front].oracleText,
                                           textAlign: TextAlign.justify,
                                         ),
                                       );
                                     }
-                                    if (card[Side.front].producedMana.isNotEmpty) {
+                                    if (card[SideOld.front].producedMana.isNotEmpty) {
                                       widgets.add(
                                         CardInfoMana(
                                           title: 'Produced Mana:',
-                                          manaString: card[Side.front].producedMana.join(''),
+                                          manaString: card[SideOld.front].producedMana.join(''),
                                         ),
                                       );
                                     }
-                                    if (card[Side.front].power.isNotEmpty && card[Side.front].toughness.isNotEmpty) {
+                                    if (card[SideOld.front].power.isNotEmpty &&
+                                        card[SideOld.front].toughness.isNotEmpty) {
                                       widgets.add(
                                         CardInfoText(
                                           title: 'Power/Toughness:',
-                                          value: '${card[Side.front].power}/${card[Side.front].toughness}',
+                                          value: '${card[SideOld.front].power}/${card[SideOld.front].toughness}',
                                         ),
                                       );
                                     }
-                                    if (card[Side.front].loyalty.isNotEmpty) {
+                                    if (card[SideOld.front].loyalty.isNotEmpty) {
                                       widgets.add(
                                         CardInfoText(
                                           title: 'Loyalty:',
-                                          value: card[Side.front].loyalty,
+                                          value: card[SideOld.front].loyalty,
                                         ),
                                       );
                                     }
@@ -421,7 +424,7 @@ class CardDetailsSearch extends StatelessWidget {
                                   padding: const EdgeInsets.all(8.0),
                                   child: CardWidget(
                                     card: card,
-                                    side: Side.front,
+                                    side: SideOld.front,
                                   ),
                                 ),
                         ),
@@ -657,7 +660,7 @@ class _CardDetailsCollectionState extends State<CardDetailsCollection> {
                                 if (cardNotifier.isFlipped) {
                                   if (_card.faces[1].name.isNotEmpty) {
                                     widgets.add(
-                                      CardInfoText(title: 'Name:', value: _card[Side.back].name),
+                                      CardInfoText(title: 'Name:', value: _card[SideOld.back].name),
                                     );
                                   }
                                   if (_quantity > 0) {
@@ -667,51 +670,52 @@ class _CardDetailsCollectionState extends State<CardDetailsCollection> {
                                   }
                                   if (_card.faces[1].manaCost.isNotEmpty) {
                                     widgets.add(
-                                      CardInfoMana(title: 'Mana Cost:', manaString: _card[Side.back].manaCost),
+                                      CardInfoMana(title: 'Mana Cost:', manaString: _card[SideOld.back].manaCost),
                                     );
                                   }
                                   if (_card.faces[1].type.isNotEmpty) {
                                     widgets.add(
-                                      CardInfoText(title: 'Type Line:', value: _card[Side.back].type),
+                                      CardInfoText(title: 'Type Line:', value: _card[SideOld.back].type),
                                     );
                                   }
-                                  if (_card[Side.back].oracleText.isNotEmpty) {
+                                  if (_card[SideOld.back].oracleText.isNotEmpty) {
                                     widgets.add(
                                       CardInfoMana(
                                         title: 'Oracle Text:',
-                                        manaString: _card[Side.back].oracleText,
+                                        manaString: _card[SideOld.back].oracleText,
                                         textAlign: TextAlign.justify,
                                       ),
                                     );
                                   }
-                                  if (_card[Side.back].producedMana.isNotEmpty) {
+                                  if (_card[SideOld.back].producedMana.isNotEmpty) {
                                     widgets.add(
                                       CardInfoMana(
                                         title: 'Produced Mana:',
-                                        manaString: _card[Side.back].producedMana.join(''),
+                                        manaString: _card[SideOld.back].producedMana.join(''),
                                       ),
                                     );
                                   }
-                                  if (_card[Side.back].power.isNotEmpty && _card[Side.back].toughness.isNotEmpty) {
+                                  if (_card[SideOld.back].power.isNotEmpty &&
+                                      _card[SideOld.back].toughness.isNotEmpty) {
                                     widgets.add(
                                       CardInfoText(
                                         title: 'Power/Toughness:',
-                                        value: '${_card[Side.back].power}/${_card[Side.back].toughness}',
+                                        value: '${_card[SideOld.back].power}/${_card[SideOld.back].toughness}',
                                       ),
                                     );
                                   }
-                                  if (_card[Side.back].loyalty.isNotEmpty) {
+                                  if (_card[SideOld.back].loyalty.isNotEmpty) {
                                     widgets.add(
                                       CardInfoText(
                                         title: 'Loyalty:',
-                                        value: _card[Side.back].loyalty,
+                                        value: _card[SideOld.back].loyalty,
                                       ),
                                     );
                                   }
                                 } else {
-                                  if (_card[Side.front].name.isNotEmpty) {
+                                  if (_card[SideOld.front].name.isNotEmpty) {
                                     widgets.add(
-                                      CardInfoText(title: 'Name:', value: _card[Side.front].name),
+                                      CardInfoText(title: 'Name:', value: _card[SideOld.front].name),
                                     );
                                   }
                                   if (_quantity > 0) {
@@ -719,54 +723,55 @@ class _CardDetailsCollectionState extends State<CardDetailsCollection> {
                                       CardInfoText(title: 'Quantity:', value: _quantity.toString()),
                                     );
                                   }
-                                  if (_card[Side.front].manaCost.isNotEmpty) {
+                                  if (_card[SideOld.front].manaCost.isNotEmpty) {
                                     widgets.add(
-                                      CardInfoMana(title: 'Mana Cost:', manaString: _card[Side.front].manaCost),
+                                      CardInfoMana(title: 'Mana Cost:', manaString: _card[SideOld.front].manaCost),
                                     );
                                   }
-                                  if (_card[Side.front].type.isNotEmpty) {
+                                  if (_card[SideOld.front].type.isNotEmpty) {
                                     widgets.add(
-                                      CardInfoText(title: 'Type Line:', value: _card[Side.front].type),
+                                      CardInfoText(title: 'Type Line:', value: _card[SideOld.front].type),
                                     );
                                   }
-                                  if (_card[Side.front].oracleText.isNotEmpty) {
+                                  if (_card[SideOld.front].oracleText.isNotEmpty) {
                                     widgets.add(
                                       CardInfoMana(
                                         title: 'Oracle Text:',
-                                        manaString: _card[Side.front].oracleText,
+                                        manaString: _card[SideOld.front].oracleText,
                                         textAlign: TextAlign.justify,
                                       ),
                                     );
                                   }
-                                  if (_card[Side.front].producedMana.isNotEmpty) {
+                                  if (_card[SideOld.front].producedMana.isNotEmpty) {
                                     widgets.add(
                                       CardInfoMana(
                                         title: 'Produced Mana:',
-                                        manaString: _card[Side.front].producedMana.join(''),
+                                        manaString: _card[SideOld.front].producedMana.join(''),
                                       ),
                                     );
                                   }
-                                  if (_card[Side.front].power.isNotEmpty && _card[Side.front].toughness.isNotEmpty) {
+                                  if (_card[SideOld.front].power.isNotEmpty &&
+                                      _card[SideOld.front].toughness.isNotEmpty) {
                                     widgets.add(
                                       CardInfoText(
                                         title: 'Power/Toughness:',
-                                        value: '${_card[Side.front].power}/${_card[Side.front].toughness}',
+                                        value: '${_card[SideOld.front].power}/${_card[SideOld.front].toughness}',
                                       ),
                                     );
                                   }
-                                  if (_card[Side.front].loyalty.isNotEmpty) {
+                                  if (_card[SideOld.front].loyalty.isNotEmpty) {
                                     widgets.add(
                                       CardInfoText(
                                         title: 'Loyalty:',
-                                        value: _card[Side.front].loyalty,
+                                        value: _card[SideOld.front].loyalty,
                                       ),
                                     );
                                   }
                                 }
                               } else {
-                                if (_card[Side.front].name.isNotEmpty) {
+                                if (_card[SideOld.front].name.isNotEmpty) {
                                   widgets.add(
-                                    CardInfoText(title: 'Name:', value: _card[Side.front].name),
+                                    CardInfoText(title: 'Name:', value: _card[SideOld.front].name),
                                   );
                                 }
                                 if (_quantity > 0) {
@@ -774,46 +779,47 @@ class _CardDetailsCollectionState extends State<CardDetailsCollection> {
                                     CardInfoText(title: 'Quantity:', value: _quantity.toString()),
                                   );
                                 }
-                                if (_card[Side.front].manaCost.isNotEmpty) {
+                                if (_card[SideOld.front].manaCost.isNotEmpty) {
                                   widgets.add(
-                                    CardInfoMana(title: 'Mana Cost:', manaString: _card[Side.front].manaCost),
+                                    CardInfoMana(title: 'Mana Cost:', manaString: _card[SideOld.front].manaCost),
                                   );
                                 }
-                                if (_card[Side.front].type.isNotEmpty) {
+                                if (_card[SideOld.front].type.isNotEmpty) {
                                   widgets.add(
-                                    CardInfoText(title: 'Type Line:', value: _card[Side.front].type),
+                                    CardInfoText(title: 'Type Line:', value: _card[SideOld.front].type),
                                   );
                                 }
-                                if (_card[Side.front].oracleText.isNotEmpty) {
+                                if (_card[SideOld.front].oracleText.isNotEmpty) {
                                   widgets.add(
                                     CardInfoMana(
                                       title: 'Oracle Text:',
-                                      manaString: _card[Side.front].oracleText,
+                                      manaString: _card[SideOld.front].oracleText,
                                       textAlign: TextAlign.justify,
                                     ),
                                   );
                                 }
-                                if (_card[Side.front].producedMana.isNotEmpty) {
+                                if (_card[SideOld.front].producedMana.isNotEmpty) {
                                   widgets.add(
                                     CardInfoMana(
                                       title: 'Produced Mana:',
-                                      manaString: _card[Side.front].producedMana.join(''),
+                                      manaString: _card[SideOld.front].producedMana.join(''),
                                     ),
                                   );
                                 }
-                                if (_card[Side.front].power.isNotEmpty && _card[Side.front].toughness.isNotEmpty) {
+                                if (_card[SideOld.front].power.isNotEmpty &&
+                                    _card[SideOld.front].toughness.isNotEmpty) {
                                   widgets.add(
                                     CardInfoText(
                                       title: 'Power/Toughness:',
-                                      value: '${_card[Side.front].power}/${_card[Side.front].toughness}',
+                                      value: '${_card[SideOld.front].power}/${_card[SideOld.front].toughness}',
                                     ),
                                   );
                                 }
-                                if (_card[Side.front].loyalty.isNotEmpty) {
+                                if (_card[SideOld.front].loyalty.isNotEmpty) {
                                   widgets.add(
                                     CardInfoText(
                                       title: 'Loyalty:',
-                                      value: _card[Side.front].loyalty,
+                                      value: _card[SideOld.front].loyalty,
                                     ),
                                   );
                                 }
@@ -927,7 +933,7 @@ class _CardDetailsCollectionState extends State<CardDetailsCollection> {
                               padding: const EdgeInsets.all(8.0),
                               child: CardWidget(
                                 card: _card,
-                                side: Side.front,
+                                side: SideOld.front,
                               ),
                             ),
                     ),
