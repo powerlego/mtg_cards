@@ -182,61 +182,61 @@ class MTGLegality extends MTGField {
   final String legalityDisplay;
 
   static final List<String> _formats = [
-    "standard",
-    "future",
-    "historic",
-    "gladiator",
-    "pioneer",
-    "modern",
-    "legacy",
-    "pauper",
-    "vintage",
-    "penny",
-    "commander",
-    "brawl",
-    "duel",
-    "historicbrawl",
-    "paupercommander",
-    "premodern",
-    "alchemy",
-    "explorer",
-    "oldschool",
+    'standard',
+    'future',
+    'historic',
+    'gladiator',
+    'pioneer',
+    'modern',
+    'legacy',
+    'pauper',
+    'vintage',
+    'penny',
+    'commander',
+    'brawl',
+    'duel',
+    'historicbrawl',
+    'paupercommander',
+    'premodern',
+    'alchemy',
+    'explorer',
+    'oldschool',
   ];
 
   static final List<String> _formatsDisplay = [
-    "Standard",
-    "Future",
-    "Historic",
-    "Gladiator",
-    "Pioneer",
-    "Modern",
-    "Legacy",
-    "Pauper",
-    "Vintage",
-    "Penny",
-    "Commander",
-    "Brawl",
-    "Duel",
-    "Historic Brawl",
-    "Pauper Commander",
-    "Premodern",
-    "Alchemy",
-    "Explorer",
-    "Old School",
+    'Standard',
+    'Future',
+    'Historic',
+    'Gladiator',
+    'Pioneer',
+    'Modern',
+    'Legacy',
+    'Pauper',
+    'Vintage',
+    'Penny',
+    'Commander',
+    'Brawl',
+    'Duel',
+    'Historic Brawl',
+    'Pauper Commander',
+    'Premodern',
+    'Alchemy',
+    'Explorer',
+    'Old School',
   ];
 
   static final List<String> _legalities = [
-    "legal",
-    "not_legal",
-    "restricted",
-    "banned",
+    'legal',
+    'not_legal',
+    'restricted',
+    'banned',
   ];
 
   static final List<String> _legalityDisplay = [
-    "Legal",
-    "Banned",
-    "Restricted",
-    "Not Legal",
+    'Legal',
+    'Not Legal',
+    'Restricted',
+    'Banned',
   ];
 
   MTGLegality(String name, String display, int sortOrder, this.legality, this.legalityDisplay)
@@ -291,7 +291,7 @@ class MTGLegality extends MTGField {
 ///
 /// Example:
 /// ```dart
-///   final json = { "name": "nonfoil", "display": "Non-Foil", "sortOrder": 0, "price": Decimal.parse('0.01') };
+///   final json = { 'name': 'nonfoil', 'display': 'Non-Foil', 'sortOrder': 0, 'price': Decimal.parse('0.01') };
 ///   MTGPrice price = MTGPrice.fromJson(json);
 ///   print(price.price); // 0.01
 ///   print(price.name); // 'nonfoil'
@@ -305,15 +305,15 @@ class MTGPrice extends MTGField {
   final Decimal price;
 
   static final List<String> _finishes = [
-    "nonfoil",
-    "foil",
-    "etched",
+    'nonfoil',
+    'foil',
+    'etched',
   ];
 
   static final List<String> _finishesDisplay = [
-    "Non-Foil",
-    "Foil",
-    "Etched",
+    'Non-Foil',
+    'Foil',
+    'Etched',
   ];
 
   /// Creates a new [MTGPrice] object.
@@ -450,13 +450,13 @@ class MTGPrice extends MTGField {
   ///
   /// Example (good):
   /// ```dart
-  /// MTGPrice price = MTGPrice.fromJson({ "name": "nonfoil", "display": "Non-Foil", "sortOrder": 0, "price": Decimal.parse('0.01') });
+  /// MTGPrice price = MTGPrice.fromJson({ 'name': 'nonfoil', 'display': 'Non-Foil', 'sortOrder': 0, 'price': Decimal.parse('0.01') });
   /// print(price.formattedPriceIn('EUR')); // '€0.0085'
   /// ```
   ///
   /// Example (bad):
   /// ```dart
-  /// MTGPrice price = MTGPrice.fromJson({ "name": "nonfoil", "display": "Non-Foil", "sortOrder": 0, "price": Decimal.parse('0.01') });
+  /// MTGPrice price = MTGPrice.fromJson({ 'name': 'nonfoil', 'display': 'Non-Foil', 'sortOrder': 0, 'price': Decimal.parse('0.01') });
   /// print(price.formattedPriceIn('EURR')); // '0.00 EURR'
   /// ```
   ///
@@ -832,7 +832,7 @@ class MTGPrice extends MTGField {
 }
 
 class MTGFinish extends MTGField {
-  static MTGFinish get normal => MTGFinish('normal', 'Normal', 0);
+  static MTGFinish get nonfoil => MTGFinish('nonfoil', 'Non-Foil', 0);
   static MTGFinish get foil => MTGFinish('foil', 'Foil', 1);
   static MTGFinish get etched => MTGFinish('etched', 'Etched', 2);
   static MTGFinish get glossy => MTGFinish('glossy', 'Glossy', 3);
@@ -873,8 +873,8 @@ class MTGFinish extends MTGField {
   /// Returns the [MTGFinish] with the given [name] or [MTGFinish.unknown] if no [MTGFinish] with the given [name] exists
   static MTGFinish fromName(String name) {
     switch (name) {
-      case 'normal':
-        return normal;
+      case 'nonfoil':
+        return nonfoil;
       case 'foil':
         return foil;
       case 'etched':
@@ -891,8 +891,8 @@ class MTGFinish extends MTGField {
   /// Returns the [MTGFinish] with the given [display] or [MTGFinish.unknown] if no [MTGFinish] with the given [display] exists
   static MTGFinish fromDisplay(String display) {
     switch (display) {
-      case 'Normal':
-        return normal;
+      case 'Non-Foil':
+        return nonfoil;
       case 'Foil':
         return foil;
       case 'Etched':
