@@ -26,7 +26,7 @@ class MTGCardSupertype extends MTGCardType {
   static MTGCardSupertype get legendary => MTGCardSupertype('legendary', 'Legendary', 2);
   static MTGCardSupertype get ongoing => MTGCardSupertype('ongoing', 'Ongoing', 3);
   static MTGCardSupertype get snow => MTGCardSupertype('snow', 'Snow', 4);
-  static MTGCardSupertype get token => MTGCardSupertype('token', "Token", 5);
+  static MTGCardSupertype get token => MTGCardSupertype('token', 'Token', 5);
   static MTGCardSupertype get world => MTGCardSupertype('world', 'World', 6);
   static MTGCardSupertype get unknown => MTGCardSupertype('unknown', 'Unknown', 255);
 
@@ -60,7 +60,7 @@ class MTGCardSupertype extends MTGCardType {
     );
   }
 
-  static MTGCardSupertype getSupertypeFromName(String name) {
+  static MTGCardSupertype fromName(String name) {
     switch (name) {
       case 'basic':
         return basic;
@@ -81,7 +81,7 @@ class MTGCardSupertype extends MTGCardType {
     }
   }
 
-  static MTGCardSupertype getSupertypeFromDisplay(String display) {
+  static MTGCardSupertype fromDisplay(String display) {
     switch (display) {
       case 'Basic':
         return basic;
@@ -137,6 +137,7 @@ class MTGCardMainType extends MTGCardType {
   static MTGCardMainType get tribal => MTGCardMainType('tribal', 'Tribal', 13);
   static MTGCardMainType get vanguard => MTGCardMainType('vanguard', 'Vanguard', 14);
   static MTGCardMainType get dungeon => MTGCardMainType('dungeon', 'Dungeon', 15);
+  static MTGCardMainType get card => MTGCardMainType('card', 'Card', 16);
   static MTGCardMainType get unknown => MTGCardMainType('unknown', 'Unknown', 255);
 
   static List<MTGCardMainType> get all => [
@@ -156,6 +157,7 @@ class MTGCardMainType extends MTGCardType {
         tribal,
         vanguard,
         dungeon,
+        card,
       ];
 
   static List<String> get allNames => [
@@ -175,6 +177,7 @@ class MTGCardMainType extends MTGCardType {
         tribal.name,
         vanguard.name,
         dungeon.name,
+        card.name,
       ];
 
   MTGCardMainType(String name, String display, int sortOrder) : super(name, display, sortOrder);
@@ -187,7 +190,7 @@ class MTGCardMainType extends MTGCardType {
     );
   }
 
-  static MTGCardMainType getTypeFromName(String name) {
+  static MTGCardMainType fromName(String name) {
     switch (name) {
       case 'artifact':
         return artifact;
@@ -226,7 +229,7 @@ class MTGCardMainType extends MTGCardType {
     }
   }
 
-  static MTGCardMainType getTypeFromDisplay(String display) {
+  static MTGCardMainType fromDisplay(String display) {
     switch (display) {
       case 'Artifact':
         return artifact;
@@ -1309,12 +1312,1318 @@ class MTGCreatureSubtype extends MTGCardSubtype {
     );
   }
 
-  static MTGCreatureSubtype getSubTypeFromName(String subType) {
-    return unknown;
+  static MTGCreatureSubtype fromName(String subType) {
+    switch (subType) {
+      case 'advisor':
+        return advisor;
+      case 'aetherborn':
+        return aetherborn;
+      case 'alicorn':
+        return alicorn;
+      case 'alien':
+        return alien;
+      case 'ally':
+        return ally;
+      case 'angel':
+        return angel;
+      case 'antelope':
+        return antelope;
+      case 'ape':
+        return ape;
+      case 'archer':
+        return archer;
+      case 'archon':
+        return archon;
+      case 'army':
+        return army;
+      case 'art':
+        return art;
+      case 'artificer':
+        return artificer;
+      case 'assassin':
+        return assassin;
+      case 'assemblyworker':
+        return assemblyworker;
+      case 'astartes':
+        return astartes;
+      case 'atog':
+        return atog;
+      case 'aurochs':
+        return aurochs;
+      case 'autobot':
+        return autobot;
+      case 'avatar':
+        return avatar;
+      case 'azra':
+        return azra;
+      case 'badger':
+        return badger;
+      case 'balloon':
+        return balloon;
+      case 'barbarian':
+        return barbarian;
+      case 'bard':
+        return bard;
+      case 'basilisk':
+        return basilisk;
+      case 'bat':
+        return bat;
+      case 'bear':
+        return bear;
+      case 'beast':
+        return beast;
+      case 'beaver':
+        return beaver;
+      case 'beeble':
+        return beeble;
+      case 'beholder':
+        return beholder;
+      case 'berserker':
+        return berserker;
+      case 'bird':
+        return bird;
+      case 'blinkmoth':
+        return blinkmoth;
+      case 'boar':
+        return boar;
+      case 'brainiac':
+        return brainiac;
+      case 'bringer':
+        return bringer;
+      case 'brushwagg':
+        return brushwagg;
+      case 'bureaucrat':
+        return bureaucrat;
+      case 'ctan':
+        return ctan;
+      case 'camarid':
+        return camarid;
+      case 'camel':
+        return camel;
+      case 'caribou':
+        return caribou;
+      case 'carrier':
+        return carrier;
+      case 'cat':
+        return cat;
+      case 'centaur':
+        return centaur;
+      case 'cephalid':
+        return cephalid;
+      case 'chameleon':
+        return chameleon;
+      case 'chicken':
+        return chicken;
+      case 'child':
+        return child;
+      case 'chimera':
+        return chimera;
+      case 'citizen':
+        return citizen;
+      case 'clamfolk':
+        return clamfolk;
+      case 'cleric':
+        return cleric;
+      case 'clown':
+        return clown;
+      case 'cockatrice':
+        return cockatrice;
+      case 'construct':
+        return construct;
+      case 'cow':
+        return cow;
+      case 'coward':
+        return coward;
+      case 'crab':
+        return crab;
+      case 'crocodile':
+        return crocodile;
+      case 'custodes':
+        return custodes;
+      case 'cyborg':
+        return cyborg;
+      case 'cyclops':
+        return cyclops;
+      case 'dauthi':
+        return dauthi;
+      case 'deer':
+        return deer;
+      case 'demigod':
+        return demigod;
+      case 'demon':
+        return demon;
+      case 'deserter':
+        return deserter;
+      case 'designer':
+        return designer;
+      case 'devil':
+        return devil;
+      case 'dinosaur':
+        return dinosaur;
+      case 'djinn':
+        return djinn;
+      case 'dog':
+        return dog;
+      case 'donkey':
+        return donkey;
+      case 'dragon':
+        return dragon;
+      case 'drake':
+        return drake;
+      case 'dreadnought':
+        return dreadnought;
+      case 'drone':
+        return drone;
+      case 'druid':
+        return druid;
+      case 'dryad':
+        return dryad;
+      case 'dwarf':
+        return dwarf;
+      case 'efreet':
+        return efreet;
+      case 'egg':
+        return egg;
+      case 'elder':
+        return elder;
+      case 'eldrazi':
+        return eldrazi;
+      case 'elemental':
+        return elemental;
+      case 'elementalQuestion':
+        return elementalQuestion;
+      case 'elephant':
+        return elephant;
+      case 'elf':
+        return elf;
+      case 'elk':
+        return elk;
+      case 'elves':
+        return elves;
+      case 'employee':
+        return employee;
+      case 'etiquette':
+        return etiquette;
+      case 'eye':
+        return eye;
+      case 'faerie':
+        return faerie;
+      case 'ferret':
+        return ferret;
+      case 'fish':
+        return fish;
+      case 'flagbearer':
+        return flagbearer;
+      case 'fox':
+        return fox;
+      case 'fractal':
+        return fractal;
+      case 'frog':
+        return frog;
+      case 'fungus':
+        return fungus;
+      case 'gamer':
+        return gamer;
+      case 'gargoyle':
+        return gargoyle;
+      case 'germ':
+        return germ;
+      case 'giant':
+        return giant;
+      case 'gith':
+        return gith;
+      case 'gnoll':
+        return gnoll;
+      case 'gnome':
+        return gnome;
+      case 'goat':
+        return goat;
+      case 'goblin':
+        return goblin;
+      case 'god':
+        return god;
+      case 'golem':
+        return golem;
+      case 'gorgon':
+        return gorgon;
+      case 'grandchild':
+        return grandchild;
+      case 'graveborn':
+        return graveborn;
+      case 'gremlin':
+        return gremlin;
+      case 'griffin':
+        return griffin;
+      case 'guest':
+        return guest;
+      case 'gus':
+        return gus;
+      case 'hag':
+        return hag;
+      case 'halfling':
+        return halfling;
+      case 'hamster':
+        return hamster;
+      case 'harpy':
+        return harpy;
+      case 'hatificer':
+        return hatificer;
+      case 'head':
+        return head;
+      case 'hellion':
+        return hellion;
+      case 'hero':
+        return hero;
+      case 'hippo':
+        return hippo;
+      case 'hippogriff':
+        return hippogriff;
+      case 'homarid':
+        return homarid;
+      case 'homunculus':
+        return homunculus;
+      case 'hornet':
+        return hornet;
+      case 'horror':
+        return horror;
+      case 'horse':
+        return horse;
+      case 'human':
+        return human;
+      case 'hydra':
+        return hydra;
+      case 'hyena':
+        return hyena;
+      case 'illusion':
+        return illusion;
+      case 'imp':
+        return imp;
+      case 'incarnation':
+        return incarnation;
+      case 'inkling':
+        return inkling;
+      case 'inquisitor':
+        return inquisitor;
+      case 'insect':
+        return insect;
+      case 'jackal':
+        return jackal;
+      case 'jellyfish':
+        return jellyfish;
+      case 'juggernaut':
+        return juggernaut;
+      case 'kangaroo':
+        return kangaroo;
+      case 'kavu':
+        return kavu;
+      case 'killbot':
+        return killbot;
+      case 'kirin':
+        return kirin;
+      case 'kithkin':
+        return kithkin;
+      case 'knight':
+        return knight;
+      case 'kobold':
+        return kobold;
+      case 'kor':
+        return kor;
+      case 'kraken':
+        return kraken;
+      case 'lady':
+        return lady;
+      case 'lamia':
+        return lamia;
+      case 'lammasu':
+        return lammasu;
+      case 'leech':
+        return leech;
+      case 'leviathan':
+        return leviathan;
+      case 'lhurgoyf':
+        return lhurgoyf;
+      case 'licid':
+        return licid;
+      case 'lizard':
+        return lizard;
+      case 'lobster':
+        return lobster;
+      case 'mammoth':
+        return mammoth;
+      case 'manticore':
+        return manticore;
+      case 'masticore':
+        return masticore;
+      case 'mercenary':
+        return mercenary;
+      case 'merfolk':
+        return merfolk;
+      case 'metathran':
+        return metathran;
+      case 'mime':
+        return mime;
+      case 'minion':
+        return minion;
+      case 'minotaur':
+        return minotaur;
+      case 'mole':
+        return mole;
+      case 'monger':
+        return monger;
+      case 'mongoose':
+        return mongoose;
+      case 'monk':
+        return monk;
+      case 'monkey':
+        return monkey;
+      case 'moonfolk':
+        return moonfolk;
+      case 'mouse':
+        return mouse;
+      case 'mummy':
+        return mummy;
+      case 'mutant':
+        return mutant;
+      case 'myr':
+        return myr;
+      case 'mystic':
+        return mystic;
+      case 'naga':
+        return naga;
+      case 'nautilus':
+        return nautilus;
+      case 'necron':
+        return necron;
+      case 'nephilim':
+        return nephilim;
+      case 'nightmare':
+        return nightmare;
+      case 'nightstalker':
+        return nightstalker;
+      case 'ninja':
+        return ninja;
+      case 'noble':
+        return noble;
+      case 'noggle':
+        return noggle;
+      case 'nomad':
+        return nomad;
+      case 'nymph':
+        return nymph;
+      case 'octopus':
+        return octopus;
+      case 'ogre':
+        return ogre;
+      case 'ooze':
+        return ooze;
+      case 'orb':
+        return orb;
+      case 'orc':
+        return orc;
+      case 'orgg':
+        return orgg;
+      case 'otter':
+        return otter;
+      case 'ouphe':
+        return ouphe;
+      case 'ox':
+        return ox;
+      case 'oyster':
+        return oyster;
+      case 'pangolin':
+        return pangolin;
+      case 'paratrooper':
+        return paratrooper;
+      case 'peasant':
+        return peasant;
+      case 'pegasus':
+        return pegasus;
+      case 'pentavite':
+        return pentavite;
+      case 'performer':
+        return performer;
+      case 'pest':
+        return pest;
+      case 'phelddagrif':
+        return phelddagrif;
+      case 'phoenix':
+        return phoenix;
+      case 'phyrexian':
+        return phyrexian;
+      case 'pilot':
+        return pilot;
+      case 'pincher':
+        return pincher;
+      case 'pirate':
+        return pirate;
+      case 'plant':
+        return plant;
+      case 'porcupine':
+        return porcupine;
+      case 'praetor':
+        return praetor;
+      case 'primarch':
+        return primarch;
+      case 'prism':
+        return prism;
+      case 'processor':
+        return processor;
+      case 'proper':
+        return proper;
+      case 'rabbit':
+        return rabbit;
+      case 'raccoon':
+        return raccoon;
+      case 'ranger':
+        return ranger;
+      case 'rat':
+        return rat;
+      case 'rebel':
+        return rebel;
+      case 'reflection':
+        return reflection;
+      case 'reveler':
+        return reveler;
+      case 'rhino':
+        return rhino;
+      case 'rigger':
+        return rigger;
+      case 'robot':
+        return robot;
+      case 'rogue':
+        return rogue;
+      case 'sable':
+        return sable;
+      case 'salamander':
+        return salamander;
+      case 'samurai':
+        return samurai;
+      case 'sand':
+        return sand;
+      case 'saproling':
+        return saproling;
+      case 'satyr':
+        return satyr;
+      case 'scarecrow':
+        return scarecrow;
+      case 'scientist':
+        return scientist;
+      case 'scion':
+        return scion;
+      case 'scorpion':
+        return scorpion;
+      case 'scout':
+        return scout;
+      case 'sculpture':
+        return sculpture;
+      case 'serf':
+        return serf;
+      case 'serpent':
+        return serpent;
+      case 'servo':
+        return servo;
+      case 'shade':
+        return shade;
+      case 'shaman':
+        return shaman;
+      case 'shapeshifter':
+        return shapeshifter;
+      case 'shark':
+        return shark;
+      case 'sheep':
+        return sheep;
+      case 'ship':
+        return ship;
+      case 'siren':
+        return siren;
+      case 'skeleton':
+        return skeleton;
+      case 'slith':
+        return slith;
+      case 'sliver':
+        return sliver;
+      case 'slug':
+        return slug;
+      case 'snake':
+        return snake;
+      case 'soldier':
+        return soldier;
+      case 'soltari':
+        return soltari;
+      case 'spawn':
+        return spawn;
+      case 'specter':
+        return specter;
+      case 'spellshaper':
+        return spellshaper;
+      case 'sphinx':
+        return sphinx;
+      case 'spider':
+        return spider;
+      case 'spike':
+        return spike;
+      case 'spirit':
+        return spirit;
+      case 'splinter':
+        return splinter;
+      case 'sponge':
+        return sponge;
+      case 'spy':
+        return spy;
+      case 'squid':
+        return squid;
+      case 'squirrel':
+        return squirrel;
+      case 'starfish':
+        return starfish;
+      case 'surrakar':
+        return surrakar;
+      case 'survivor':
+        return survivor;
+      case 'teddy':
+        return teddy;
+      case 'tentacle':
+        return tentacle;
+      case 'tetravite':
+        return tetravite;
+      case 'thalakos':
+        return thalakos;
+      case 'the':
+        return the;
+      case 'thopter':
+        return thopter;
+      case 'thrull':
+        return thrull;
+      case 'tiefling':
+        return tiefling;
+      case 'townsfolk':
+        return townsfolk;
+      case 'treefolk':
+        return treefolk;
+      case 'trilobite':
+        return trilobite;
+      case 'triskelavite':
+        return triskelavite;
+      case 'troll':
+        return troll;
+      case 'turtle':
+        return turtle;
+      case 'tyranid':
+        return tyranid;
+      case 'unicorn':
+        return unicorn;
+      case 'vampire':
+        return vampire;
+      case 'vampyre':
+        return vampyre;
+      case 'vedalken':
+        return vedalken;
+      case 'viashino':
+        return viashino;
+      case 'villain':
+        return villain;
+      case 'volver':
+        return volver;
+      case 'waiter':
+        return waiter;
+      case 'wall':
+        return wall;
+      case 'walrus':
+        return walrus;
+      case 'warlock':
+        return warlock;
+      case 'warrior':
+        return warrior;
+      case 'wasp':
+        return wasp;
+      case 'weird':
+        return weird;
+      case 'werewolf':
+        return werewolf;
+      case 'whale':
+        return whale;
+      case 'wizard':
+        return wizard;
+      case 'wolf':
+        return wolf;
+      case 'wolverine':
+        return wolverine;
+      case 'wombat':
+        return wombat;
+      case 'worm':
+        return worm;
+      case 'wraith':
+        return wraith;
+      case 'wrestler':
+        return wrestler;
+      case 'wurm':
+        return wurm;
+      case 'yeti':
+        return yeti;
+      case 'zombie':
+        return zombie;
+      case 'zubera':
+        return zubera;
+      default:
+        return unknown;
+    }
   }
 
-  static MTGCreatureSubtype getSubTypeFromDisplay(String subType) {
-    return unknown;
+  static MTGCreatureSubtype fromDisplay(String subType) {
+    switch (subType) {
+      case 'Advisor':
+        return advisor;
+      case 'Aetherborn':
+        return aetherborn;
+      case 'Alicorn':
+        return alicorn;
+      case 'Alien':
+        return alien;
+      case 'Ally':
+        return ally;
+      case 'Angel':
+        return angel;
+      case 'Antelope':
+        return antelope;
+      case 'Ape':
+        return ape;
+      case 'Archer':
+        return archer;
+      case 'Archon':
+        return archon;
+      case 'Army':
+        return army;
+      case 'Art':
+        return art;
+      case 'Artificer':
+        return artificer;
+      case 'Assassin':
+        return assassin;
+      case 'Assembly-Worker':
+        return assemblyworker;
+      case 'Astartes':
+        return astartes;
+      case 'Atog':
+        return atog;
+      case 'Aurochs':
+        return aurochs;
+      case 'Autobot':
+        return autobot;
+      case 'Avatar':
+        return avatar;
+      case 'Azra':
+        return azra;
+      case 'Badger':
+        return badger;
+      case 'Balloon':
+        return balloon;
+      case 'Barbarian':
+        return barbarian;
+      case 'Bard':
+        return bard;
+      case 'Basilisk':
+        return basilisk;
+      case 'Bat':
+        return bat;
+      case 'Bear':
+        return bear;
+      case 'Beast':
+        return beast;
+      case 'Beaver':
+        return beaver;
+      case 'Beeble':
+        return beeble;
+      case 'Beholder':
+        return beholder;
+      case 'Berserker':
+        return berserker;
+      case 'Bird':
+        return bird;
+      case 'Blinkmoth':
+        return blinkmoth;
+      case 'Boar':
+        return boar;
+      case 'Brainiac':
+        return brainiac;
+      case 'Bringer':
+        return bringer;
+      case 'Brushwagg':
+        return brushwagg;
+      case 'Bureaucrat':
+        return bureaucrat;
+      case 'C\'tan':
+        return ctan;
+      case 'Camarid':
+        return camarid;
+      case 'Camel':
+        return camel;
+      case 'Caribou':
+        return caribou;
+      case 'Carrier':
+        return carrier;
+      case 'Cat':
+        return cat;
+      case 'Centaur':
+        return centaur;
+      case 'Cephalid':
+        return cephalid;
+      case 'Chameleon':
+        return chameleon;
+      case 'Chicken':
+        return chicken;
+      case 'Child':
+        return child;
+      case 'Chimera':
+        return chimera;
+      case 'Citizen':
+        return citizen;
+      case 'Clamfolk':
+        return clamfolk;
+      case 'Cleric':
+        return cleric;
+      case 'Clown':
+        return clown;
+      case 'Cockatrice':
+        return cockatrice;
+      case 'Construct':
+        return construct;
+      case 'Cow':
+        return cow;
+      case 'Coward':
+        return coward;
+      case 'Crab':
+        return crab;
+      case 'Crocodile':
+        return crocodile;
+      case 'Custodes':
+        return custodes;
+      case 'Cyborg':
+        return cyborg;
+      case 'Cyclops':
+        return cyclops;
+      case 'Dauthi':
+        return dauthi;
+      case 'Deer':
+        return deer;
+      case 'Demigod':
+        return demigod;
+      case 'Demon':
+        return demon;
+      case 'Deserter':
+        return deserter;
+      case 'Designer':
+        return designer;
+      case 'Devil':
+        return devil;
+      case 'Dinosaur':
+        return dinosaur;
+      case 'Djinn':
+        return djinn;
+      case 'Dog':
+        return dog;
+      case 'Donkey':
+        return donkey;
+      case 'Dragon':
+        return dragon;
+      case 'Drake':
+        return drake;
+      case 'Dreadnought':
+        return dreadnought;
+      case 'Drone':
+        return drone;
+      case 'Druid':
+        return druid;
+      case 'Dryad':
+        return dryad;
+      case 'Dwarf':
+        return dwarf;
+      case 'Efreet':
+        return efreet;
+      case 'Egg':
+        return egg;
+      case 'Elder':
+        return elder;
+      case 'Eldrazi':
+        return eldrazi;
+      case 'Elemental':
+        return elemental;
+      case 'Elemental?':
+        return elementalQuestion;
+      case 'Elephant':
+        return elephant;
+      case 'Elf':
+        return elf;
+      case 'Elk':
+        return elk;
+      case 'Elves':
+        return elves;
+      case 'Employee':
+        return employee;
+      case 'Etiquette':
+        return etiquette;
+      case 'Eye':
+        return eye;
+      case 'Faerie':
+        return faerie;
+      case 'Ferret':
+        return ferret;
+      case 'Fish':
+        return fish;
+      case 'Flagbearer':
+        return flagbearer;
+      case 'Fox':
+        return fox;
+      case 'Fractal':
+        return fractal;
+      case 'Frog':
+        return frog;
+      case 'Fungus':
+        return fungus;
+      case 'Gamer':
+        return gamer;
+      case 'Gargoyle':
+        return gargoyle;
+      case 'Germ':
+        return germ;
+      case 'Giant':
+        return giant;
+      case 'Gith':
+        return gith;
+      case 'Gnoll':
+        return gnoll;
+      case 'Gnome':
+        return gnome;
+      case 'Goat':
+        return goat;
+      case 'Goblin':
+        return goblin;
+      case 'God':
+        return god;
+      case 'Golem':
+        return golem;
+      case 'Gorgon':
+        return gorgon;
+      case 'Grandchild':
+        return grandchild;
+      case 'Graveborn':
+        return graveborn;
+      case 'Gremlin':
+        return gremlin;
+      case 'Griffin':
+        return griffin;
+      case 'Guest':
+        return guest;
+      case 'Gus':
+        return gus;
+      case 'Hag':
+        return hag;
+      case 'Halfling':
+        return halfling;
+      case 'Hamster':
+        return hamster;
+      case 'Harpy':
+        return harpy;
+      case 'Hatificer':
+        return hatificer;
+      case 'Head':
+        return head;
+      case 'Hellion':
+        return hellion;
+      case 'Hero':
+        return hero;
+      case 'Hippo':
+        return hippo;
+      case 'Hippogriff':
+        return hippogriff;
+      case 'Homarid':
+        return homarid;
+      case 'Homunculus':
+        return homunculus;
+      case 'Hornet':
+        return hornet;
+      case 'Horror':
+        return horror;
+      case 'Horse':
+        return horse;
+      case 'Human':
+        return human;
+      case 'Hydra':
+        return hydra;
+      case 'Hyena':
+        return hyena;
+      case 'Illusion':
+        return illusion;
+      case 'Imp':
+        return imp;
+      case 'Incarnation':
+        return incarnation;
+      case 'Inkling':
+        return inkling;
+      case 'Inquisitor':
+        return inquisitor;
+      case 'Insect':
+        return insect;
+      case 'Jackal':
+        return jackal;
+      case 'Jellyfish':
+        return jellyfish;
+      case 'Juggernaut':
+        return juggernaut;
+      case 'Kangaroo':
+        return kangaroo;
+      case 'Kavu':
+        return kavu;
+      case 'Killbot':
+        return killbot;
+      case 'Kirin':
+        return kirin;
+      case 'Kithkin':
+        return kithkin;
+      case 'Knight':
+        return knight;
+      case 'Kobold':
+        return kobold;
+      case 'Kor':
+        return kor;
+      case 'Kraken':
+        return kraken;
+      case 'Lady':
+        return lady;
+      case 'Lamia':
+        return lamia;
+      case 'Lammasu':
+        return lammasu;
+      case 'Leech':
+        return leech;
+      case 'Leviathan':
+        return leviathan;
+      case 'Lhurgoyf':
+        return lhurgoyf;
+      case 'Licid':
+        return licid;
+      case 'Lizard':
+        return lizard;
+      case 'Lobster':
+        return lobster;
+      case 'Mammoth':
+        return mammoth;
+      case 'Manticore':
+        return manticore;
+      case 'Masticore':
+        return masticore;
+      case 'Mercenary':
+        return mercenary;
+      case 'Merfolk':
+        return merfolk;
+      case 'Metathran':
+        return metathran;
+      case 'Mime':
+        return mime;
+      case 'Minion':
+        return minion;
+      case 'Minotaur':
+        return minotaur;
+      case 'Mole':
+        return mole;
+      case 'Monger':
+        return monger;
+      case 'Mongoose':
+        return mongoose;
+      case 'Monk':
+        return monk;
+      case 'Monkey':
+        return monkey;
+      case 'Moonfolk':
+        return moonfolk;
+      case 'Mouse':
+        return mouse;
+      case 'Mummy':
+        return mummy;
+      case 'Mutant':
+        return mutant;
+      case 'Myr':
+        return myr;
+      case 'Mystic':
+        return mystic;
+      case 'Naga':
+        return naga;
+      case 'Nautilus':
+        return nautilus;
+      case 'Necron':
+        return necron;
+      case 'Nephilim':
+        return nephilim;
+      case 'Nightmare':
+        return nightmare;
+      case 'Nightstalker':
+        return nightstalker;
+      case 'Ninja':
+        return ninja;
+      case 'Noble':
+        return noble;
+      case 'Noggle':
+        return noggle;
+      case 'Nomad':
+        return nomad;
+      case 'Nymph':
+        return nymph;
+      case 'Octopus':
+        return octopus;
+      case 'Ogre':
+        return ogre;
+      case 'Ooze':
+        return ooze;
+      case 'Orb':
+        return orb;
+      case 'Orc':
+        return orc;
+      case 'Orgg':
+        return orgg;
+      case 'Otter':
+        return otter;
+      case 'Ouphe':
+        return ouphe;
+      case 'Ox':
+        return ox;
+      case 'Oyster':
+        return oyster;
+      case 'Pangolin':
+        return pangolin;
+      case 'Paratrooper':
+        return paratrooper;
+      case 'Peasant':
+        return peasant;
+      case 'Pegasus':
+        return pegasus;
+      case 'Pentavite':
+        return pentavite;
+      case 'Performer':
+        return performer;
+      case 'Pest':
+        return pest;
+      case 'Phelddagrif':
+        return phelddagrif;
+      case 'Phoenix':
+        return phoenix;
+      case 'Phyrexian':
+        return phyrexian;
+      case 'Pilot':
+        return pilot;
+      case 'Pincher':
+        return pincher;
+      case 'Pirate':
+        return pirate;
+      case 'Plant':
+        return plant;
+      case 'Porcupine':
+        return porcupine;
+      case 'Praetor':
+        return praetor;
+      case 'Primarch':
+        return primarch;
+      case 'Prism':
+        return prism;
+      case 'Processor':
+        return processor;
+      case 'Proper':
+        return proper;
+      case 'Rabbit':
+        return rabbit;
+      case 'Raccoon':
+        return raccoon;
+      case 'Ranger':
+        return ranger;
+      case 'Rat':
+        return rat;
+      case 'Rebel':
+        return rebel;
+      case 'Reflection':
+        return reflection;
+      case 'Reveler':
+        return reveler;
+      case 'Rhino':
+        return rhino;
+      case 'Rigger':
+        return rigger;
+      case 'Robot':
+        return robot;
+      case 'Rogue':
+        return rogue;
+      case 'Sable':
+        return sable;
+      case 'Salamander':
+        return salamander;
+      case 'Samurai':
+        return samurai;
+      case 'Sand':
+        return sand;
+      case 'Saproling':
+        return saproling;
+      case 'Satyr':
+        return satyr;
+      case 'Scarecrow':
+        return scarecrow;
+      case 'Scientist':
+        return scientist;
+      case 'Scion':
+        return scion;
+      case 'Scorpion':
+        return scorpion;
+      case 'Scout':
+        return scout;
+      case 'Sculpture':
+        return sculpture;
+      case 'Serf':
+        return serf;
+      case 'Serpent':
+        return serpent;
+      case 'Servo':
+        return servo;
+      case 'Shade':
+        return shade;
+      case 'Shaman':
+        return shaman;
+      case 'Shapeshifter':
+        return shapeshifter;
+      case 'Shark':
+        return shark;
+      case 'Sheep':
+        return sheep;
+      case 'Ship':
+        return ship;
+      case 'Siren':
+        return siren;
+      case 'Skeleton':
+        return skeleton;
+      case 'Slith':
+        return slith;
+      case 'Sliver':
+        return sliver;
+      case 'Slug':
+        return slug;
+      case 'Snake':
+        return snake;
+      case 'Soldier':
+        return soldier;
+      case 'Soltari':
+        return soltari;
+      case 'Spawn':
+        return spawn;
+      case 'Specter':
+        return specter;
+      case 'Spellshaper':
+        return spellshaper;
+      case 'Sphinx':
+        return sphinx;
+      case 'Spider':
+        return spider;
+      case 'Spike':
+        return spike;
+      case 'Spirit':
+        return spirit;
+      case 'Splinter':
+        return splinter;
+      case 'Sponge':
+        return sponge;
+      case 'Spy':
+        return spy;
+      case 'Squid':
+        return squid;
+      case 'Squirrel':
+        return squirrel;
+      case 'Starfish':
+        return starfish;
+      case 'Surrakar':
+        return surrakar;
+      case 'Survivor':
+        return survivor;
+      case 'Teddy':
+        return teddy;
+      case 'Tentacle':
+        return tentacle;
+      case 'Tetravite':
+        return tetravite;
+      case 'Thalakos':
+        return thalakos;
+      case 'The':
+        return the;
+      case 'Thopter':
+        return thopter;
+      case 'Thrull':
+        return thrull;
+      case 'Tiefling':
+        return tiefling;
+      case 'Townsfolk':
+        return townsfolk;
+      case 'Treefolk':
+        return treefolk;
+      case 'Trilobite':
+        return trilobite;
+      case 'Triskelavite':
+        return triskelavite;
+      case 'Troll':
+        return troll;
+      case 'Turtle':
+        return turtle;
+      case 'Tyranid':
+        return tyranid;
+      case 'Unicorn':
+        return unicorn;
+      case 'Vampire':
+        return vampire;
+      case 'Vampyre':
+        return vampyre;
+      case 'Vedalken':
+        return vedalken;
+      case 'Viashino':
+        return viashino;
+      case 'Villain':
+        return villain;
+      case 'Volver':
+        return volver;
+      case 'Waiter':
+        return waiter;
+      case 'Wall':
+        return wall;
+      case 'Walrus':
+        return walrus;
+      case 'Warlock':
+        return warlock;
+      case 'Warrior':
+        return warrior;
+      case 'Wasp':
+        return wasp;
+      case 'Weird':
+        return weird;
+      case 'Werewolf':
+        return werewolf;
+      case 'Whale':
+        return whale;
+      case 'Wizard':
+        return wizard;
+      case 'Wolf':
+        return wolf;
+      case 'Wolverine':
+        return wolverine;
+      case 'Wombat':
+        return wombat;
+      case 'Worm':
+        return worm;
+      case 'Wraith':
+        return wraith;
+      case 'Wrestler':
+        return wrestler;
+      case 'Wurm':
+        return wurm;
+      case 'Yeti':
+        return yeti;
+      case 'Zombie':
+        return zombie;
+      case 'Zubera':
+        return zubera;
+      default:
+        return unknown;
+    }
   }
 
   @override
@@ -1372,7 +2681,7 @@ class MTGEnchantmentSubtype extends MTGCardSubtype {
     );
   }
 
-  static MTGEnchantmentSubtype getSubtypeFromName(String subType) {
+  static MTGEnchantmentSubtype fromName(String subType) {
     switch (subType) {
       case 'aura':
         return aura;
@@ -1397,7 +2706,7 @@ class MTGEnchantmentSubtype extends MTGCardSubtype {
     }
   }
 
-  static MTGEnchantmentSubtype getSubtypeFromDisplay(String subType) {
+  static MTGEnchantmentSubtype fromDisplay(String subType) {
     switch (subType) {
       case 'Aura':
         return aura;
@@ -1453,7 +2762,7 @@ class MTGLandSubtype extends MTGCardSubtype {
   static MTGLandSubtype get powerplant => MTGLandSubtype('powerplant', 'Power-Plant', 9);
   static MTGLandSubtype get swamp => MTGLandSubtype('swamp', 'Swamp', 10);
   static MTGLandSubtype get tower => MTGLandSubtype('tower', 'Tower', 11);
-  static MTGLandSubtype get urzas => MTGLandSubtype('urzas', "Urza's", 12);
+  static MTGLandSubtype get urzas => MTGLandSubtype('urzas', 'Urza\'s', 12);
   static MTGLandSubtype get unknown => MTGLandSubtype('unknown', 'Unknown', 255);
 
   static List<MTGLandSubtype> get all => [
@@ -1498,7 +2807,7 @@ class MTGLandSubtype extends MTGCardSubtype {
     );
   }
 
-  static MTGLandSubtype getSubtypeFromName(String subType) {
+  static MTGLandSubtype fromName(String subType) {
     switch (subType) {
       case 'desert':
         return desert;
@@ -1531,7 +2840,7 @@ class MTGLandSubtype extends MTGCardSubtype {
     }
   }
 
-  static MTGLandSubtype getSubtypeFromDisplay(String subType) {
+  static MTGLandSubtype fromDisplay(String subType) {
     switch (subType) {
       case 'Desert':
         return desert;
@@ -1557,7 +2866,7 @@ class MTGLandSubtype extends MTGCardSubtype {
         return swamp;
       case 'Tower':
         return tower;
-      case "Urza's":
+      case 'Urza\'s':
         return urzas;
       default:
         return unknown;
@@ -1634,7 +2943,7 @@ class MTGArtifactSubtype extends MTGCardSubtype {
     );
   }
 
-  static MTGArtifactSubtype getSubtypeFromName(String subType) {
+  static MTGArtifactSubtype fromName(String subType) {
     switch (subType) {
       case 'attraction':
         return attraction;
@@ -1663,7 +2972,7 @@ class MTGArtifactSubtype extends MTGCardSubtype {
     }
   }
 
-  static MTGArtifactSubtype getSubtypeFromDisplay(String subType) {
+  static MTGArtifactSubtype fromDisplay(String subType) {
     switch (subType) {
       case 'Attraction':
         return attraction;
@@ -1721,7 +3030,7 @@ class MTGInstantSubtype extends MTGCardSubtype {
     );
   }
 
-  static MTGInstantSubtype getSubtypeFromName(String subType) {
+  static MTGInstantSubtype fromName(String subType) {
     switch (subType) {
       case 'adventure':
         return adventure;
@@ -1734,7 +3043,7 @@ class MTGInstantSubtype extends MTGCardSubtype {
     }
   }
 
-  static MTGInstantSubtype getSubtypeFromDisplay(String subType) {
+  static MTGInstantSubtype fromDisplay(String subType) {
     switch (subType) {
       case 'Adventure':
         return adventure;
@@ -1792,7 +3101,7 @@ class MTGSorcerySubtype extends MTGCardSubtype {
     );
   }
 
-  static MTGSorcerySubtype getSubtypeFromName(String subType) {
+  static MTGSorcerySubtype fromName(String subType) {
     switch (subType) {
       case 'adventure':
         return adventure;
@@ -1805,7 +3114,7 @@ class MTGSorcerySubtype extends MTGCardSubtype {
     }
   }
 
-  static MTGSorcerySubtype getSubtypeFromDisplay(String subType) {
+  static MTGSorcerySubtype fromDisplay(String subType) {
     switch (subType) {
       case 'Adventure':
         return adventure;
@@ -2101,7 +3410,7 @@ class MTGPlaneswalkerSubtype extends MTGCardSubtype {
     );
   }
 
-  static MTGPlaneswalkerSubtype getSubtypeFromName(String subType) {
+  static MTGPlaneswalkerSubtype fromName(String subType) {
     switch (subType) {
       case 'abian':
         return abian;
@@ -2272,7 +3581,7 @@ class MTGPlaneswalkerSubtype extends MTGCardSubtype {
     }
   }
 
-  static MTGPlaneswalkerSubtype getSubtypeFromDisplay(String subType) {
+  static MTGPlaneswalkerSubtype fromDisplay(String subType) {
     switch (subType) {
       case 'Abian':
         return abian;
@@ -2462,9 +3771,9 @@ class MTGPlaneswalkerSubtype extends MTGCardSubtype {
 }
 
 class MTGCardTypeLine extends MTGField {
-  MTGCardTypeLine(this.cardType, this.subType) : super("typeLine", "Type Line", 0);
+  MTGCardTypeLine(this.cardType, this.subType) : super('typeLine', 'Type Line', 0);
 
-  MTGCardTypeLine.empty() : this([MTGCardType.unknown], [MTGCardSubtype.unknown]);
+  MTGCardTypeLine.empty() : this([MTGCardType.unknown], []);
 
   final List<MTGCardType> cardType;
   final List<MTGCardSubtype> subType;
@@ -2506,43 +3815,51 @@ class MTGCardTypeLine extends MTGField {
 
 class _MTGCardTypeParser {
   static MTGCardType parseCardType(String cardType) {
-    if (MTGCardSupertype.allNames.contains(cardType)) {
-      return MTGCardSupertype.getSupertypeFromName(cardType);
-    } else if (MTGCardMainType.allNames.contains(cardType)) {
-      return MTGCardMainType.getTypeFromName(cardType);
+    if (MTGCardSupertype.allNames.contains(cardType.toLowerCase())) {
+      return MTGCardSupertype.fromName(cardType.toLowerCase());
+    } else if (MTGCardMainType.allNames.contains(cardType.toLowerCase())) {
+      return MTGCardMainType.fromName(cardType.toLowerCase());
     } else {
       return MTGCardType.unknown;
     }
   }
 
   static MTGCardSubtype parseCardSubType(String cardSubType, {bool isInstant = false}) {
-    if (MTGCreatureSubtype.allNames.contains(cardSubType)) {
-      return MTGCreatureSubtype.getSubTypeFromName(cardSubType);
-    } else if (MTGEnchantmentSubtype.allNames.contains(cardSubType)) {
-      return MTGEnchantmentSubtype.getSubtypeFromName(cardSubType);
-    } else if (MTGLandSubtype.allNames.contains(cardSubType)) {
-      return MTGLandSubtype.getSubtypeFromName(cardSubType);
-    } else if (MTGArtifactSubtype.allNames.contains(cardSubType)) {
-      return MTGArtifactSubtype.getSubtypeFromName(cardSubType);
-    } else if (MTGInstantSubtype.allNames.contains(cardSubType) && MTGSorcerySubtype.allNames.contains(cardSubType)) {
+    if (MTGCreatureSubtype.allNames.contains(cardSubType.toLowerCase())) {
+      return MTGCreatureSubtype.fromName(cardSubType.toLowerCase());
+    } else if (MTGEnchantmentSubtype.allNames.contains(cardSubType.toLowerCase())) {
+      return MTGEnchantmentSubtype.fromName(cardSubType.toLowerCase());
+    } else if (MTGLandSubtype.allNames.contains(cardSubType.toLowerCase())) {
+      return MTGLandSubtype.fromName(cardSubType.toLowerCase());
+    } else if (MTGArtifactSubtype.allNames.contains(cardSubType.toLowerCase())) {
+      return MTGArtifactSubtype.fromName(cardSubType.toLowerCase());
+    } else if (MTGInstantSubtype.allNames.contains(cardSubType.toLowerCase()) &&
+        MTGSorcerySubtype.allNames.contains(cardSubType.toLowerCase())) {
       if (isInstant) {
-        return MTGInstantSubtype.getSubtypeFromName(cardSubType);
+        return MTGInstantSubtype.fromName(cardSubType.toLowerCase());
       } else {
-        return MTGSorcerySubtype.getSubtypeFromName(cardSubType);
+        return MTGSorcerySubtype.fromName(cardSubType.toLowerCase());
       }
-    } else if (MTGInstantSubtype.allNames.contains(cardSubType)) {
-      return MTGInstantSubtype.getSubtypeFromName(cardSubType);
-    } else if (MTGSorcerySubtype.allNames.contains(cardSubType)) {
-      return MTGSorcerySubtype.getSubtypeFromName(cardSubType);
-    } else if (MTGPlaneswalkerSubtype.allNames.contains(cardSubType)) {
-      return MTGPlaneswalkerSubtype.getSubtypeFromName(cardSubType);
+    } else if (MTGInstantSubtype.allNames.contains(cardSubType.toLowerCase())) {
+      return MTGInstantSubtype.fromName(cardSubType.toLowerCase());
+    } else if (MTGSorcerySubtype.allNames.contains(cardSubType.toLowerCase())) {
+      return MTGSorcerySubtype.fromName(cardSubType.toLowerCase());
+    } else if (MTGPlaneswalkerSubtype.allNames.contains(cardSubType.toLowerCase())) {
+      return MTGPlaneswalkerSubtype.fromName(cardSubType.toLowerCase());
     } else {
       return MTGCardSubtype.unknown;
     }
   }
 
   static MTGCardTypeLine parseCardTypeLine(String cardTypeLine) {
-    List<String> cardTypeLineSplit = cardTypeLine.split(' - ');
+    List<String> cardTypeLineSplit;
+    if (cardTypeLine.contains('-')) {
+      cardTypeLineSplit = cardTypeLine.split(' - ');
+    } else if (cardTypeLine.contains('—')) {
+      cardTypeLineSplit = cardTypeLine.split(' — ');
+    } else {
+      cardTypeLineSplit = [cardTypeLine];
+    }
     List<MTGCardType> cardType = [];
     List<MTGCardSubtype> subType = [];
     bool isInstant = false;
