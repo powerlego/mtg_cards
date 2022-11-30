@@ -86,6 +86,22 @@ class CardDatabaseImpl extends Database {
   }
 
   @override
+  Future<void> deleteAll(List<dynamic> documents) async {
+    if (!_db.isConnected) {
+      await _db.open();
+    }
+    if (_db.state != State.open) {
+      await Future.delayed(const Duration(seconds: 1));
+    }
+    List<Map<String, dynamic>> entries = [];
+    for (var document in documents) {
+      CardEntry entry = document as CardEntry;
+      entries.add({'_id': entry.id});
+    }
+    await _collection.remove(entries);
+  }
+
+  @override
   Future<void> disconnect() async {
     await _db.close();
   }

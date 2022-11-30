@@ -86,6 +86,22 @@ class CurrencyDatabaseImpl extends Database {
   }
 
   @override
+  Future<void> deleteAll(List<dynamic> documents) async {
+    if (!db.isConnected) {
+      await db.open();
+    }
+    if (db.state != State.open) {
+      await Future.delayed(const Duration(seconds: 1));
+    }
+    List<Map<String, dynamic>> entries = [];
+    for (var document in documents) {
+      CurrencyEntry entry = document as CurrencyEntry;
+      entries.add({'_id': entry.id});
+    }
+    await collection.remove(entries);
+  }
+
+  @override
   Future<void> disconnect() async {
     await db.close();
   }

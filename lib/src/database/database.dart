@@ -34,6 +34,10 @@ abstract class Database {
   /// * [document] is the document to delete
   Future<void> delete(dynamic document);
 
+  /// Deletes multiple documents in the collection
+  /// * [documents] is the list of documents to delete
+  Future<void> deleteAll(List<dynamic> documents);
+
   /// Disconnects from the database
   Future<void> disconnect();
 }

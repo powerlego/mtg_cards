@@ -140,6 +140,32 @@ class CardDatabaseImpl extends Database {
   }
 
   @override
+  Future<void> deleteAll(List<dynamic> documents) async {
+    Console console = window.console;
+    List<Map<String, dynamic>> entries = [];
+    for (var document in documents) {
+      CardEntry entry = document as CardEntry;
+      entries.add(entry.toJson());
+    }
+    await HttpRequest.request(
+      "$_connectionString/delete_all/",
+      method: "POST",
+      sendData: jsonEncode(entries),
+      requestHeaders: {"Content-Type": "application/json"},
+    ).then((HttpRequest response) {
+      if (response.status == HttpStatus.ok) {
+        return;
+      } else {
+        throw Exception('Failed to delete cards. Status: ${response.status}. Error: ${response.statusText}');
+      }
+    }).catchError((error) {
+      console.error(error);
+      return;
+    });
+    return;
+  }
+
+  @override
   Future<void> disconnect() async {
     return;
   }
