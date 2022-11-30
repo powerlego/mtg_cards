@@ -43,27 +43,22 @@ void main() async {
   await settings.loadSettings();
   //await Utils.updateCards();
   await Utils.updateExhangeRates();
-  final collection = await cardDatabase.getCollection();
-  List<CardEntryOld> entries = collection.map((e) => CardEntryOld.fromJson(e)).toList();
-  List<MTGCardOld> cards = entries.map((e) => e.card).toList();
-  List<MTGCard> newCards = cards.map((e) => MTGCard.fromOldCard(e)).toList();
-  File("cards.json").writeAsStringSync(jsonEncode(newCards));
-  // if (isDesktop) {
-  //   await flutter_acrylic.Window.initialize();
-  //   await WindowManager.instance.ensureInitialized();
-  //   windowManager.waitUntilReadyToShow().then((_) async {
-  //     await windowManager.setTitleBarStyle(
-  //       TitleBarStyle.hidden,
-  //       windowButtonVisibility: false,
-  //     );
-  //     await windowManager.setSize(const Size(1200, 720));
-  //     await windowManager.setMinimumSize(const Size(826, 540));
-  //     await windowManager.center();
-  //     await windowManager.show();
-  //     await windowManager.setSkipTaskbar(false);
-  //   });
-  // }
-  // runApp(const MyApp());
+  if (isDesktop) {
+    await flutter_acrylic.Window.initialize();
+    await WindowManager.instance.ensureInitialized();
+    windowManager.waitUntilReadyToShow().then((_) async {
+      await windowManager.setTitleBarStyle(
+        TitleBarStyle.hidden,
+        windowButtonVisibility: false,
+      );
+      await windowManager.setSize(const Size(1200, 720));
+      await windowManager.setMinimumSize(const Size(826, 540));
+      await windowManager.center();
+      await windowManager.show();
+      await windowManager.setSkipTaskbar(false);
+    });
+  }
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
