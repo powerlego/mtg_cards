@@ -1,16 +1,11 @@
 ///@nodoc
 
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:cron/cron.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mtg_cards/databases.dart';
 import 'package:mtg_cards/notifiers.dart';
 import 'package:mtg_cards/pages.dart';
-import 'package:mtg_cards/src/models/mtg_card.dart';
-import 'package:mtg_cards/src/models/mtg_card_old.dart';
 import 'package:mtg_cards/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:mtg_cards/theme.dart';

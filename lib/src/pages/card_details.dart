@@ -101,7 +101,6 @@ class CardDetailsSearch extends StatelessWidget {
                       card: card.copyWith(isFoil: (finish! == 'Foil') ? true : false),
                       quantity: copies!,
                       price: card.getPrice(MTGFinish.fromDisplay(finish!)),
-                      currency: 'usd',
                     ),
                   );
                 }

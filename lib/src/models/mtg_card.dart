@@ -21,6 +21,27 @@ class ScryfallParser {
     if (finishes.length == 1 && finishes[0].name == "foil") {
       isFoil = true;
     }
+    List<MTGPrice> prices = [];
+    for (var entry in (json["prices"] as Map<String, dynamic>).entries) {
+      if (entry.value != null) {
+        if (entry.key == 'usd') {
+          prices.add(MTGPrice.from(MTGFinish.fromName("nonfoil"), Price(price: Decimal.parse(entry.value.toString()))));
+        } else if (entry.key == 'usd_foil') {
+          prices.add(MTGPrice.from(MTGFinish.fromName("foil"), Price(price: Decimal.parse(entry.value.toString()))));
+        } else if (entry.key == 'usd_etched') {
+          prices.add(MTGPrice.from(MTGFinish.fromName("etched"), Price(price: Decimal.parse(entry.value.toString()))));
+        }
+      } else {
+        if (entry.key == 'usd') {
+          prices.add(MTGPrice.from(MTGFinish.fromName("nonfoil"), Price(price: Decimal.parse("0"))));
+        } else if (entry.key == 'usd_foil') {
+          prices.add(MTGPrice.from(MTGFinish.fromName("foil"), Price(price: Decimal.parse("0"))));
+        } else if (entry.key == 'usd_etched') {
+          prices.add(MTGPrice.from(MTGFinish.fromName("etched"), Price(price: Decimal.parse("0"))));
+        }
+      }
+    }
+
     if (!json.containsKey("card_faces")) {
       MTGFace face = parseScryfallFaceJson(json);
       return MTGCard(
@@ -45,20 +66,12 @@ class ScryfallParser {
         List<MTGLegality>.from(
           json["legalities"].entries.map((entry) => MTGLegality.from(entry.key, entry.value)),
         ),
-        List<MTGPrice>.from(
-          json["prices"].entries.map((entry) {
-            if (entry.value != null) {
-              return MTGPrice.from(entry.key, Price(price: Decimal.parse(entry.value.toString())));
-            } else {
-              return MTGPrice.from(entry.key, Price(price: Decimal.parse("0.0")));
-            }
-          }),
-        ),
+        prices,
       );
     } else {
       return MTGCard(
         json["name"],
-        json["type_line"].split(" // ").map((e) => MTGCardTypeLine.fromString(e)).toList(),
+        List<MTGCardTypeLine>.from(json["type_line"].split(" // ").map((e) => MTGCardTypeLine.fromString(e)).toList()),
         json["set_name"],
         json["set"],
         json["collector_number"],
@@ -88,15 +101,7 @@ class ScryfallParser {
         List<MTGLegality>.from(
           json["legalities"].entries.map((entry) => MTGLegality.from(entry.key, entry.value)),
         ),
-        List<MTGPrice>.from(
-          json["prices"].entries.map((entry) {
-            if (entry.value != null) {
-              return MTGPrice.from(entry.key, Price(price: Decimal.parse(entry.value.toString())));
-            } else {
-              return MTGPrice.from(entry.key, Price(price: Decimal.parse("0.0")));
-            }
-          }),
-        ),
+        prices,
       );
     }
   }
@@ -105,7 +110,7 @@ class ScryfallParser {
     return MTGFace(
       json["name"],
       json["mana_cost"],
-      json["type_line"],
+      MTGCardTypeLine.fromString(json["type_line"]),
       json["oracle_text"],
       (json.containsKey("power")) ? json["power"] : "",
       (json.containsKey("toughness")) ? json["toughness"] : "",
@@ -235,70 +240,6 @@ class MTGCard {
     this.prices,
   );
 
-  static MTGCard fromOldCard(MTGCardOld oldCard) {
-    List<MTGPrice> prices = [];
-    for (var e in oldCard.prices) {
-      if (e.currency == "usd") {
-        if (e.price.isNotEmpty) {
-          prices.add(MTGPrice.from(MTGFinish.fromName("nonfoil"), Price(price: Decimal.parse(e.price))));
-        } else {
-          prices.add(MTGPrice.from(MTGFinish.fromName("nonfoil"), Price(price: Decimal.parse("0"))));
-        }
-      } else if (e.currency == "usd_foil") {
-        if (e.price.isNotEmpty) {
-          prices.add(MTGPrice.from(MTGFinish.fromName('foil'), Price(price: Decimal.parse(e.price))));
-        } else {
-          prices.add(MTGPrice.from(MTGFinish.fromName('foil'), Price(price: Decimal.parse("0"))));
-        }
-      } else if (e.currency == "usd_etched") {
-        if (e.price.isNotEmpty) {
-          prices.add(MTGPrice.from(MTGFinish.fromName('etched'), Price(price: Decimal.parse(e.price))));
-        } else {
-          prices.add(MTGPrice.from(MTGFinish.fromName('etched'), Price(price: Decimal.parse("0"))));
-        }
-      }
-    }
-    if (oldCard.faces.length > 1) {
-      return MTGCard(
-        oldCard.name,
-        oldCard.type.split(" // ").map((e) => MTGCardTypeLine.fromString(e)).toList(),
-        oldCard.setName,
-        oldCard.set,
-        oldCard.collectorNumber,
-        oldCard.cardUrl,
-        oldCard.id,
-        oldCard.cmc,
-        MTGRarity.fromName(oldCard.rarity),
-        oldCard.isFoil,
-        oldCard.faces.map((e) => MTGFace.fromOldFace(e)).toList(),
-        oldCard.finishes.map((e) => MTGFinish.fromName(e)).toList(),
-        oldCard.colorIdentity.map((e) => MTGColor.fromName(e)).toList(),
-        oldCard.keywords,
-        oldCard.legalities.map((e) => MTGLegality.from(e.format, e.legality)).toList(),
-        prices,
-      );
-    } else {
-      return MTGCard(
-        oldCard.name,
-        [MTGCardTypeLine.fromString(oldCard.type)],
-        oldCard.setName,
-        oldCard.set,
-        oldCard.collectorNumber,
-        oldCard.cardUrl,
-        oldCard.id,
-        oldCard.cmc,
-        MTGRarity.fromName(oldCard.rarity),
-        oldCard.isFoil,
-        oldCard.faces.map((e) => MTGFace.fromOldFace(e)).toList(),
-        oldCard.finishes.map((e) => MTGFinish.fromName(e)).toList(),
-        oldCard.colorIdentity.map((e) => MTGColor.fromName(e)).toList(),
-        oldCard.keywords,
-        oldCard.legalities.map((e) => MTGLegality.from(e.format, e.legality)).toList(),
-        prices,
-      );
-    }
-  }
-
   /// Creates a new empty [MTGCard]
   MTGCard.empty()
       : name = '',
@@ -313,7 +254,7 @@ class MTGCard {
         isFoil = false,
         faces = [MTGFace.empty()],
         finishes = [],
-        colors = [],
+        colors = [MTGColor.colorless],
         keywords = [],
         legalities = [],
         prices = [];
@@ -329,11 +270,11 @@ class MTGCard {
       Uri.parse(json['cardUrl']),
       json['id'],
       json['cmc'],
-      MTGRarity.fromName(json['rarity']),
+      MTGRarity.fromName(json['rarity']['name']),
       json['isFoil'],
       (json['faces'] as List).map((e) => MTGFace.fromJson(e)).toList(),
-      (json['finishes'] as List).map((e) => MTGFinish.fromName(e)).toList(),
-      (json['colors'] as List).map((e) => MTGColor.fromName(e)).toList(),
+      (json['finishes'] as List).map((e) => MTGFinish.fromName(e['name'])).toList(),
+      (json['colors'] as List).map((e) => MTGColor.fromName(e['name'])).toList(),
       (json['keywords'] as List).map((e) => e.toString()).toList(),
       (json['legalities'] as List).map((e) => MTGLegality.fromJson(e)).toList(),
       (json['prices'] as List).map((e) => MTGPrice.fromJson(e)).toList(),
@@ -532,22 +473,6 @@ class MTGFace {
     this.colors,
   );
 
-  static MTGFace fromOldFace(MTGFaceOld oldFace) {
-    return MTGFace(
-      oldFace.name,
-      oldFace.manaCost,
-      MTGCardTypeLine.fromString(oldFace.type),
-      oldFace.oracleText,
-      oldFace.power,
-      oldFace.toughness,
-      oldFace.loyalty,
-      oldFace.producedMana,
-      oldFace.imageUrl,
-      oldFace.illustrationId,
-      oldFace.colors.map((e) => MTGColor.fromName(e)).toList(),
-    );
-  }
-
   /// Creates a new empty [MTGFace]
   MTGFace.empty()
       : name = "",
@@ -560,14 +485,14 @@ class MTGFace {
         producedMana = [],
         imageUrl = Uri.parse(""),
         illustrationId = "",
-        colors = [];
+        colors = [MTGColor.colorless];
 
   /// Creates a new [MTGFace] from a JSON object [json]
   factory MTGFace.fromJson(Map<String, dynamic> json) {
     return MTGFace(
       json['name'] as String,
       json['manaCost'] as String,
-      MTGCardTypeLine.fromString(json['type'] as String),
+      MTGCardTypeLine.fromJson(json['type']),
       json['oracleText'] as String,
       json['power'] as String,
       json['toughness'] as String,
@@ -575,7 +500,7 @@ class MTGFace {
       (json['producedMana'] as List<dynamic>).map((e) => e as String).toList(),
       Uri.parse(json['imageUrl'] as String),
       json['illustrationId'] as String,
-      (json['colors'] as List<dynamic>).map((e) => MTGColor.fromName(e as String)).toList(),
+      (json['colors'] as List<dynamic>).map((e) => MTGColor.fromName(e['name'] as String)).toList(),
     );
   }
 
