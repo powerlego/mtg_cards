@@ -136,14 +136,14 @@ class _CardCollectionState extends State<CardCollection> {
           }
         } else {
           if (_filteredItems.isEmpty &&
-              (!Provider.of<CollectionNotifier>(context).filteringColor &&
-                  !Provider.of<CollectionNotifier>(context).filteringColor)) {
+              (!context.read<CollectionNotifier>().filteringRarity &&
+                  !context.read<CollectionNotifier>().filteringColor)) {
             _items = _originalItems
                 .where((element) => element.card.name.toLowerCase().contains(searchValue.toLowerCase()))
                 .toList();
           } else if (_filteredItems.isEmpty &&
-              (Provider.of<CollectionNotifier>(context).filteringColor ||
-                  Provider.of<CollectionNotifier>(context).filteringColor)) {
+              (context.read<CollectionNotifier>().filteringColor ||
+                  context.read<CollectionNotifier>().filteringColor)) {
             _items = [];
           } else {
             _items = _filteredItems
