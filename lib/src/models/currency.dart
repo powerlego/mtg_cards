@@ -10,14 +10,12 @@ class Price extends Comparable {
 
   factory Price.fromJson(Map<String, dynamic> json) {
     return Price(
-      price: Decimal.parse((json['price'] as Map<String, dynamic>)['\$numberDecimal'] as String),
+      price: Decimal.parse(json['\$numberDecimal'] as String),
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'price': {'\$numberDecimal': price.toString()},
-    };
+    return {'\$numberDecimal': price.toString()};
   }
 
   Price copyWith({
