@@ -1,4 +1,5 @@
 import 'package:mtg_cards/models.dart';
+import 'package:mtg_cards/utils.dart';
 
 class MTGCardType extends MTGField {
   static MTGCardType get unknown => MTGCardType('unknown', 'Unknown', 255);
@@ -3811,6 +3812,17 @@ class MTGCardTypeLine extends MTGField {
       return '${cardType.map((e) => e.display).join(' ')} - ${subType.map((e) => e.display).join(' ')}';
     }
   }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is MTGCardTypeLine &&
+            Utils.listEquals(other.cardType, cardType) &&
+            Utils.listEquals(other.subType, subType);
+  }
+
+  @override
+  int get hashCode => cardType.hashCode ^ subType.hashCode;
 }
 
 class _MTGCardTypeParser {
