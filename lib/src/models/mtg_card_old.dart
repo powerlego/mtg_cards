@@ -3,10 +3,13 @@ import 'dart:convert';
 import 'package:decimal/decimal.dart';
 import 'package:mtg_cards/utils.dart';
 
+@Deprecated("Use Side instead")
 enum SideOld {
   front,
   back,
 }
+
+@Deprecated("Use MTGCard instead")
 
 /// A class that represents a Magic: The Gathering card with this card's name [name], type [type], set name [setName], set code [set], collector number [collectorNumber], Scryfall Card Url [cardUrl], Scryfall Id [id], [rarity], converted mana cost [cmc], if the card is foil or not [isFoil], faces [faces], finishes [finishes], keywords [keywords], color identities [colorIdentity], legalities [legalities], and prices [prices]
 ///
@@ -418,6 +421,8 @@ class MTGCardOld {
   }
 }
 
+@Deprecated("Use MTGFace instead")
+
 ///A class representing a face of a Magic: The Gathering card. A face is a side of a card, such as the front and back of a double-faced card. A face can have a name [name], mana cost [manaCost], type line [type], oracle text [oracleText], power [power], toughness [toughness], loyalty [loyalty], the mana it produces [producedMana], its image [imageUrl], its illustration ID [illustrationId], and colors [colors].
 class MTGFaceOld {
   /// The name of the face
@@ -610,6 +615,8 @@ class MTGFaceOld {
   }
 }
 
+@Deprecated("Use MTGLegality instead")
+
 /// A class representing a legalities object in the API. A legalities object contains the legality of a card in a format. It has a [format] and a [legality].
 class MTGLegalityOld {
   /// The format of the legality
@@ -711,6 +718,8 @@ class MTGLegalityOld {
     }
   }
 }
+
+@Deprecated("Use MTGPrice instead")
 
 /// A class representing a price object in the API. A price object contains the price of a card in a currency. It has a [currency] and a [price].
 class MTGPriceOld {
