@@ -5,7 +5,7 @@ class CardImageImpl extends StatefulWidget {
   const CardImageImpl({super.key, required this.cardID, required this.face});
 
   final String cardID;
-  final MTGFaceOld face;
+  final MTGFace face;
 
   @override
   State<CardImageImpl> createState() => _CardImageImplState();

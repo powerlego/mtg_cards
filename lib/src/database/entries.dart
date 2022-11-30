@@ -5,13 +5,79 @@ import 'package:mongo_dart/mongo_dart.dart';
 
 class CardEntry {
   final ObjectId id;
+  final MTGCard card;
+  final int quantity;
+  final MTGPrice price;
+  final String currency;
+
+  const CardEntry({
+    required this.id,
+    required this.card,
+    required this.quantity,
+    required this.price,
+    required this.currency,
+  });
+
+  CardEntry.empty()
+      : this(
+          id: ObjectId(),
+          card: MTGCard.empty(),
+          quantity: 0,
+          price: MTGPrice.zero,
+          currency: '',
+        );
+
+  factory CardEntry.fromJson(Map<String, dynamic> json) {
+    return CardEntry(
+      id: (json["_id"] is ObjectId) ? json["_id"] : ObjectId.fromHexString(json["_id"]["\$oid"]),
+      card: MTGCard.fromJson(json["card"]),
+      quantity: json["quantity"],
+      price: MTGPrice.fromJson(json["price"]),
+      currency: json["currency"] ?? 'usd',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': {'\$oid': id.toHexString()},
+      'card': card.toJson(),
+      'quantity': quantity,
+      'price': price.toJson(),
+      'currency': currency,
+    };
+  }
+
+  @override
+  String toString() {
+    return jsonEncode(toJson());
+  }
+
+  CardEntry copyWith({
+    ObjectId? id,
+    MTGCard? card,
+    int? quantity,
+    MTGPrice? price,
+    String? currency,
+  }) {
+    return CardEntry(
+      id: id ?? this.id,
+      card: card ?? this.card,
+      quantity: quantity ?? this.quantity,
+      price: price ?? this.price,
+      currency: currency ?? this.currency,
+    );
+  }
+}
+
+class CardEntryOld {
+  final ObjectId id;
   final MTGCardOld card;
   final int quantity;
   final String finish;
   final Decimal price;
   final String currency;
 
-  const CardEntry(
+  const CardEntryOld(
       {required this.id,
       required this.card,
       required this.quantity,
@@ -19,7 +85,7 @@ class CardEntry {
       required this.price,
       required this.currency});
 
-  CardEntry.empty()
+  CardEntryOld.empty()
       : this(
           id: ObjectId(),
           card: MTGCardOld.empty(),
@@ -29,8 +95,8 @@ class CardEntry {
           currency: '',
         );
 
-  factory CardEntry.fromJson(Map<String, dynamic> json) {
-    return CardEntry(
+  factory CardEntryOld.fromJson(Map<String, dynamic> json) {
+    return CardEntryOld(
       id: (json["_id"] is ObjectId) ? json["_id"] : ObjectId.fromHexString(json["_id"]["\$oid"]),
       card: MTGCardOld.fromJson(json["card"]),
       quantity: json["quantity"],
@@ -60,7 +126,7 @@ class CardEntry {
     return jsonEncode(toJson());
   }
 
-  CardEntry copyWith({
+  CardEntryOld copyWith({
     ObjectId? id,
     MTGCardOld? card,
     int? quantity,
@@ -68,7 +134,7 @@ class CardEntry {
     Decimal? price,
     String? currency,
   }) {
-    return CardEntry(
+    return CardEntryOld(
       id: id ?? this.id,
       card: card ?? this.card,
       quantity: quantity ?? this.quantity,

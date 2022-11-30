@@ -7,7 +7,7 @@ class FinishesSelection extends StatefulWidget {
     required this.card,
     required this.onChanged,
   });
-  final MTGCardOld card;
+  final MTGCard card;
   final Function(String?)? onChanged;
 
   @override
@@ -20,22 +20,22 @@ class _FinishesSelectionState extends State<FinishesSelection> {
   @override
   void initState() {
     super.initState();
-    if (widget.card.formattedFinishes.keys.length == 1) {
-      _finish = widget.card.formattedFinishes.keys.first;
+    if (widget.card.finishes.length == 1) {
+      _finish = widget.card.finishes.first.display;
       widget.onChanged!(_finish);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return (widget.card.formattedFinishes.keys.length == 1)
+    return (widget.card.finishes.length == 1)
         ? ComboBox<String>(
             value: _finish,
-            items: widget.card.formattedFinishes.keys.map(
+            items: widget.card.finishes.map(
               (e) {
                 return ComboBoxItem<String>(
-                  value: e,
-                  child: Text(e),
+                  value: e.display,
+                  child: Text(e.display),
                 );
               },
             ).toList(),
@@ -49,11 +49,11 @@ class _FinishesSelectionState extends State<FinishesSelection> {
               });
               widget.onChanged!(value);
             },
-            items: widget.card.formattedFinishes.keys.map(
+            items: widget.card.finishes.map(
               (e) {
                 return ComboBoxItem<String>(
-                  value: e,
-                  child: Text(e),
+                  value: e.display,
+                  child: Text(e.display),
                 );
               },
             ).toList(),

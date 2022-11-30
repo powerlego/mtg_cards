@@ -9,13 +9,13 @@ import 'package:mtg_cards/pages.dart';
 import 'package:mtg_cards/widgets.dart';
 import 'package:provider/provider.dart';
 
-Future<List<MTGCardOld>> fetchCards(String query) async {
+Future<List<MTGCard>> fetchCards(String query) async {
   final response =
       await http.get(Uri.parse('https://api.scryfall.com/cards/search?q=$query&include_extras=true&unique=prints'));
 
   if (response.statusCode == 200) {
     final json = jsonDecode(response.body);
-    List<MTGCardOld> cards = await compute(parseCards, response.body);
+    List<MTGCard> cards = await compute(parseCards, response.body);
     if (json['has_more'] == true) {
       cards.addAll(await getMoreCards(json['next_page']));
       return cards;
@@ -28,11 +28,11 @@ Future<List<MTGCardOld>> fetchCards(String query) async {
   // Use the compute function to run parseCards in a separate isolate.
 }
 
-Future<List<MTGCardOld>> getMoreCards(String next) async {
+Future<List<MTGCard>> getMoreCards(String next) async {
   final response = await http.get(Uri.parse(next));
 
   if (response.statusCode == 200) {
-    List<MTGCardOld> cards = await compute(parseCards, response.body);
+    List<MTGCard> cards = await compute(parseCards, response.body);
     final json = jsonDecode(response.body);
     if (json['has_more'] == true) {
       cards.addAll(await getMoreCards(json['next_page']));
@@ -47,14 +47,14 @@ Future<List<MTGCardOld>> getMoreCards(String next) async {
   // Use the compute function to run parseCards in a separate isolate.
 }
 
-List<MTGCardOld> parseCards(String responseBody) {
+List<MTGCard> parseCards(String responseBody) {
   // Parses the JSON response and returns a list of MTGCard objects.
   final parsed = Map<String, dynamic>.from(jsonDecode(responseBody));
   if (parsed['data'] == null) {
     return [];
   } else {
     final List<dynamic> data = parsed['data'] as List<dynamic>;
-    return data.map<MTGCardOld>((json) => MTGCardOld.fromJson(json)).toList();
+    return data.map<MTGCard>((json) => ScryfallParser.parseScryfallCardJson(json)).toList();
   }
 }
 
@@ -67,7 +67,7 @@ class CardSearch extends StatefulWidget {
 
 class _CardSearchState extends State<CardSearch> {
   final TextEditingController _controller = TextEditingController();
-  List<MTGCardOld> _cards = <MTGCardOld>[];
+  List<MTGCard> _cards = <MTGCard>[];
   bool _isLoading = false;
   bool _emptySearch = true;
   bool _searched = false;
@@ -125,7 +125,7 @@ class _CardSearchState extends State<CardSearch> {
                               setState(() {
                                 _controller.clear();
                                 _emptySearch = true;
-                                _cards = <MTGCardOld>[];
+                                _cards = <MTGCard>[];
                                 _searched = false;
                                 _isLoading = false;
                                 _focusNode.requestFocus();
@@ -135,7 +135,7 @@ class _CardSearchState extends State<CardSearch> {
                           suffixMode: OverlayVisibilityMode.editing,
                           onChanged: (String value) {
                             setState(() {
-                              _cards = <MTGCardOld>[];
+                              _cards = <MTGCard>[];
                               _isLoading = false;
                             });
                           },
@@ -196,7 +196,7 @@ class _CardSearchState extends State<CardSearch> {
                                             Expanded(
                                               child: CardWidget(
                                                 card: card,
-                                                side: SideOld.front,
+                                                side: Side.front,
                                               ),
                                             ),
                                           ],

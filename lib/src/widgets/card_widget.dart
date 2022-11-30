@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 /// A widget that displays a card.
 class FlippableCardWidget extends StatefulWidget {
   /// The card to display.
-  final MTGCardOld card;
+  final MTGCard card;
 
   /// Creates a widget that displays a card.
   const FlippableCardWidget({
@@ -43,12 +43,12 @@ class _FlippableCardWidgetState extends State<FlippableCardWidget> {
           front: CardWidget(
             key: const ValueKey(true),
             card: widget.card,
-            side: SideOld.front,
+            side: Side.front,
           ),
           back: CardWidget(
             key: const ValueKey(false),
             card: widget.card,
-            side: SideOld.back,
+            side: Side.back,
           ),
         ),
       ),
@@ -113,8 +113,8 @@ class CardFace extends StatelessWidget {
 class CardWidget extends StatelessWidget {
   const CardWidget({super.key, required this.card, required this.side});
 
-  final MTGCardOld card;
-  final SideOld side;
+  final MTGCard card;
+  final Side side;
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +156,7 @@ class CardImage extends StatelessWidget {
   const CardImage({super.key, required this.cardID, required this.face});
 
   final String cardID;
-  final MTGFaceOld face;
+  final MTGFace face;
 
   @override
   @override

@@ -171,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 );
                               } else {
-                                final totalCollectionPrice = Decimal.parse(snapshot.data.toString());
+                                final totalCollectionPrice = Price(price: Decimal.parse(snapshot.data.toString()));
                                 return Padding(
                                   padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
                                   child: Row(
@@ -184,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                                       Expanded(
                                         flex: 5,
                                         child: FutureBuilder(
-                                          future: currencyDatabase.getCurrency(settingsNotifier.currency),
+                                          future: totalCollectionPrice.formattedPriceIn(settingsNotifier.currency),
                                           builder: (context, snapshot) {
                                             if (snapshot.connectionState == ConnectionState.waiting) {
                                               return const Center(child: ProgressRing());
@@ -198,10 +198,7 @@ class _HomePageState extends State<HomePage> {
                                                 );
                                               } else {
                                                 return SelectableText(
-                                                  Utils.formatCurrency(
-                                                      settingsNotifier.currency,
-                                                      Utils.convertCurrency(settingsNotifier.currency,
-                                                          totalCollectionPrice, snapshot.data!.exchangeRate)),
+                                                  snapshot.data!,
                                                   textAlign: TextAlign.right,
                                                   style: FluentTheme.of(context).typography.body!.copyWith(
                                                         fontWeight: FontWeight.bold,
@@ -260,17 +257,10 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Text('Name: ${card.name}'),
                                       FutureBuilder(
-                                        future: currencyDatabase.getCurrency(settingsNotifier.currency),
+                                        future: cardEntry.price.formattedPriceIn(settingsNotifier.currency),
                                         builder: (context, snapshot) {
                                           if (snapshot.hasData) {
-                                            return Text(
-                                              Utils.formatCurrency(
-                                                  settingsNotifier.currency,
-                                                  Utils.convertCurrency(
-                                                      settingsNotifier.currency,
-                                                      cardEntry.card.getPrice('usd', cardEntry.finish),
-                                                      snapshot.data!.exchangeRate)),
-                                            );
+                                            return Text(snapshot.data!);
                                           } else {
                                             return const Center(child: ProgressRing());
                                           }
@@ -298,7 +288,7 @@ class _HomePageState extends State<HomePage> {
                                             padding: const EdgeInsets.all(8.0),
                                             child: CardWidget(
                                               card: card,
-                                              side: SideOld.front,
+                                              side: Side.front,
                                             ),
                                           ),
                                   ),
