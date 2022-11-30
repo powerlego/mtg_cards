@@ -225,6 +225,8 @@ class MTGCardMainType extends MTGCardType {
         return vanguard;
       case 'dungeon':
         return dungeon;
+      case 'card':
+        return card;
       default:
         return unknown;
     }
@@ -264,6 +266,8 @@ class MTGCardMainType extends MTGCardType {
         return vanguard;
       case 'Dungeon':
         return dungeon;
+      case 'Card':
+        return card;
       default:
         return unknown;
     }
@@ -3809,7 +3813,7 @@ class MTGCardTypeLine extends MTGField {
     } else if (subType.isEmpty) {
       return cardType.map((e) => e.display).join(' ');
     } else {
-      return '${cardType.map((e) => e.display).join(' ')} - ${subType.map((e) => e.display).join(' ')}';
+      return '${cardType.map((e) => e.display).join(' ')} — ${subType.map((e) => e.display).join(' ')}';
     }
   }
 
