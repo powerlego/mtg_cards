@@ -124,7 +124,7 @@ class CardDatabaseImpl extends Database {
         .addStage(
           Match(
             where
-                .eq('card.set', card.card.set)
+                .eq('card.setCode', card.card.setCode)
                 .and(where.eq('card.collectorNumber', card.card.collectorNumber))
                 .map['\$query'],
           ),
@@ -159,13 +159,11 @@ class CardDatabaseImpl extends Database {
           Project({
             '_id': 1,
             'name': '\$card.name',
-            'finish': 1,
-            'currency': 1,
-            'total_price': Multiply([ToDecimal('\$price'), '\$quantity']),
+            'total_price': Multiply([ToDecimal('\$price.price'), '\$quantity']),
           }),
         )
         .addStage(
-          Group(id: '\$currency', fields: {'total': Sum('\$total_price')}),
+          Group(id: BsonNull(), fields: {'total': Sum('\$total_price')}),
         )
         .build();
     if (!_db.isConnected) {
@@ -186,12 +184,12 @@ class CardDatabaseImpl extends Database {
           Group(
             id: BsonNull(),
             fields: {
-              'white': Sum(Cond(ifExpr: In('W', '\$card.colorIdentity'), thenExpr: 1, elseExpr: 0)),
-              'blue': Sum(Cond(ifExpr: In('U', '\$card.colorIdentity'), thenExpr: 1, elseExpr: 0)),
-              'black': Sum(Cond(ifExpr: In('B', '\$card.colorIdentity'), thenExpr: 1, elseExpr: 0)),
-              'red': Sum(Cond(ifExpr: In('R', '\$card.colorIdentity'), thenExpr: 1, elseExpr: 0)),
-              'green': Sum(Cond(ifExpr: In('G', '\$card.colorIdentity'), thenExpr: 1, elseExpr: 0)),
-              'colorless': Sum(Cond(ifExpr: Eq(Size('\$card.colorIdentity'), 0), thenExpr: 1, elseExpr: 0)),
+              'white': Sum(Cond(ifExpr: In('W', '\$card.colors.name'), thenExpr: 1, elseExpr: 0)),
+              'blue': Sum(Cond(ifExpr: In('U', '\$card.colors.name'), thenExpr: 1, elseExpr: 0)),
+              'black': Sum(Cond(ifExpr: In('B', '\$card.colors.name'), thenExpr: 1, elseExpr: 0)),
+              'red': Sum(Cond(ifExpr: In('R', '\$card.colors.name'), thenExpr: 1, elseExpr: 0)),
+              'green': Sum(Cond(ifExpr: In('G', '\$card.colors.name'), thenExpr: 1, elseExpr: 0)),
+              'colorless': Sum(Cond(ifExpr: In('C', '\$card.colors.name'), thenExpr: 1, elseExpr: 0)),
             },
           ),
         )
