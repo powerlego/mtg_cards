@@ -44,7 +44,7 @@ void main() async {
   //await Utils.updateCards();
   await Utils.updateExhangeRates();
   final collection = await cardDatabase.getCollection();
-  List<CardEntry> entries = collection.map((e) => CardEntry.fromJson(e)).toList();
+  List<CardEntryOld> entries = collection.map((e) => CardEntryOld.fromJson(e)).toList();
   List<MTGCardOld> cards = entries.map((e) => e.card).toList();
   List<MTGCard> newCards = cards.map((e) => MTGCard.fromOldCard(e)).toList();
   File("cards.json").writeAsStringSync(jsonEncode(newCards));
