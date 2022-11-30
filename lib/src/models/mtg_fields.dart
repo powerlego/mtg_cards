@@ -1,5 +1,5 @@
 import 'package:decimal/decimal.dart';
-import 'package:mtg_cards/databases.dart';
+import 'package:mtg_cards/models.dart';
 
 abstract class MTGField extends Comparable {
   final String name;
@@ -97,6 +97,13 @@ class MTGColor extends MTGField {
   }
 
   @override
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+    };
+  }
+
+  @override
   bool operator ==(Object other) {
     return identical(this, other) || other is MTGColor && other.name == name;
   }
@@ -159,6 +166,13 @@ class MTGRarity extends MTGField {
       default:
         return unknown;
     }
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+    };
   }
 
   @override
@@ -302,19 +316,9 @@ class MTGLegality extends MTGField {
 /// ```
 class MTGPrice extends MTGField {
   /// The price in USD.
-  final Decimal price;
+  final Price price;
 
-  static final List<String> _finishes = [
-    'nonfoil',
-    'foil',
-    'etched',
-  ];
-
-  static final List<String> _finishesDisplay = [
-    'Non-Foil',
-    'Foil',
-    'Etched',
-  ];
+  static MTGPrice get zero => MTGPrice(MTGFinish.unknown, Price.zero);
 
   /// Creates a new [MTGPrice] object.
   /// [name] is the name of the finish for a card, [display] is the display name of the finish, [sortOrder] is the sort order of the finish, and [price] is the price of a card in USD for the given finish.
@@ -340,7 +344,7 @@ class MTGPrice extends MTGField {
   /// See also:
   /// - [MTGPrice.fromJson]
   /// - [MTGPrice.from]
-  MTGPrice(String name, String display, int sortOrder, this.price) : super(name, display, sortOrder);
+  MTGPrice(MTGFinish finish, this.price) : super(finish.name, finish.display, finish.sortOrder);
 
   /// Creates a new [MTGPrice] object based on a [finish] and a [price].
   /// [finish] is the name of the finish for a card, and [price] is the price of a card in USD for the given finish.
@@ -364,9 +368,8 @@ class MTGPrice extends MTGField {
   ///
   /// See also:
   /// - [MTGPrice.fromJson]
-  factory MTGPrice.from(String finish, Decimal price) {
-    int index = _finishes.indexOf(finish);
-    return MTGPrice(finish, _finishesDisplay[index], index, price);
+  factory MTGPrice.from(MTGFinish finish, Price price) {
+    return MTGPrice(finish, price);
   }
 
   /// Creates a new [MTGPrice] object based on a JSON object.
@@ -398,7 +401,8 @@ class MTGPrice extends MTGField {
   /// - [MTGPrice.from]
   /// - [MTGPrice.toJson]
   factory MTGPrice.fromJson(Map<String, dynamic> json) {
-    return MTGPrice(json['name'], json['display'], json['sortOrder'], Decimal.parse(json['price']));
+    return MTGPrice(MTGFinish.fromName((json['finish'] as Map<String, dynamic>)['name']),
+        Price.fromJson(json['price'] as Map<String, dynamic>));
   }
 
   /// Gets this price in a given [currency].
@@ -424,17 +428,8 @@ class MTGPrice extends MTGField {
   /// MTGPrice price = MTGPrice('nonfoil', 'Non-Foil', 0, Decimal.parse('0.01'));
   /// print(price.priceIn('EURR')); // 0.0
   /// ```
-  Future<Decimal> priceIn(String currency) async {
-    if (currency.toLowerCase() == 'usd') {
-      return price;
-    } else {
-      CurrencyEntry currencyEntry = await currencyDatabase.getCurrency(currency);
-      if (currencyEntry.exchangeRate > 1) {
-        return Decimal.parse((price.toDouble() / currencyEntry.exchangeRate).toString());
-      } else {
-        return price * Decimal.parse(currencyEntry.exchangeRate.toString());
-      }
-    }
+  Future<Decimal> priceIn(String currency, {int quantity = 1}) async {
+    return price.priceIn(currency, quantity: quantity);
   }
 
   /// Gets this price in a given [currency] and formats it.
@@ -462,346 +457,16 @@ class MTGPrice extends MTGField {
   ///
   /// See also:
   /// - [MTGPrice.priceIn]
-  Future<String> formattedPriceIn(String currency) async {
-    Decimal amount = await priceIn(currency);
-    switch (currency.toLowerCase()) {
-      case 'aed':
-        return 'د.إ ${amount.toStringAsFixed(2)}';
-      case 'afn':
-        return '؋ ${amount.toStringAsFixed(2)}';
-      case 'all':
-        return 'L ${amount.toStringAsFixed(2)}';
-      case 'amd':
-        return '֏ ${amount.toStringAsFixed(2)}';
-      case 'ang':
-        return 'ƒ ${amount.toStringAsFixed(2)}';
-      case 'aoa':
-        return 'Kz ${amount.toStringAsFixed(2)}';
-      case 'ars':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'aud':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'awg':
-        return 'ƒ ${amount.toStringAsFixed(2)}';
-      case 'azn':
-        return '₼ ${amount.toStringAsFixed(2)}';
-      case 'bam':
-        return 'KM ${amount.toStringAsFixed(2)}';
-      case 'bbd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'bdt':
-        return '৳ ${amount.toStringAsFixed(2)}';
-      case 'bgn':
-        return 'лв ${amount.toStringAsFixed(2)}';
-      case 'bhd':
-        return '.د.ب ${amount.toStringAsFixed(2)}';
-      case 'bif':
-        return 'Fr ${amount.toStringAsFixed(2)}';
-      case 'bmd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'bnd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'bob':
-        return '\$b ${amount.toStringAsFixed(2)}';
-      case 'brl':
-        return 'R\$ ${amount.toStringAsFixed(2)}';
-      case 'bsd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'btc':
-        return '₿ ${amount.toStringAsFixed(6)}';
-      case 'btn':
-        return 'Nu. ${amount.toStringAsFixed(2)}';
-      case 'bwp':
-        return 'P ${amount.toStringAsFixed(2)}';
-      case 'byn':
-        return 'Br ${amount.toStringAsFixed(2)}';
-      case 'bzd':
-        return 'BZ\$ ${amount.toStringAsFixed(2)}';
-      case 'cad':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'cdf':
-        return 'Fr ${amount.toStringAsFixed(2)}';
-      case 'chf':
-        return 'Fr ${amount.toStringAsFixed(2)}';
-      case 'clf':
-        return 'UF ${amount.toStringAsFixed(2)}';
-      case 'clp':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'cny':
-        return '¥ ${amount.toStringAsFixed(2)}';
-      case 'cop':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'crc':
-        return '₡ ${amount.toStringAsFixed(2)}';
-      case 'cuc':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'cup':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'cve':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'czk':
-        return 'Kč ${amount.toStringAsFixed(2)}';
-      case 'djf':
-        return 'Fr ${amount.toStringAsFixed(2)}';
-      case 'dkk':
-        return 'kr ${amount.toStringAsFixed(2)}';
-      case 'dop':
-        return 'RD\$ ${amount.toStringAsFixed(2)}';
-      case 'dzd':
-        return 'د.ج ${amount.toStringAsFixed(2)}';
-      case 'egp':
-        return '£ ${amount.toStringAsFixed(2)}';
-      case 'ern':
-        return 'Nfk ${amount.toStringAsFixed(2)}';
-      case 'etb':
-        return 'Br ${amount.toStringAsFixed(2)}';
-      case 'eur':
-        return '€ ${amount.toStringAsFixed(2)}';
-      case 'fjd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'fkp':
-        return '£ ${amount.toStringAsFixed(2)}';
-      case 'gbp':
-        return '£ ${amount.toStringAsFixed(2)}';
-      case 'gel':
-        return '₾ ${amount.toStringAsFixed(2)}';
-      case 'ggp':
-        return '£ ${amount.toStringAsFixed(2)}';
-      case 'ghs':
-        return '₵ ${amount.toStringAsFixed(2)}';
-      case 'gip':
-        return '£ ${amount.toStringAsFixed(2)}';
-      case 'gmd':
-        return 'D ${amount.toStringAsFixed(2)}';
-      case 'gnf':
-        return 'Fr ${amount.toStringAsFixed(2)}';
-      case 'gtq':
-        return 'Q ${amount.toStringAsFixed(2)}';
-      case 'gyd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'hkd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'hnl':
-        return 'L ${amount.toStringAsFixed(2)}';
-      case 'hrk':
-        return 'kn ${amount.toStringAsFixed(2)}';
-      case 'htg':
-        return 'G ${amount.toStringAsFixed(2)}';
-      case 'huf':
-        return 'Ft ${amount.toStringAsFixed(2)}';
-      case 'idr':
-        return 'Rp ${amount.toStringAsFixed(2)}';
-      case 'ils':
-        return '₪ ${amount.toStringAsFixed(2)}';
-      case 'imp':
-        return '£ ${amount.toStringAsFixed(2)}';
-      case 'inr':
-        return '₹ ${amount.toStringAsFixed(2)}';
-      case 'iqd':
-        return 'ع.د ${amount.toStringAsFixed(2)}';
-      case 'irr':
-        return '﷼ ${amount.toStringAsFixed(2)}';
-      case 'isk':
-        return 'kr ${amount.toStringAsFixed(2)}';
-      case 'jep':
-        return '£ ${amount.toStringAsFixed(2)}';
-      case 'jmd':
-        return 'J\$ ${amount.toStringAsFixed(2)}';
-      case 'jod':
-        return 'د.ا ${amount.toStringAsFixed(2)}';
-      case 'jpy':
-        return '¥ ${amount.toStringAsFixed(2)}';
-      case 'kes':
-        return 'Sh ${amount.toStringAsFixed(2)}';
-      case 'kgs':
-        return 'лв ${amount.toStringAsFixed(2)}';
-      case 'khr':
-        return '៛ ${amount.toStringAsFixed(2)}';
-      case 'kmf':
-        return 'Fr ${amount.toStringAsFixed(2)}';
-      case 'kpw':
-        return '₩ ${amount.toStringAsFixed(2)}';
-      case 'krw':
-        return '₩ ${amount.toStringAsFixed(2)}';
-      case 'kwd':
-        return 'د.ك ${amount.toStringAsFixed(2)}';
-      case 'kyd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'kzt':
-        return 'лв ${amount.toStringAsFixed(2)}';
-      case 'lak':
-        return '₭ ${amount.toStringAsFixed(2)}';
-      case 'lbp':
-        return '£ ${amount.toStringAsFixed(2)}';
-      case 'lkr':
-        return '₨ ${amount.toStringAsFixed(2)}';
-      case 'lrd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'lsl':
-        return 'L ${amount.toStringAsFixed(2)}';
-      case 'lyd':
-        return 'ل.د ${amount.toStringAsFixed(2)}';
-      case 'mad':
-        return 'د.م. ${amount.toStringAsFixed(2)}';
-      case 'mdl':
-        return 'L ${amount.toStringAsFixed(2)}';
-      case 'mga':
-        return 'Ar ${amount.toStringAsFixed(2)}';
-      case 'mkd':
-        return 'ден ${amount.toStringAsFixed(2)}';
-      case 'mmk':
-        return 'Ks ${amount.toStringAsFixed(2)}';
-      case 'mnt':
-        return '₮ ${amount.toStringAsFixed(2)}';
-      case 'mop':
-        return 'P ${amount.toStringAsFixed(2)}';
-      case 'mro':
-        return 'UM ${amount.toStringAsFixed(2)}';
-      case 'mur':
-        return '₨ ${amount.toStringAsFixed(2)}';
-      case 'mvr':
-        return 'Rf ${amount.toStringAsFixed(2)}';
-      case 'mwk':
-        return 'MK ${amount.toStringAsFixed(2)}';
-      case 'mxn':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'myr':
-        return 'RM ${amount.toStringAsFixed(2)}';
-      case 'mzn':
-        return 'MT ${amount.toStringAsFixed(2)}';
-      case 'nad':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'ngn':
-        return '₦ ${amount.toStringAsFixed(2)}';
-      case 'nio':
-        return 'C\$ ${amount.toStringAsFixed(2)}';
-      case 'nok':
-        return 'kr ${amount.toStringAsFixed(2)}';
-      case 'npr':
-        return '₨ ${amount.toStringAsFixed(2)}';
-      case 'nzd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'omr':
-        return 'ر.ع. ${amount.toStringAsFixed(2)}';
-      case 'pab':
-        return 'B/. ${amount.toStringAsFixed(2)}';
-      case 'pen':
-        return 'S/. ${amount.toStringAsFixed(2)}';
-      case 'pgk':
-        return 'K ${amount.toStringAsFixed(2)}';
-      case 'php':
-        return '₱ ${amount.toStringAsFixed(2)}';
-      case 'pkr':
-        return '₨ ${amount.toStringAsFixed(2)}';
-      case 'pln':
-        return 'zł ${amount.toStringAsFixed(2)}';
-      case 'pyg':
-        return 'Gs ${amount.toStringAsFixed(2)}';
-      case 'qar':
-        return 'ر.ق ${amount.toStringAsFixed(2)}';
-      case 'ron':
-        return 'lei ${amount.toStringAsFixed(2)}';
-      case 'rsd':
-        return 'Дин. ${amount.toStringAsFixed(2)}';
-      case 'rub':
-        return '₽ ${amount.toStringAsFixed(2)}';
-      case 'rwf':
-        return 'Fr ${amount.toStringAsFixed(2)}';
-      case 'sar':
-        return 'ر.س ${amount.toStringAsFixed(2)}';
-      case 'sbd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'scr':
-        return '₨ ${amount.toStringAsFixed(2)}';
-      case 'sdg':
-        return 'ج.س ${amount.toStringAsFixed(2)}';
-      case 'sek':
-        return 'kr ${amount.toStringAsFixed(2)}';
-      case 'sgd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'shp':
-        return '£ ${amount.toStringAsFixed(2)}';
-      case 'sll':
-        return 'Le ${amount.toStringAsFixed(2)}';
-      case 'sos':
-        return 'S ${amount.toStringAsFixed(2)}';
-      case 'srd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'std':
-        return 'Db ${amount.toStringAsFixed(2)}';
-      case 'svc':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'syp':
-        return '£ ${amount.toStringAsFixed(2)}';
-      case 'szl':
-        return 'L ${amount.toStringAsFixed(2)}';
-      case 'thb':
-        return '฿ ${amount.toStringAsFixed(2)}';
-      case 'tjs':
-        return 'SM ${amount.toStringAsFixed(2)}';
-      case 'tmt':
-        return 'm ${amount.toStringAsFixed(2)}';
-      case 'tnd':
-        return 'د.ت ${amount.toStringAsFixed(2)}';
-      case 'top':
-        return 'T\$ ${amount.toStringAsFixed(2)}';
-      case 'try':
-        return '₺ ${amount.toStringAsFixed(2)}';
-      case 'ttd':
-        return 'TT\$ ${amount.toStringAsFixed(2)}';
-      case 'twd':
-        return 'NT\$ ${amount.toStringAsFixed(2)}';
-      case 'tzs':
-        return 'TSh ${amount.toStringAsFixed(2)}';
-      case 'uah':
-        return '₴ ${amount.toStringAsFixed(2)}';
-      case 'ugx':
-        return 'USh ${amount.toStringAsFixed(2)}';
-      case 'usd':
-        return '\$ ${amount.toStringAsFixed(2)}';
-      case 'uyu':
-        return '\$U ${amount.toStringAsFixed(2)}';
-      case 'uzs':
-        return 'so\'m ${amount.toStringAsFixed(2)}';
-      case 'vef':
-        return 'Bs ${amount.toStringAsFixed(2)}';
-      case 'vnd':
-        return '₫ ${amount.toStringAsFixed(2)}';
-      case 'vuv':
-        return 'VT ${amount.toStringAsFixed(2)}';
-      case 'wst':
-        return 'WS\$ ${amount.toStringAsFixed(2)}';
-      case 'xaf':
-        return 'Fr ${amount.toStringAsFixed(2)}';
-      case 'xcd':
-        return 'EC\$ ${amount.toStringAsFixed(2)}';
-      case 'xof':
-        return 'Fr ${amount.toStringAsFixed(2)}';
-      case 'xpf':
-        return 'Fr ${amount.toStringAsFixed(2)}';
-      case 'xpt':
-        return 'XPT ${amount.toStringAsFixed(2)}';
-      case 'yer':
-        return '﷼ ${amount.toStringAsFixed(2)}';
-      case 'zar':
-        return 'R ${amount.toStringAsFixed(2)}';
-      case 'zmw':
-        return 'ZK ${amount.toStringAsFixed(2)}';
-      case 'zwl':
-        return 'Z\$ ${amount.toStringAsFixed(2)}';
-      default:
-        return '${amount.toStringAsFixed(2)} $currency';
-    }
+  Future<String> formattedPriceIn(String currency, {int quantity = 1}) async {
+    return price.formattedPriceIn(currency, quantity: quantity);
   }
 
   /// Gets the JSON representation of this [MTGPrice]
   @override
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
-      'display': display,
-      'sortOrder': sortOrder,
-      'price': price.toString(),
+      'finish': MTGFinish.fromName(name).toJson(),
+      'price': {'\$numberDecimal': price.toString()},
     };
   }
 
@@ -845,8 +510,6 @@ class MTGFinish extends MTGField {
   Map<String, dynamic> toJson() {
     return {
       'name': name,
-      'display': display,
-      'sortOrder': sortOrder,
     };
   }
 
