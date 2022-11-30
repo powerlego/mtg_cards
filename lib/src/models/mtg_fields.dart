@@ -401,8 +401,7 @@ class MTGPrice extends MTGField {
   /// - [MTGPrice.from]
   /// - [MTGPrice.toJson]
   factory MTGPrice.fromJson(Map<String, dynamic> json) {
-    return MTGPrice(MTGFinish.fromName((json['finish'] as Map<String, dynamic>)['name']),
-        Price.fromJson(json['price'] as Map<String, dynamic>));
+    return MTGPrice(MTGFinish.fromName((json['finish'] as Map<String, dynamic>)['name']), Price(price: json['price']));
   }
 
   /// Gets this price in a given [currency].
@@ -466,7 +465,7 @@ class MTGPrice extends MTGField {
   Map<String, dynamic> toJson() {
     return {
       'finish': MTGFinish.fromName(name).toJson(),
-      'price': {'\$numberDecimal': price.toString()},
+      'price': price.toJson(),
     };
   }
 
