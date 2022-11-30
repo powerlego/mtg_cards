@@ -3,10 +3,10 @@ import 'package:mtg_cards/databases.dart';
 import 'package:mtg_cards/keys.dart';
 
 class CurrencyDatabaseImpl extends Database {
-  final String connectionString = localConnectionString;
+  final String _connectionString = localConnectionString;
 
-  final String databaseName = 'cards';
-  final String collectionName = 'currency';
+  final String _databaseName = 'cards';
+  final String _collectionName = 'currency';
 
   late Db db;
   late DbCollection collection;
@@ -18,9 +18,9 @@ class CurrencyDatabaseImpl extends Database {
   /// Throws an exception if the connection fails
   @override
   Future<void> connect() async {
-    db = await Db.create(connectionString + databaseName);
+    db = await Db.create(_connectionString + _databaseName);
     await db.open();
-    collection = db.collection(collectionName);
+    collection = db.collection(_collectionName);
   }
 
   @override
@@ -83,6 +83,22 @@ class CurrencyDatabaseImpl extends Database {
     }
     CurrencyEntry entry = document as CurrencyEntry;
     await collection.remove({'_id': entry.id});
+  }
+
+  @override
+  Future<void> deleteAll(List<dynamic> documents) async {
+    if (!db.isConnected) {
+      await db.open();
+    }
+    if (db.state != State.open) {
+      await Future.delayed(const Duration(seconds: 1));
+    }
+    List<Map<String, dynamic>> entries = [];
+    for (var document in documents) {
+      CurrencyEntry entry = document as CurrencyEntry;
+      entries.add({'_id': entry.id});
+    }
+    await collection.remove(entries);
   }
 
   @override

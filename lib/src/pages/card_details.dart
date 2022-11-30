@@ -100,9 +100,7 @@ class CardDetailsSearch extends StatelessWidget {
                       id: m.ObjectId(),
                       card: card.copyWith(isFoil: (finish! == 'Foil') ? true : false),
                       quantity: copies!,
-                      finish: finish!,
-                      price: card.getPrice('usd', finish!),
-                      currency: 'usd',
+                      price: card.getPrice(MTGFinish.fromDisplay(finish!)),
                     ),
                   );
                 }
@@ -128,7 +126,7 @@ class CardDetailsSearch extends StatelessWidget {
         showSnackbar(
           context,
           StatusSnackbar(
-            message: 'Added ${result.quantity}x ${result.card.name} (${result.finish}) to collection',
+            message: 'Added ${result.quantity}x ${result.card.name} (${result.price.display}) to collection',
             extended: true,
           ),
         );
@@ -215,9 +213,9 @@ class CardDetailsSearch extends StatelessWidget {
                                           CardInfoMana(title: 'Mana Cost:', manaString: card[Side.back].manaCost),
                                         );
                                       }
-                                      if (card.faces[1].type.isNotEmpty) {
+                                      if (card.faces[1].type != MTGCardTypeLine.unknown) {
                                         widgets.add(
-                                          CardInfoText(title: 'Type Line:', value: card[Side.back].type),
+                                          CardInfoText(title: 'Type Line:', value: card[Side.back].type.toString()),
                                         );
                                       }
                                       if (card[Side.back].oracleText.isNotEmpty) {
@@ -264,9 +262,9 @@ class CardDetailsSearch extends StatelessWidget {
                                           CardInfoMana(title: 'Mana Cost:', manaString: card[Side.front].manaCost),
                                         );
                                       }
-                                      if (card[Side.front].type.isNotEmpty) {
+                                      if (card[Side.front].type != MTGCardTypeLine.unknown) {
                                         widgets.add(
-                                          CardInfoText(title: 'Type Line:', value: card[Side.front].type),
+                                          CardInfoText(title: 'Type Line:', value: card[Side.front].type.toString()),
                                         );
                                       }
                                       if (card[Side.front].oracleText.isNotEmpty) {
@@ -314,9 +312,9 @@ class CardDetailsSearch extends StatelessWidget {
                                         CardInfoMana(title: 'Mana Cost:', manaString: card[Side.front].manaCost),
                                       );
                                     }
-                                    if (card[Side.front].type.isNotEmpty) {
+                                    if (card[Side.front].type != MTGCardTypeLine.unknown) {
                                       widgets.add(
-                                        CardInfoText(title: 'Type Line:', value: card[Side.front].type),
+                                        CardInfoText(title: 'Type Line:', value: card[Side.front].type.toString()),
                                       );
                                     }
                                     if (card[Side.front].oracleText.isNotEmpty) {
@@ -353,19 +351,19 @@ class CardDetailsSearch extends StatelessWidget {
                                       );
                                     }
                                   }
-                                  if (card.rarity.isNotEmpty) {
+                                  if (card.rarity != MTGRarity.unknown) {
                                     widgets.add(
                                       CardInfoText(
                                         title: 'Rarity:',
-                                        value: card.rarity,
+                                        value: card.rarity.display,
                                       ),
                                     );
                                   }
-                                  if (card.setName.isNotEmpty) {
+                                  if (card.set.isNotEmpty) {
                                     widgets.add(
                                       CardInfoText(
                                         title: 'Set:',
-                                        value: card.setName,
+                                        value: card.set,
                                       ),
                                     );
                                   }
@@ -583,10 +581,11 @@ class _CardDetailsCollectionState extends State<CardDetailsCollection> {
                       final card = await Utils.refreshCard(_card);
                       await cardDatabase.update(
                         widget.entry.copyWith(
-                            card: card.copyWith(
-                              isFoil: (_card.isFoil),
-                            ),
-                            price: card.getPrice('usd', widget.entry.finish)),
+                          card: card.copyWith(
+                            isFoil: (_card.isFoil),
+                          ),
+                          price: card.getPrice(MTGFinish.fromName(widget.entry.price.name)),
+                        ),
                       );
                       setState(() {
                         _card = card;
@@ -670,9 +669,9 @@ class _CardDetailsCollectionState extends State<CardDetailsCollection> {
                                       CardInfoMana(title: 'Mana Cost:', manaString: _card[Side.back].manaCost),
                                     );
                                   }
-                                  if (_card.faces[1].type.isNotEmpty) {
+                                  if (_card.faces[1].type != MTGCardTypeLine.unknown) {
                                     widgets.add(
-                                      CardInfoText(title: 'Type Line:', value: _card[Side.back].type),
+                                      CardInfoText(title: 'Type Line:', value: _card[Side.back].type.toString()),
                                     );
                                   }
                                   if (_card[Side.back].oracleText.isNotEmpty) {
@@ -724,9 +723,9 @@ class _CardDetailsCollectionState extends State<CardDetailsCollection> {
                                       CardInfoMana(title: 'Mana Cost:', manaString: _card[Side.front].manaCost),
                                     );
                                   }
-                                  if (_card[Side.front].type.isNotEmpty) {
+                                  if (_card[Side.front].type != MTGCardTypeLine.unknown) {
                                     widgets.add(
-                                      CardInfoText(title: 'Type Line:', value: _card[Side.front].type),
+                                      CardInfoText(title: 'Type Line:', value: _card[Side.front].type.toString()),
                                     );
                                   }
                                   if (_card[Side.front].oracleText.isNotEmpty) {
@@ -779,9 +778,9 @@ class _CardDetailsCollectionState extends State<CardDetailsCollection> {
                                     CardInfoMana(title: 'Mana Cost:', manaString: _card[Side.front].manaCost),
                                   );
                                 }
-                                if (_card[Side.front].type.isNotEmpty) {
+                                if (_card[Side.front].type != MTGCardTypeLine.unknown) {
                                   widgets.add(
-                                    CardInfoText(title: 'Type Line:', value: _card[Side.front].type),
+                                    CardInfoText(title: 'Type Line:', value: _card[Side.front].type.toString()),
                                   );
                                 }
                                 if (_card[Side.front].oracleText.isNotEmpty) {
@@ -818,19 +817,19 @@ class _CardDetailsCollectionState extends State<CardDetailsCollection> {
                                   );
                                 }
                               }
-                              if (_card.rarity.isNotEmpty) {
+                              if (_card.rarity.name != 'unknown') {
                                 widgets.add(
                                   CardInfoText(
                                     title: 'Rarity:',
-                                    value: _card.rarity,
+                                    value: _card.rarity.display,
                                   ),
                                 );
                               }
-                              if (_card.setName.isNotEmpty) {
+                              if (_card.set.isNotEmpty) {
                                 widgets.add(
                                   CardInfoText(
                                     title: 'Set:',
-                                    value: _card.setName,
+                                    value: _card.set,
                                   ),
                                 );
                               }
@@ -849,18 +848,15 @@ class _CardDetailsCollectionState extends State<CardDetailsCollection> {
                                   ),
                                 );
                               }
-                              if (widget.entry.price > Decimal.zero) {
+                              if (widget.entry.price.price.price > Decimal.zero) {
                                 widgets.add(
                                   FutureBuilder(
-                                    future: currencyDatabase.getCurrency(settingsNotifier.currency),
+                                    future: widget.entry.price.formattedPriceIn(settingsNotifier.currency),
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
                                         return CardInfoText(
                                           title: 'Price:',
-                                          value: Utils.formatCurrency(
-                                              settingsNotifier.currency,
-                                              Utils.convertCurrency(settingsNotifier.currency, widget.entry.price,
-                                                  snapshot.data!.exchangeRate)),
+                                          value: snapshot.data!,
                                         );
                                       } else {
                                         return const CardInfoText(
@@ -874,17 +870,13 @@ class _CardDetailsCollectionState extends State<CardDetailsCollection> {
                                 if (_quantity > 0) {
                                   widgets.add(
                                     FutureBuilder(
-                                      future: currencyDatabase.getCurrency(settingsNotifier.currency),
+                                      future: widget.entry.price
+                                          .formattedPriceIn(settingsNotifier.currency, quantity: _quantity),
                                       builder: (context, snapshot) {
                                         if (snapshot.hasData) {
                                           return CardInfoText(
                                             title: 'Total:',
-                                            value: Utils.formatCurrency(
-                                                settingsNotifier.currency,
-                                                Utils.convertCurrency(
-                                                    settingsNotifier.currency,
-                                                    widget.entry.price * Decimal.parse(_quantity.toString()),
-                                                    snapshot.data!.exchangeRate)),
+                                            value: snapshot.data!,
                                           );
                                         } else {
                                           return const CardInfoText(
@@ -1053,7 +1045,7 @@ class CardLegalities extends StatelessWidget {
                           ),
                           padding: const EdgeInsets.all(2),
                           child: Text(
-                            '${e.formattedFormat}: ${e.formattedLegality}',
+                            '${e.display}: ${e.legalityDisplay}',
                             style: FluentTheme.of(context).typography.body!.copyWith(
                                   fontWeight: FontWeight.bold,
                                   fontSize: fontSize,
@@ -1081,6 +1073,7 @@ class CardPrices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settingsNotifier = context.watch<SettingsNotifier>();
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 2, 8, 0),
       child: Row(
@@ -1093,37 +1086,25 @@ class CardPrices extends StatelessWidget {
           ),
           Expanded(
             child: Builder(builder: (context) {
-              final List<TableRow> prices = <TableRow>[];
-              const columns = 3;
-              for (int i = 0; i < card.prices.length / columns; i++) {
-                List<TableCell> row = <TableCell>[];
-                for (int j = 0; j < columns; j++) {
-                  if (i * columns + j < card.prices.length) {
-                    row.add(
-                      TableCell(
-                        child: Text(
-                          '${card.prices[i * columns + j].formattedCurrency}: ${card.prices[i * columns + j].formattedPrice}',
-                          textAlign: TextAlign.right,
-                          style: FluentTheme.of(context).typography.body!.copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: fontSize - 2,
-                              ),
-                        ),
-                      ),
-                    );
-                  } else {
-                    row.add(
-                      const TableCell(
-                        child: SizedBox(),
-                      ),
-                    );
-                  }
-                }
-                prices.add(TableRow(children: row));
+              TableRow prices;
+              List<TableCell> row = <TableCell>[];
+              for (int i = 0; i < card.prices.length; i++) {
+                row.add(
+                  TableCell(
+                    child: Text(
+                      '${card.prices[i].display}: ${card.prices[i].formattedPriceIn(settingsNotifier.currency)}',
+                      textAlign: TextAlign.right,
+                      style: FluentTheme.of(context).typography.body!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: fontSize - 2,
+                          ),
+                    ),
+                  ),
+                );
               }
-
+              prices = TableRow(children: row);
               return Table(
-                children: prices,
+                children: [prices],
               );
             }),
           ),

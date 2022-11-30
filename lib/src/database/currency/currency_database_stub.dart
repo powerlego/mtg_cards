@@ -35,6 +35,11 @@ class CurrencyDatabaseImpl extends Database {
   }
 
   @override
+  Future<void> deleteAll(List<dynamic> documents) {
+    throw Exception("Stub Implementation");
+  }
+
+  @override
   Future<void> disconnect() {
     throw Exception("Stub Implementation");
   }

@@ -7,26 +7,21 @@ class CardEntry {
   final ObjectId id;
   final MTGCard card;
   final int quantity;
-  final String finish;
-  final Decimal price;
-  final String currency;
+  final MTGPrice price;
 
-  const CardEntry(
-      {required this.id,
-      required this.card,
-      required this.quantity,
-      required this.finish,
-      required this.price,
-      required this.currency});
+  const CardEntry({
+    required this.id,
+    required this.card,
+    required this.quantity,
+    required this.price,
+  });
 
   CardEntry.empty()
       : this(
           id: ObjectId(),
           card: MTGCard.empty(),
           quantity: 0,
-          finish: '',
-          price: Decimal.zero,
-          currency: '',
+          price: MTGPrice.zero,
         );
 
   factory CardEntry.fromJson(Map<String, dynamic> json) {
@@ -34,13 +29,7 @@ class CardEntry {
       id: (json["_id"] is ObjectId) ? json["_id"] : ObjectId.fromHexString(json["_id"]["\$oid"]),
       card: MTGCard.fromJson(json["card"]),
       quantity: json["quantity"],
-      finish: json["finish"],
-      price: (json["price"] is Decimal)
-          ? (json["price"] ?? Decimal.zero)
-          : (json["price"]["\$numberDecimal"] != null)
-              ? Decimal.parse(json["price"]["\$numberDecimal"])
-              : Decimal.parse(json["price"] ?? "0"),
-      currency: json["currency"] ?? 'usd',
+      price: MTGPrice.fromJson(json["price"]),
     );
   }
 
@@ -49,9 +38,7 @@ class CardEntry {
       '_id': {'\$oid': id.toHexString()},
       'card': card.toJson(),
       'quantity': quantity,
-      'finish': finish,
-      'price': {'\$numberDecimal': price.toString()},
-      'currency': currency,
+      'price': price.toJson(),
     };
   }
 
@@ -64,17 +51,13 @@ class CardEntry {
     ObjectId? id,
     MTGCard? card,
     int? quantity,
-    String? finish,
-    Decimal? price,
-    String? currency,
+    MTGPrice? price,
   }) {
     return CardEntry(
       id: id ?? this.id,
       card: card ?? this.card,
       quantity: quantity ?? this.quantity,
-      finish: finish ?? this.finish,
       price: price ?? this.price,
-      currency: currency ?? this.currency,
     );
   }
 }
@@ -109,7 +92,7 @@ class CurrencyEntry {
 
   Map<String, dynamic> toJson() => {
         '_id': {'\$oid': id.toHexString()},
-        'currency': currency,
+        'currency': currency.toLowerCase(),
         'date': date.toIso8601String(),
         'exchangeRate': exchangeRate,
       };

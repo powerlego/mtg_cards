@@ -5,8 +5,7 @@ class MTGSymbolWidget extends StatelessWidget {
   final MTGSymbol symbol;
   final double size;
 
-  const MTGSymbolWidget({Key? key, required this.symbol, this.size = 25})
-      : super(key: key);
+  const MTGSymbolWidget({Key? key, required this.symbol, this.size = 25}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +70,7 @@ class MTGSymbolParser {
               WidgetSpan(
                 child: MTGSymbolWidget(
                   symbol: symbolData,
-                  size: (size != null)
-                      ? size
-                      : FluentTheme.of(context).typography.body!.fontSize!,
+                  size: (size != null) ? size : FluentTheme.of(context).typography.body!.fontSize!,
                 ),
               ),
             );
@@ -82,10 +79,7 @@ class MTGSymbolParser {
               TextSpan(
                 text: symbol,
                 style: (size != null)
-                    ? FluentTheme.of(context)
-                        .typography
-                        .body!
-                        .copyWith(fontSize: size)
+                    ? FluentTheme.of(context).typography.body!.copyWith(fontSize: size)
                     : FluentTheme.of(context).typography.body,
               ),
             );
@@ -476,464 +470,464 @@ class MTGSymbols {
     return symbols;
   }
 
-  static MTGSymbol error = const MTGSymbol(
+  static const MTGSymbol error = MTGSymbol(
     'error',
     '',
     'https://svgs.scryfall.io/card-symbols/0.svg',
     'error',
   );
 
-  static MTGSymbol tap = const MTGSymbol(
+  static const MTGSymbol tap = MTGSymbol(
     'Tap',
     '{T}',
     "https://svgs.scryfall.io/card-symbols/T.svg",
     "tap this permanent",
   );
-  static MTGSymbol untap = const MTGSymbol(
+  static const MTGSymbol untap = MTGSymbol(
     'Untap',
     '{Q}',
     "https://svgs.scryfall.io/card-symbols/Q.svg",
     "untap this permanent",
   );
-  static MTGSymbol energy = const MTGSymbol(
+  static const MTGSymbol energy = MTGSymbol(
     'Energy',
     '{E}',
     "https://svgs.scryfall.io/card-symbols/E.svg",
     "an energy counter",
   );
-  static MTGSymbol planeswalker = const MTGSymbol(
+  static const MTGSymbol planeswalker = MTGSymbol(
     'Planeswalker',
     '{PW}',
     "https://svgs.scryfall.io/card-symbols/PW.svg",
     "planeswalker",
   );
-  static MTGSymbol chaos = const MTGSymbol(
+  static const MTGSymbol chaos = MTGSymbol(
     'Chaos',
     '{CHAOS}',
     "https://svgs.scryfall.io/card-symbols/CHAOS.svg",
     "chaos",
   );
-  static MTGSymbol acorn = const MTGSymbol(
+  static const MTGSymbol acorn = MTGSymbol(
     'Acorn',
     '{A}',
     "https://svgs.scryfall.io/card-symbols/A.svg",
     "an acorn counter",
   );
-  static MTGSymbol ticket = const MTGSymbol(
+  static const MTGSymbol ticket = MTGSymbol(
     'Ticket',
     '{TK}',
     "https://svgs.scryfall.io/card-symbols/TK.svg",
     "a ticket counter",
   );
 
-  static MTGSymbol xGeneric = const MTGSymbol(
+  static const MTGSymbol xGeneric = MTGSymbol(
     'X Generic',
     '{X}',
     "https://svgs.scryfall.io/card-symbols/X.svg",
     "X generic mana",
   );
-  static MTGSymbol yGeneric = const MTGSymbol(
+  static const MTGSymbol yGeneric = MTGSymbol(
     'Y Generic',
     '{Y}',
     "https://svgs.scryfall.io/card-symbols/Y.svg",
     "Y generic mana",
   );
-  static MTGSymbol zGeneric = const MTGSymbol(
+  static const MTGSymbol zGeneric = MTGSymbol(
     'Z Generic',
     '{Z}',
     "https://svgs.scryfall.io/card-symbols/Z.svg",
     "Z generic mana",
   );
-  static MTGSymbol zero = const MTGSymbol(
+  static const MTGSymbol zero = MTGSymbol(
     'Zero',
     '{0}',
     "https://svgs.scryfall.io/card-symbols/0.svg",
     "zero generic mana",
   );
 
-  static MTGSymbol oneHalf = const MTGSymbol(
+  static const MTGSymbol oneHalf = MTGSymbol(
     'One Half',
     '{½}',
     "https://svgs.scryfall.io/card-symbols/HALF.svg",
     "one half generic mana",
   );
 
-  static MTGSymbol one = const MTGSymbol(
+  static const MTGSymbol one = MTGSymbol(
     'One',
     '{1}',
     "https://svgs.scryfall.io/card-symbols/1.svg",
     "one generic mana",
   );
-  static MTGSymbol two = const MTGSymbol(
+  static const MTGSymbol two = MTGSymbol(
     'Two',
     '{2}',
     "https://svgs.scryfall.io/card-symbols/2.svg",
     "two generic mana",
   );
-  static MTGSymbol three = const MTGSymbol(
+  static const MTGSymbol three = MTGSymbol(
     'Three',
     '{3}',
     "https://svgs.scryfall.io/card-symbols/3.svg",
     "three generic mana",
   );
-  static MTGSymbol four = const MTGSymbol(
+  static const MTGSymbol four = MTGSymbol(
     'Four',
     '{4}',
     "https://svgs.scryfall.io/card-symbols/4.svg",
     "four generic mana",
   );
-  static MTGSymbol five = const MTGSymbol(
+  static const MTGSymbol five = MTGSymbol(
     'Five',
     '{5}',
     "https://svgs.scryfall.io/card-symbols/5.svg",
     "five generic mana",
   );
-  static MTGSymbol six = const MTGSymbol(
+  static const MTGSymbol six = MTGSymbol(
     'Six',
     '{6}',
     "https://svgs.scryfall.io/card-symbols/6.svg",
     "six generic mana",
   );
-  static MTGSymbol seven = const MTGSymbol(
+  static const MTGSymbol seven = MTGSymbol(
     'Seven',
     '{7}',
     "https://svgs.scryfall.io/card-symbols/7.svg",
     "seven generic mana",
   );
-  static MTGSymbol eight = const MTGSymbol(
+  static const MTGSymbol eight = MTGSymbol(
     'Eight',
     '{8}',
     "https://svgs.scryfall.io/card-symbols/8.svg",
     "eight generic mana",
   );
-  static MTGSymbol nine = const MTGSymbol(
+  static const MTGSymbol nine = MTGSymbol(
     'Nine',
     '{9}',
     "https://svgs.scryfall.io/card-symbols/9.svg",
     "nine generic mana",
   );
-  static MTGSymbol ten = const MTGSymbol(
+  static const MTGSymbol ten = MTGSymbol(
     'Ten',
     '{10}',
     "https://svgs.scryfall.io/card-symbols/10.svg",
     "ten generic mana",
   );
-  static MTGSymbol eleven = const MTGSymbol(
+  static const MTGSymbol eleven = MTGSymbol(
     'Eleven',
     '{11}',
     "https://svgs.scryfall.io/card-symbols/11.svg",
     "eleven generic mana",
   );
-  static MTGSymbol twelve = const MTGSymbol(
+  static const MTGSymbol twelve = MTGSymbol(
     'Twelve',
     '{12}',
     "https://svgs.scryfall.io/card-symbols/12.svg",
     "twelve generic mana",
   );
-  static MTGSymbol thirteen = const MTGSymbol(
+  static const MTGSymbol thirteen = MTGSymbol(
     'Thirteen',
     '{13}',
     "https://svgs.scryfall.io/card-symbols/13.svg",
     "thirteen generic mana",
   );
-  static MTGSymbol fourteen = const MTGSymbol(
+  static const MTGSymbol fourteen = MTGSymbol(
     'Fourteen',
     '{14}',
     "https://svgs.scryfall.io/card-symbols/14.svg",
     "fourteen generic mana",
   );
-  static MTGSymbol fifteen = const MTGSymbol(
+  static const MTGSymbol fifteen = MTGSymbol(
     'Fifteen',
     '{15}',
     "https://svgs.scryfall.io/card-symbols/15.svg",
     "fifteen generic mana",
   );
-  static MTGSymbol sixteen = const MTGSymbol(
+  static const MTGSymbol sixteen = MTGSymbol(
     'Sixteen',
     '{16}',
     "https://svgs.scryfall.io/card-symbols/16.svg",
     "sixteen generic mana",
   );
-  static MTGSymbol seventeen = const MTGSymbol(
+  static const MTGSymbol seventeen = MTGSymbol(
     'Seventeen',
     '{17}',
     "https://svgs.scryfall.io/card-symbols/17.svg",
     "seventeen generic mana",
   );
-  static MTGSymbol eighteen = const MTGSymbol(
+  static const MTGSymbol eighteen = MTGSymbol(
     'Eighteen',
     '{18}',
     "https://svgs.scryfall.io/card-symbols/18.svg",
     "eighteen generic mana",
   );
-  static MTGSymbol nineteen = const MTGSymbol(
+  static const MTGSymbol nineteen = MTGSymbol(
     'Nineteen',
     '{19}',
     "https://svgs.scryfall.io/card-symbols/19.svg",
     "nineteen generic mana",
   );
-  static MTGSymbol twenty = const MTGSymbol(
+  static const MTGSymbol twenty = MTGSymbol(
     'Twenty',
     '{20}',
     "https://svgs.scryfall.io/card-symbols/20.svg",
     "twenty generic mana",
   );
-  static MTGSymbol oneHundred = const MTGSymbol(
+  static const MTGSymbol oneHundred = MTGSymbol(
     'One Hundred',
     '{100}',
     "https://svgs.scryfall.io/card-symbols/100.svg",
     "one hundred generic mana",
   );
 
-  static MTGSymbol whiteBlue = const MTGSymbol(
+  static const MTGSymbol whiteBlue = MTGSymbol(
     'White Blue',
     '{W/U}',
     "https://svgs.scryfall.io/card-symbols/WU.svg",
     "one white or blue mana",
   );
 
-  static MTGSymbol whiteBlack = const MTGSymbol(
+  static const MTGSymbol whiteBlack = MTGSymbol(
     'White Black',
     '{W/B}',
     "https://svgs.scryfall.io/card-symbols/WB.svg",
     "one white or black mana",
   );
 
-  static MTGSymbol blackRed = const MTGSymbol(
+  static const MTGSymbol blackRed = MTGSymbol(
     'Black Red',
     '{B/R}',
     "https://svgs.scryfall.io/card-symbols/BR.svg",
     "one black or red mana",
   );
 
-  static MTGSymbol blackGreen = const MTGSymbol(
+  static const MTGSymbol blackGreen = MTGSymbol(
     'Black Green',
     '{B/G}',
     "https://svgs.scryfall.io/card-symbols/BG.svg",
     "one black or green mana",
   );
 
-  static MTGSymbol blueBlack = const MTGSymbol(
+  static const MTGSymbol blueBlack = MTGSymbol(
     'Blue Black',
     '{U/B}',
     "https://svgs.scryfall.io/card-symbols/UB.svg",
     "one blue or black mana",
   );
 
-  static MTGSymbol blueRed = const MTGSymbol(
+  static const MTGSymbol blueRed = MTGSymbol(
     'Blue Red',
     '{U/R}',
     "https://svgs.scryfall.io/card-symbols/UR.svg",
     "one blue or red mana",
   );
 
-  static MTGSymbol redGreen = const MTGSymbol(
+  static const MTGSymbol redGreen = MTGSymbol(
     'Red Green',
     '{R/G}',
     "https://svgs.scryfall.io/card-symbols/RG.svg",
     "one red or green mana",
   );
 
-  static MTGSymbol redWhite = const MTGSymbol(
+  static const MTGSymbol redWhite = MTGSymbol(
     'Red White',
     '{R/W}',
     "https://svgs.scryfall.io/card-symbols/RW.svg",
     "one red or white mana",
   );
 
-  static MTGSymbol greenWhite = const MTGSymbol(
+  static const MTGSymbol greenWhite = MTGSymbol(
     'Green White',
     '{G/W}',
     "https://svgs.scryfall.io/card-symbols/GW.svg",
     "one green or white mana",
   );
 
-  static MTGSymbol greenBlue = const MTGSymbol(
+  static const MTGSymbol greenBlue = MTGSymbol(
     'Green Blue',
     '{G/U}',
     "https://svgs.scryfall.io/card-symbols/GU.svg",
     "one green or blue mana",
   );
 
-  static MTGSymbol snow = const MTGSymbol(
+  static const MTGSymbol snow = MTGSymbol(
     'Snow',
     '{S}',
     "https://svgs.scryfall.io/card-symbols/S.svg",
     "one snow mana",
   );
-  static MTGSymbol white = const MTGSymbol(
+  static const MTGSymbol white = MTGSymbol(
     'White',
     '{W}',
     "https://svgs.scryfall.io/card-symbols/W.svg",
     "one white mana",
   );
-  static MTGSymbol blue = const MTGSymbol(
+  static const MTGSymbol blue = MTGSymbol(
     'Blue',
     '{U}',
     "https://svgs.scryfall.io/card-symbols/U.svg",
     "one blue mana",
   );
-  static MTGSymbol black = const MTGSymbol(
+  static const MTGSymbol black = MTGSymbol(
     'Black',
     '{B}',
     "https://svgs.scryfall.io/card-symbols/B.svg",
     "one black mana",
   );
-  static MTGSymbol red = const MTGSymbol(
+  static const MTGSymbol red = MTGSymbol(
     'Red',
     '{R}',
     "https://svgs.scryfall.io/card-symbols/R.svg",
     "one red mana",
   );
-  static MTGSymbol green = const MTGSymbol(
+  static const MTGSymbol green = MTGSymbol(
     'Green',
     '{G}',
     "https://svgs.scryfall.io/card-symbols/G.svg",
     "one green mana",
   );
-  static MTGSymbol colorless = const MTGSymbol(
+  static const MTGSymbol colorless = MTGSymbol(
     'Colorless',
     '{C}',
     "https://svgs.scryfall.io/card-symbols/C.svg",
     "one colorless mana",
   );
-  static MTGSymbol phyrexianWhite = const MTGSymbol(
+  static const MTGSymbol phyrexianWhite = MTGSymbol(
     'Phyrexian White',
     '{W/P}',
     "https://svgs.scryfall.io/card-symbols/WP.svg",
     "one white mana or two life",
   );
-  static MTGSymbol phyrexianBlue = const MTGSymbol(
+  static const MTGSymbol phyrexianBlue = MTGSymbol(
     'Phyrexian Blue',
     '{U/P}',
     "https://svgs.scryfall.io/card-symbols/UP.svg",
     "one blue mana or two life",
   );
-  static MTGSymbol phyrexianBlack = const MTGSymbol(
+  static const MTGSymbol phyrexianBlack = MTGSymbol(
     'Phyrexian Black',
     '{B/P}',
     "https://svgs.scryfall.io/card-symbols/BP.svg",
     "one black mana or two life",
   );
-  static MTGSymbol phyrexianRed = const MTGSymbol(
+  static const MTGSymbol phyrexianRed = MTGSymbol(
     'Phyrexian Red',
     '{R/P}',
     "https://svgs.scryfall.io/card-symbols/RP.svg",
     "one red mana or two life",
   );
-  static MTGSymbol phyrexianGreen = const MTGSymbol(
+  static const MTGSymbol phyrexianGreen = MTGSymbol(
     'Phyrexian Green',
     '{G/P}',
     "https://svgs.scryfall.io/card-symbols/GP.svg",
     "one green mana or two life",
   );
 
-  static MTGSymbol phyrexianBlackGreen = const MTGSymbol(
+  static const MTGSymbol phyrexianBlackGreen = MTGSymbol(
     'Phyrexian Black Green',
     '{B/G/P}',
     "https://svgs.scryfall.io/card-symbols/BGP.svg",
     "one black, one green mana, or two life",
   );
 
-  static MTGSymbol phyrexianBlackRed = const MTGSymbol(
+  static const MTGSymbol phyrexianBlackRed = MTGSymbol(
     'Phyrexian Black Red',
     '{B/R/P}',
     "https://svgs.scryfall.io/card-symbols/BRP.svg",
     "one black, one red mana, or two life",
   );
 
-  static MTGSymbol phyrexianBlueBlack = const MTGSymbol(
+  static const MTGSymbol phyrexianBlueBlack = MTGSymbol(
     'Phyrexian Blue Black',
     '{U/B/P}',
     "https://svgs.scryfall.io/card-symbols/UBP.svg",
     "one blue, one black mana, or two life",
   );
 
-  static MTGSymbol phyrexianBlueRed = const MTGSymbol(
+  static const MTGSymbol phyrexianBlueRed = MTGSymbol(
     'Phyrexian Blue Red',
     '{U/R/P}',
     "https://svgs.scryfall.io/card-symbols/URP.svg",
     "one blue, one red mana, or two life",
   );
 
-  static MTGSymbol phyrexianRedGreen = const MTGSymbol(
+  static const MTGSymbol phyrexianRedGreen = MTGSymbol(
     'Phyrexian Red Green',
     '{R/G/P}',
     "https://svgs.scryfall.io/card-symbols/RGP.svg",
     "one red, one green mana, or two life",
   );
 
-  static MTGSymbol phyrexianRedWhite = const MTGSymbol(
+  static const MTGSymbol phyrexianRedWhite = MTGSymbol(
     'Phyrexian Red White',
     '{R/W/P}',
     "https://svgs.scryfall.io/card-symbols/RWP.svg",
     "one red, one white mana, or two life",
   );
 
-  static MTGSymbol phyrexianWhiteBlue = const MTGSymbol(
+  static const MTGSymbol phyrexianWhiteBlue = MTGSymbol(
     'Phyrexian White Blue',
     '{W/U/P}',
     "https://svgs.scryfall.io/card-symbols/WUP.svg",
     "one white, one blue mana, or two life",
   );
 
-  static MTGSymbol phyrexianWhiteBlack = const MTGSymbol(
+  static const MTGSymbol phyrexianWhiteBlack = MTGSymbol(
     'Phyrexian White Black',
     '{W/B/P}',
     "https://svgs.scryfall.io/card-symbols/WBP.svg",
     "one white, one black mana, or two life",
   );
 
-  static MTGSymbol phyrexianGreenWhite = const MTGSymbol(
+  static const MTGSymbol phyrexianGreenWhite = MTGSymbol(
     'Phyrexian Green White',
     '{G/W/P}',
     "https://svgs.scryfall.io/card-symbols/GWP.svg",
     "one green, one white mana, or two life",
   );
 
-  static MTGSymbol phyrexianGreenBlue = const MTGSymbol(
+  static const MTGSymbol phyrexianGreenBlue = MTGSymbol(
     'Phyrexian Green Blue',
     '{G/U/P}',
     "https://svgs.scryfall.io/card-symbols/GUP.svg",
     "one green, one blue mana, or two life",
   );
 
-  static MTGSymbol phyrexian = const MTGSymbol(
+  static const MTGSymbol phyrexian = MTGSymbol(
     'Phyrexian',
     '{P}',
     "https://svgs.scryfall.io/card-symbols/P.svg",
     "one colored mana or two life",
   );
 
-  static MTGSymbol genericWhite = const MTGSymbol(
+  static const MTGSymbol genericWhite = MTGSymbol(
     'Generic White',
     '{2/W}',
     "https://svgs.scryfall.io/card-symbols/2W.svg",
     "two generic mana and one white mana",
   );
 
-  static MTGSymbol genericBlue = const MTGSymbol(
+  static const MTGSymbol genericBlue = MTGSymbol(
     'Generic Blue',
     '{2/U}',
     "https://svgs.scryfall.io/card-symbols/2U.svg",
     "two generic mana and one blue mana",
   );
 
-  static MTGSymbol genericBlack = const MTGSymbol(
+  static const MTGSymbol genericBlack = MTGSymbol(
     'Generic Black',
     '{2/B}',
     "https://svgs.scryfall.io/card-symbols/2B.svg",
     "two generic mana and one black mana",
   );
 
-  static MTGSymbol genericRed = const MTGSymbol(
+  static const MTGSymbol genericRed = MTGSymbol(
     'Generic Red',
     '{2/R}',
     "https://svgs.scryfall.io/card-symbols/2R.svg",
     "two generic mana and one red mana",
   );
 
-  static MTGSymbol genericGreen = const MTGSymbol(
+  static const MTGSymbol genericGreen = MTGSymbol(
     'Generic Green',
     '{2/G}',
     "https://svgs.scryfall.io/card-symbols/2G.svg",
@@ -948,8 +942,7 @@ class MTGSymbol extends StatelessWidget {
   final String tooltip;
   final double size;
 
-  const MTGSymbol(this.name, this.symbol, this.symbolUrl, this.tooltip,
-      {super.key, this.size = 25});
+  const MTGSymbol(this.name, this.symbol, this.symbolUrl, this.tooltip, {super.key, this.size = 25});
 
   MTGSymbol copyWith({required double size}) {
     return MTGSymbol(name, symbol, symbolUrl, tooltip, size: size);

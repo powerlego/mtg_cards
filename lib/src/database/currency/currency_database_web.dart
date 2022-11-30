@@ -7,7 +7,7 @@ import 'dart:html';
 import 'package:mtg_cards/keys.dart';
 
 class CurrencyDatabaseImpl extends Database {
-  final String connectionString = '$webConnectionString/currency';
+  final String _connectionString = '$webConnectionString/currency';
 
   CurrencyDatabaseImpl();
 
@@ -23,7 +23,7 @@ class CurrencyDatabaseImpl extends Database {
   Future<List<Map<String, dynamic>>> getCollection() async {
     Console console = window.console;
 
-    final response = await HttpRequest.request("$connectionString/collection/", method: 'GET').then(
+    final response = await HttpRequest.request("$_connectionString/collection/", method: 'GET').then(
       (HttpRequest response) {
         if (response.status == HttpStatus.ok) {
           return response.response as String;
@@ -49,7 +49,7 @@ class CurrencyDatabaseImpl extends Database {
     Console console = window.console;
     CurrencyEntry entry = document as CurrencyEntry;
     await HttpRequest.request(
-      "$connectionString/insert/",
+      "$_connectionString/insert/",
       method: "POST",
       sendData: jsonEncode(entry.toJson()),
       requestHeaders: {"Content-Type": "application/json"},
@@ -75,7 +75,7 @@ class CurrencyDatabaseImpl extends Database {
       entries.add(entry.toJson());
     }
     await HttpRequest.request(
-      "$connectionString/insert_all/",
+      "$_connectionString/insert_all/",
       method: "POST",
       sendData: jsonEncode(entries),
       requestHeaders: {"Content-Type": "application/json"},
@@ -101,7 +101,7 @@ class CurrencyDatabaseImpl extends Database {
       "update": entry.toJson(),
     };
     await HttpRequest.request(
-      "$connectionString/update/",
+      "$_connectionString/update/",
       method: "POST",
       sendData: jsonEncode(payload),
       requestHeaders: {"Content-Type": "application/json"},
@@ -123,7 +123,7 @@ class CurrencyDatabaseImpl extends Database {
     Console console = window.console;
     CurrencyEntry entry = document as CurrencyEntry;
     await HttpRequest.request(
-      "$connectionString/delete/",
+      "$_connectionString/delete/",
       method: "POST",
       sendData: jsonEncode(entry.toJson()),
       requestHeaders: {"Content-Type": "application/json"},
@@ -141,6 +141,32 @@ class CurrencyDatabaseImpl extends Database {
   }
 
   @override
+  Future<void> deleteAll(List<dynamic> documents) async {
+    Console console = window.console;
+    List<Map<String, dynamic>> entries = [];
+    for (var document in documents) {
+      CurrencyEntry entry = document as CurrencyEntry;
+      entries.add(entry.toJson());
+    }
+    await HttpRequest.request(
+      "$_connectionString/delete_all/",
+      method: "POST",
+      sendData: jsonEncode(entries),
+      requestHeaders: {"Content-Type": "application/json"},
+    ).then((HttpRequest response) {
+      if (response.status == HttpStatus.ok) {
+        return;
+      } else {
+        throw 'Failed to delete currencies. Status: ${response.status}. Error: ${response.statusText}';
+      }
+    }).catchError((error) {
+      console.log(error);
+      return;
+    });
+    return;
+  }
+
+  @override
   Future<void> disconnect() async {
     return;
   }
@@ -148,7 +174,7 @@ class CurrencyDatabaseImpl extends Database {
   Future<CurrencyEntry> getCurrency(String currency) async {
     Console console = window.console;
     final response =
-        await HttpRequest.request("$connectionString/get_currency/?currency=${currency.toLowerCase()}", method: "GET")
+        await HttpRequest.request("$_connectionString/get_currency/?currency=${currency.toLowerCase()}", method: "GET")
             .then((HttpRequest response) {
       if (response.status == HttpStatus.ok) {
         return response.response as String;
