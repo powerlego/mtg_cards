@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:decimal/decimal.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:mtg_cards/databases.dart';
 import 'package:mtg_cards/src/models/mtg_card.dart';
