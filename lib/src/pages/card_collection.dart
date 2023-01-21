@@ -127,6 +127,7 @@ class _CardCollectionState extends State<CardCollection> {
     _originalItems.sort((a, b) => a.card.name.compareTo(b.card.name));
     _items = _originalItems;
     _searchController.addListener(() {
+      final collectionNotifier = context.read<CollectionNotifier>();
       setState(() {
         if (searchValue.isEmpty) {
           if (_filteredItems.isNotEmpty) {
@@ -135,15 +136,12 @@ class _CardCollectionState extends State<CardCollection> {
             _items = _originalItems;
           }
         } else {
-          if (_filteredItems.isEmpty &&
-              (!context.read<CollectionNotifier>().filteringRarity &&
-                  !context.read<CollectionNotifier>().filteringColor)) {
+          if (_filteredItems.isEmpty && (!collectionNotifier.filteringRarity && !collectionNotifier.filteringColor)) {
             _items = _originalItems
                 .where((element) => element.card.name.toLowerCase().contains(searchValue.toLowerCase()))
                 .toList();
           } else if (_filteredItems.isEmpty &&
-              (context.read<CollectionNotifier>().filteringColor ||
-                  context.read<CollectionNotifier>().filteringColor)) {
+              (collectionNotifier.filteringColor || collectionNotifier.filteringColor)) {
             _items = [];
           } else {
             _items = _filteredItems
