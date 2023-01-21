@@ -54,7 +54,7 @@ List<MTGCard> parseCards(String responseBody) {
     return [];
   } else {
     final List<dynamic> data = parsed['data'] as List<dynamic>;
-    return data.map<MTGCard>((json) => MTGCard.fromJson(json)).toList();
+    return data.map<MTGCard>((json) => ScryfallParser.parseScryfallCardJson(json)).toList();
   }
 }
 
@@ -71,7 +71,7 @@ class _CardSearchState extends State<CardSearch> {
   bool _isLoading = false;
   bool _emptySearch = true;
   bool _searched = false;
-  final focusNode = FocusNode();
+  final _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +94,7 @@ class _CardSearchState extends State<CardSearch> {
                         child: TextBox(
                           controller: _controller,
                           placeholder: 'Search for a card',
-                          focusNode: focusNode,
+                          focusNode: _focusNode,
                           autofocus: true,
                           prefix: IconButton(
                             icon: const Icon(FluentIcons.search),
@@ -128,7 +128,7 @@ class _CardSearchState extends State<CardSearch> {
                                 _cards = <MTGCard>[];
                                 _searched = false;
                                 _isLoading = false;
-                                focusNode.requestFocus();
+                                _focusNode.requestFocus();
                               });
                             },
                           ),

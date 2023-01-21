@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:decimal/decimal.dart';
+import 'package:mtg_cards/models.dart';
 import 'package:mtg_cards/utils.dart';
 
 enum Side {
@@ -8,7 +9,145 @@ enum Side {
   back,
 }
 
-/// A class that represents a Magic: The Gathering card with this card's name [name], type [type], set name [setName], set code [set], collector number [collectorNumber], Scryfall Card Url [cardUrl], Scryfall Id [id], [rarity], converted mana cost [cmc], if the card is foil or not [isFoil], faces [faces], finishes [finishes], keywords [keywords], color identities [colorIdentity], legalities [legalities], and prices [prices]
+class ScryfallParser {
+  static MTGCard parseScryfallCardJson(Map<String, dynamic> json) {
+    List<MTGFinish> finishes = [];
+    bool isFoil = false;
+    if (json.containsKey("finishes")) {
+      for (String finish in json["finishes"]) {
+        finishes.add(MTGFinish.fromName(finish));
+      }
+    }
+    if (finishes.length == 1 && finishes[0].name == "foil") {
+      isFoil = true;
+    }
+    List<MTGPrice> prices = [];
+    for (var entry in (json["prices"] as Map<String, dynamic>).entries) {
+      if (entry.value != null) {
+        if (entry.key == 'usd') {
+          prices.add(MTGPrice.from(MTGFinish.fromName("nonfoil"), Price(price: Decimal.parse(entry.value.toString()))));
+        } else if (entry.key == 'usd_foil') {
+          prices.add(MTGPrice.from(MTGFinish.fromName("foil"), Price(price: Decimal.parse(entry.value.toString()))));
+        } else if (entry.key == 'usd_etched') {
+          prices.add(MTGPrice.from(MTGFinish.fromName("etched"), Price(price: Decimal.parse(entry.value.toString()))));
+        }
+      } else {
+        if (entry.key == 'usd') {
+          prices.add(MTGPrice.from(MTGFinish.fromName("nonfoil"), Price(price: Decimal.parse("0"))));
+        } else if (entry.key == 'usd_foil') {
+          prices.add(MTGPrice.from(MTGFinish.fromName("foil"), Price(price: Decimal.parse("0"))));
+        } else if (entry.key == 'usd_etched') {
+          prices.add(MTGPrice.from(MTGFinish.fromName("etched"), Price(price: Decimal.parse("0"))));
+        }
+      }
+    }
+
+    if (!json.containsKey("card_faces")) {
+      MTGFace face = parseScryfallFaceJson(json);
+      return MTGCard(
+        json["name"],
+        [MTGCardTypeLine.fromString(json["type_line"])],
+        json["set_name"],
+        json["set"],
+        json["collector_number"],
+        Uri.parse(json["uri"]),
+        json["id"],
+        (json["cmc"].toString().contains(".")) ? json["cmc"].toString() : "${json["cmc"]}.0",
+        MTGRarity.fromName(json["rarity"]),
+        isFoil,
+        [face],
+        finishes,
+        (json["color_identity"].isEmpty)
+            ? [MTGColor.colorless]
+            : List<MTGColor>.from(json["color_identity"].map((color) => MTGColor.fromName(color))),
+        List<String>.from(
+          json["keywords"].map((x) => x),
+        ),
+        List<MTGLegality>.from(
+          json["legalities"].entries.map((entry) => MTGLegality.from(entry.key, entry.value)),
+        ),
+        prices,
+      );
+    } else {
+      return MTGCard(
+        json["name"],
+        List<MTGCardTypeLine>.from(json["type_line"].split(" // ").map((e) => MTGCardTypeLine.fromString(e)).toList()),
+        json["set_name"],
+        json["set"],
+        json["collector_number"],
+        Uri.parse(json["uri"]),
+        json["id"],
+        (json["cmc"].toString().contains(".")) ? json["cmc"].toString() : "${json["cmc"]}.0",
+        MTGRarity.fromName(json["rarity"]),
+        isFoil,
+        List<MTGFace>.from(
+          json["card_faces"].map((x) {
+            if (!x.containsKey("image_uris")) {
+              x["image_uris"] = json["image_uris"];
+            }
+            if (!x.containsKey("colors")) {
+              x["colors"] = json["colors"];
+            }
+            return parseScryfallFaceJson(x);
+          }),
+        ),
+        finishes,
+        (json["color_identity"].isEmpty)
+            ? [MTGColor.colorless]
+            : List<MTGColor>.from(json["color_identity"].map((color) => MTGColor.fromName(color))),
+        List<String>.from(
+          json["keywords"].map((x) => x),
+        ),
+        List<MTGLegality>.from(
+          json["legalities"].entries.map((entry) => MTGLegality.from(entry.key, entry.value)),
+        ),
+        prices,
+      );
+    }
+  }
+
+  static MTGFace parseScryfallFaceJson(Map<String, dynamic> json) {
+    return MTGFace(
+      json["name"],
+      json["mana_cost"],
+      MTGCardTypeLine.fromString(json["type_line"]),
+      json["oracle_text"],
+      (json.containsKey("power")) ? json["power"] : "",
+      (json.containsKey("toughness")) ? json["toughness"] : "",
+      (json.containsKey("loyalty")) ? json["loyalty"] : "",
+      (json.containsKey("produced_mana"))
+          ? List<String>.from(
+              json["produced_mana"].map((x) {
+                if (x != null) {
+                  if (x is String) {
+                    if (x.contains("{")) {
+                      return x;
+                    } else {
+                      return "{$x}";
+                    }
+                  } else {
+                    if (x.toString().contains("{")) {
+                      return x.toString();
+                    } else {
+                      return '{$x.toString()}';
+                    }
+                  }
+                } else {
+                  return "";
+                }
+              }),
+            )
+          : [],
+      (json["image_uris"] != null) ? Uri.parse(json["image_uris"]["png"]) : Uri.parse(""),
+      (json["illustration_id"] != null) ? json["illustration_id"] : "",
+      (json["colors"].isEmpty)
+          ? [MTGColor.colorless]
+          : List<MTGColor>.from(json["colors"].map((color) => MTGColor.fromName(color))),
+    );
+  }
+}
+
+/// A class that represents a Magic: The Gathering card with this card's name [name], type [type], set name [set], set code [setCode], collector number [collectorNumber], Scryfall Card Url [cardUrl], Scryfall Id [id], [rarity], converted mana cost [cmc], if the card is foil or not [isFoil], faces [faces], finishes [finishes], keywords [keywords], color identities [colors], legalities [legalities], and prices [prices]
 ///
 /// Note:
 /// * [faces] will contain more than one element if this card is a double-faced card
@@ -37,13 +176,13 @@ class MTGCard {
   String name;
 
   /// The type of this card.
-  String type;
+  List<MTGCardTypeLine> type;
 
   /// The set of this card.
-  String setName;
+  String set;
 
   /// The set code of this card.
-  String set;
+  String setCode;
 
   /// The collector number of this card.
   String collectorNumber;
@@ -58,7 +197,7 @@ class MTGCard {
   String cmc;
 
   /// The rarity of this card.
-  String rarity;
+  MTGRarity rarity;
 
   /// If this card is foil.
   bool isFoil;
@@ -67,10 +206,10 @@ class MTGCard {
   List<MTGFace> faces;
 
   /// The finishes of this card.
-  List<String> finishes;
+  List<MTGFinish> finishes;
 
   /// The color identities of this card.
-  List<String> colorIdentity;
+  List<MTGColor> colors;
 
   /// The keywords of this card.
   List<String> keywords;
@@ -81,12 +220,12 @@ class MTGCard {
   /// The prices of this card.
   List<MTGPrice> prices;
 
-  /// Creates a new [MTGCard] with the given [name], [type], [setName], [set], [collectorNumber], [cardUrl], [id], [rarity], [cmc], [isFoil], [faces], [finishes], [keywords], [colorIdentity], [legalities], and [prices]
+  /// Creates a new [MTGCard] with the given [name], [type], [set], [setCode], [collectorNumber], [cardUrl], [id], [rarity], [cmc], [isFoil], [faces], [finishes], [keywords], [colors], [legalities], and [prices]
   MTGCard(
     this.name,
     this.type,
-    this.setName,
     this.set,
+    this.setCode,
     this.collectorNumber,
     this.cardUrl,
     this.id,
@@ -95,7 +234,7 @@ class MTGCard {
     this.isFoil,
     this.faces,
     this.finishes,
-    this.colorIdentity,
+    this.colors,
     this.keywords,
     this.legalities,
     this.prices,
@@ -104,142 +243,60 @@ class MTGCard {
   /// Creates a new empty [MTGCard]
   MTGCard.empty()
       : name = '',
-        type = '',
-        setName = '',
+        type = [MTGCardTypeLine.empty()],
         set = '',
+        setCode = '',
         collectorNumber = "",
         cardUrl = Uri(),
         id = '',
         cmc = '',
-        rarity = '',
+        rarity = MTGRarity.unknown,
         isFoil = false,
         faces = [MTGFace.empty()],
         finishes = [],
-        colorIdentity = [],
+        colors = [MTGColor.colorless],
         keywords = [],
         legalities = [],
         prices = [];
 
   /// Creates a new [MTGCard] from a JSON object [json]
   factory MTGCard.fromJson(Map<String, dynamic> json) {
-    List<String> finishes = [];
-    bool isFoil = false;
-    if (json.containsKey("finishes")) {
-      for (var finish in json["finishes"]) {
-        finishes.add(finish);
-      }
-    }
-    if (finishes.length == 1 && finishes[0] == "foil") {
-      isFoil = true;
-    }
-    if (!json.containsKey("card_faces") && !json.containsKey("faces")) {
-      MTGFace face = MTGFace.fromJson(json);
-      return MTGCard(
-        json["name"],
-        (json.containsKey("type")) ? json["type"] : json["type_line"],
-        (json.containsKey("setName")) ? json["setName"] : json["set_name"],
-        json["set"] ?? "",
-        (json.containsKey("collectorNumber")) ? json["collectorNumber"] ?? "" : json["collector_number"] ?? "",
-        (json.containsKey("cardUrl")) ? Uri.parse(json["cardUrl"]) : Uri.parse(json["uri"]),
-        json["id"],
-        (json["cmc"].toString().contains(".")) ? json["cmc"].toString() : "${json["cmc"]}.0",
-        json["rarity"],
-        (json.containsKey("isFoil")) ? json["isFoil"] : isFoil,
-        [face],
-        finishes,
-        List<String>.from(
-          (json.containsKey("colorIdentity"))
-              ? json["colorIdentity"].map((x) => x)
-              : json["color_identity"].map((x) => x),
-        ),
-        List<String>.from(
-          json["keywords"].map((x) => x),
-        ),
-        (json['legalities'] is List<dynamic>)
-            ? List<MTGLegality>.from(json['legalities'].map((e) => MTGLegality.fromJson(e)))
-            : List<MTGLegality>.from(json["legalities"].entries.map((e) => MTGLegality(e.key, e.value))),
-        (json['prices'] is List<dynamic>)
-            ? List<MTGPrice>.from(json['prices'].map((e) => MTGPrice.fromJson(e)))
-            : List<MTGPrice>.from(json["prices"].entries.map((e) {
-                if (e.value != null) {
-                  return MTGPrice(e.key, e.value);
-                } else {
-                  return MTGPrice(e.key, "");
-                }
-              })),
-      );
-    } else {
-      return MTGCard(
-        json["name"],
-        (json.containsKey("type")) ? json["type"] : json["type_line"],
-        (json.containsKey("setName")) ? json["setName"] : json["set_name"],
-        json["set"] ?? "",
-        (json.containsKey("collectorNumber")) ? json["collectorNumber"] ?? "" : json["collector_number"] ?? "",
-        (json.containsKey("cardUrl")) ? Uri.parse(json["cardUrl"]) : Uri.parse(json["uri"]),
-        json["id"],
-        (json["cmc"].toString().contains(".")) ? json["cmc"].toString() : "${json["cmc"]}.0",
-        json["rarity"],
-        (json.containsKey("isFoil")) ? json["isFoil"] : isFoil,
-        List<MTGFace>.from(
-          (json.containsKey("faces"))
-              ? json["faces"].map((x) {
-                  if (!x.containsKey("image_uris") && !x.containsKey("imageUrls")) {
-                    x["image_uris"] = json["image_uris"];
-                  }
-                  if (!x.containsKey("colors")) {
-                    x["colors"] = json["colors"];
-                  }
-                  return MTGFace.fromJson(x);
-                })
-              : json["card_faces"].map((x) {
-                  if (!x.containsKey("image_uris") && !x.containsKey("imageUrls")) {
-                    x["image_uris"] = json["image_uris"];
-                  }
-                  if (!x.containsKey("colors")) {
-                    x["colors"] = json["colors"];
-                  }
-                  return MTGFace.fromJson(x);
-                }),
-        ),
-        finishes,
-        List<String>.from(
-          (json.containsKey("colorIdentity"))
-              ? json["colorIdentity"].map((x) => x)
-              : json["color_identity"].map((x) => x),
-        ),
-        List<String>.from(json["keywords"].map((x) => x)),
-        (json['legalities'] is List<dynamic>)
-            ? List<MTGLegality>.from(json['legalities'].map((e) => MTGLegality.fromJson(e)))
-            : List<MTGLegality>.from(json["legalities"].entries.map((e) => MTGLegality(e.key, e.value))),
-        (json['prices'] is List<dynamic>)
-            ? List<MTGPrice>.from(json['prices'].map((e) => MTGPrice.fromJson(e)))
-            : List<MTGPrice>.from(json["prices"].entries.map((e) {
-                if (e.value != null) {
-                  return MTGPrice(e.key, e.value);
-                } else {
-                  return MTGPrice(e.key, "");
-                }
-              })),
-      );
-    }
+    return MTGCard(
+      json['name'],
+      (json['type'] as List).map((e) => MTGCardTypeLine.fromJson(e)).toList(),
+      json['set'],
+      json['setCode'],
+      json['collectorNumber'],
+      Uri.parse(json['cardUrl']),
+      json['id'],
+      json['cmc'],
+      MTGRarity.fromName(json['rarity']['name']),
+      json['isFoil'],
+      (json['faces'] as List).map((e) => MTGFace.fromJson(e)).toList(),
+      (json['finishes'] as List).map((e) => MTGFinish.fromName(e['name'])).toList(),
+      (json['colors'] as List).map((e) => MTGColor.fromName(e['name'])).toList(),
+      (json['keywords'] as List).map((e) => e.toString()).toList(),
+      (json['legalities'] as List).map((e) => MTGLegality.fromJson(e)).toList(),
+      (json['prices'] as List).map((e) => MTGPrice.fromJson(e)).toList(),
+    );
   }
 
   /// Gets the JSON representation of this [MTGCard]
   Map<String, dynamic> toJson() {
     return {
       'name': name,
-      'type': type,
-      'setName': setName,
+      'type': type.map((e) => e.toJson()).toList(),
       'set': set,
+      'setCode': setCode,
       'collectorNumber': collectorNumber,
       'cardUrl': cardUrl.toString(),
       'id': id,
       'cmc': cmc,
-      'rarity': rarity,
+      'rarity': rarity.toJson(),
       'isFoil': isFoil,
       'faces': faces.map((x) => x.toJson()).toList(),
-      'finishes': finishes,
-      'colorIdentity': colorIdentity,
+      'finishes': finishes.map((x) => x.toJson()).toList(),
+      'colors': colors.map((e) => e.toJson()).toList(),
       'keywords': keywords,
       'legalities': legalities.map((x) => x.toJson()).toList(),
       'prices': prices.map((x) => x.toJson()).toList(),
@@ -256,12 +313,11 @@ class MTGCard {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
     return other is MTGCard &&
         other.name == name &&
         other.type == type &&
-        other.setName == setName &&
         other.set == set &&
+        other.setCode == setCode &&
         other.collectorNumber == collectorNumber &&
         other.cardUrl == cardUrl &&
         other.id == id &&
@@ -269,7 +325,7 @@ class MTGCard {
         other.rarity == rarity &&
         other.isFoil == isFoil &&
         Utils.listEquals(other.faces, faces) &&
-        Utils.listEquals(other.colorIdentity, colorIdentity) &&
+        Utils.listEquals(other.colors, colors) &&
         Utils.listEquals(other.keywords, keywords) &&
         Utils.listEquals(other.legalities, legalities) &&
         Utils.listEquals(other.prices, prices);
@@ -292,8 +348,8 @@ class MTGCard {
   int get hashCode {
     return name.hashCode ^
         type.hashCode ^
-        setName.hashCode ^
         set.hashCode ^
+        setCode.hashCode ^
         collectorNumber.hashCode ^
         cardUrl.hashCode ^
         id.hashCode ^
@@ -301,7 +357,7 @@ class MTGCard {
         rarity.hashCode ^
         isFoil.hashCode ^
         faces.hashCode ^
-        colorIdentity.hashCode ^
+        colors.hashCode ^
         keywords.hashCode ^
         legalities.hashCode ^
         prices.hashCode;
@@ -326,18 +382,18 @@ class MTGCard {
   /// * [prices] is the new prices of this [MTGCard]
   MTGCard copyWith({
     String? name,
-    String? type,
-    String? setName,
+    List<MTGCardTypeLine>? type,
     String? set,
+    String? setCode,
     String? collectorNumber,
     Uri? cardUrl,
     String? id,
     String? cmc,
-    String? rarity,
+    MTGRarity? rarity,
     bool? isFoil,
     List<MTGFace>? faces,
-    List<String>? finishes,
-    List<String>? colorIdentity,
+    List<MTGFinish>? finishes,
+    List<MTGColor>? colors,
     List<String>? keywords,
     List<MTGLegality>? legalities,
     List<MTGPrice>? prices,
@@ -345,8 +401,8 @@ class MTGCard {
     return MTGCard(
       name ?? this.name,
       type ?? this.type,
-      setName ?? this.setName,
       set ?? this.set,
+      setCode ?? this.setCode,
       collectorNumber ?? this.collectorNumber,
       cardUrl ?? this.cardUrl,
       id ?? this.id,
@@ -355,66 +411,15 @@ class MTGCard {
       isFoil ?? this.isFoil,
       faces ?? this.faces,
       finishes ?? this.finishes,
-      colorIdentity ?? this.colorIdentity,
+      colors ?? this.colors,
       keywords ?? this.keywords,
       legalities ?? this.legalities,
       prices ?? this.prices,
     );
   }
 
-  /// Gets the formatted string representation of this [MTGCard]'s finishes
-  Map<String, String> get formattedFinishes {
-    Map<String, String> formattedFinishes = {};
-    for (var finish in finishes) {
-      switch (finish) {
-        case 'nonfoil':
-          formattedFinishes['Non-Foil'] = 'nonfoil';
-          break;
-        case 'foil':
-          formattedFinishes['Foil'] = 'foil';
-          break;
-        case 'etched':
-          formattedFinishes['Etched'] = 'etched';
-          break;
-        case 'glossy':
-          formattedFinishes['Glossy'] = 'glossy';
-          break;
-        default:
-          break;
-      }
-    }
-    return formattedFinishes;
-  }
-
-  /// Gets the price of this [MTGCard] in the specified currency [currency] and [finish]
-  Decimal getPrice(String currency, String finish) {
-    final priceMap = {for (var e in prices) e.currency: e.price};
-    switch (currency.toLowerCase()) {
-      case 'usd':
-      case 'dollar':
-        if (finish == 'foil' || finish == 'Foil') {
-          return Decimal.parse((priceMap['usd_foil']!.isEmpty) ? '0' : priceMap['usd_foil']!);
-        } else if (finish == 'nonfoil' || finish == 'Non-Foil' || finish == 'glossy' || finish == 'Glossy') {
-          return Decimal.parse((priceMap['usd']!.isEmpty) ? '0' : priceMap['usd']!);
-        } else if (finish == 'etched' || finish == 'Etched') {
-          return Decimal.parse((priceMap['usd_etched']!.isEmpty) ? '0' : priceMap['usd_etched']!);
-        } else {
-          return Decimal.fromInt(0);
-        }
-      case 'eur':
-      case 'euro':
-        if (finish == 'foil' || finish == 'Foil') {
-          return Decimal.parse((priceMap['eur_foil']!.isEmpty) ? '0' : priceMap['eur_foil']!);
-        } else if (finish == 'nonfoil' || finish == 'Non-Foil' || finish == 'glossy' || finish == 'Glossy') {
-          return Decimal.parse((priceMap['eur']!.isEmpty) ? '0' : priceMap['eur']!);
-        } else {
-          return Decimal.fromInt(0);
-        }
-      case 'tix':
-        return Decimal.parse((priceMap['tix']!.isEmpty) ? '0' : priceMap['tix']!);
-      default:
-        return Decimal.fromInt(0);
-    }
+  MTGPrice getPrice(MTGFinish finish) {
+    return prices.firstWhere((element) => element.name == finish.name);
   }
 }
 
@@ -427,7 +432,7 @@ class MTGFace {
   String manaCost;
 
   /// The type line of the face
-  String type;
+  MTGCardTypeLine type;
 
   /// The oracle text of the face
   String oracleText;
@@ -451,7 +456,7 @@ class MTGFace {
   String illustrationId;
 
   /// The colors of the face
-  List<String> colors;
+  List<MTGColor> colors;
 
   /// Creates a new [MTGFace] with the given [name], [manaCost], [type], [oracleText], [power], [toughness], [loyalty], [producedMana], [imageUrl], [illustrationId], and [colors]
   MTGFace(
@@ -472,7 +477,7 @@ class MTGFace {
   MTGFace.empty()
       : name = "",
         manaCost = "",
-        type = "",
+        type = MTGCardTypeLine.empty(),
         oracleText = "",
         power = "",
         toughness = "",
@@ -480,74 +485,22 @@ class MTGFace {
         producedMana = [],
         imageUrl = Uri.parse(""),
         illustrationId = "",
-        colors = [];
+        colors = [MTGColor.colorless];
 
   /// Creates a new [MTGFace] from a JSON object [json]
   factory MTGFace.fromJson(Map<String, dynamic> json) {
     return MTGFace(
-      json["name"],
-      (json.containsKey("manaCost")) ? json["manaCost"] : json["mana_cost"],
-      (json.containsKey("type")) ? json["type"] : json["type_line"],
-      (json.containsKey("oracleText")) ? json["oracleText"] : json["oracle_text"],
-      (json.containsKey("power")) ? json["power"] : "",
-      (json.containsKey("toughness")) ? json["toughness"] : "",
-      (json.containsKey("loyalty")) ? json["loyalty"] : "",
-      (json.containsKey("producedMana"))
-          ? List<String>.from(
-              json["producedMana"].map((x) {
-                if (x != null) {
-                  if (x is String) {
-                    if (x.contains("{")) {
-                      return x;
-                    } else {
-                      return "{$x}";
-                    }
-                  } else {
-                    if (x.toString().contains("{")) {
-                      return x.toString();
-                    } else {
-                      return '{$x.toString()}';
-                    }
-                  }
-                } else {
-                  return "";
-                }
-              }),
-            )
-          : (json.containsKey("produced_mana"))
-              ? List<String>.from(
-                  json["produced_mana"].map((x) {
-                    if (x != null) {
-                      if (x is String) {
-                        if (x.contains("{")) {
-                          return x;
-                        } else {
-                          return "{$x}";
-                        }
-                      } else {
-                        if (x.toString().contains("{")) {
-                          return x.toString();
-                        } else {
-                          return '{$x.toString()}';
-                        }
-                      }
-                    } else {
-                      return "";
-                    }
-                  }),
-                )
-              : [],
-      (json.containsKey("imageUrl"))
-          ? Uri.parse(json["imageUrl"])
-          : (json["image_uris"] != null)
-              ? Uri.parse(json["image_uris"]["png"])
-              : Uri.parse(""),
-      (json.containsKey("illustrationId"))
-          ? json["illustrationId"]
-          : (json["illustration_id"] != null)
-              ? json["illustration_id"]
-              : "",
-      List<String>.from(json["colors"].map((x) => x)),
+      json['name'] as String,
+      json['manaCost'] as String,
+      MTGCardTypeLine.fromJson(json['type']),
+      json['oracleText'] as String,
+      json['power'] as String,
+      json['toughness'] as String,
+      json['loyalty'] as String,
+      (json['producedMana'] as List<dynamic>).map((e) => e as String).toList(),
+      Uri.parse(json['imageUrl'] as String),
+      json['illustrationId'] as String,
+      (json['colors'] as List<dynamic>).map((e) => MTGColor.fromName(e['name'] as String)).toList(),
     );
   }
 
@@ -556,15 +509,15 @@ class MTGFace {
     return {
       'name': name,
       'manaCost': manaCost,
-      'type': type,
+      'type': type.toJson(),
       'oracleText': oracleText,
       'power': power,
       'toughness': toughness,
       'loyalty': loyalty,
-      'produced_mana': producedMana,
+      'producedMana': producedMana,
       'imageUrl': imageUrl.toString(),
       'illustrationId': illustrationId,
-      'colors': colors,
+      'colors': colors.map((e) => e.toJson()).toList(),
     };
   }
 
@@ -607,187 +560,5 @@ class MTGFace {
         imageUrl.hashCode ^
         illustrationId.hashCode ^
         colors.hashCode;
-  }
-}
-
-/// A class representing a legalities object in the API. A legalities object contains the legality of a card in a format. It has a [format] and a [legality].
-class MTGLegality {
-  /// The format of the legality
-  final String format;
-
-  /// The legality of the legality
-  final String legality;
-
-  /// Creates a new [MTGLegality] with the given [format] and [legality]
-  MTGLegality(this.format, this.legality);
-
-  /// Creates a new [MTGLegality] from the given JSON [json]
-  factory MTGLegality.fromJson(Map<String, dynamic> json) {
-    return MTGLegality(json["format"], json["legality"]);
-  }
-
-  /// Gets the JSON representation of this [MTGLegality]
-  Map<String, dynamic> toJson() {
-    return {
-      'format': format,
-      'legality': legality,
-    };
-  }
-
-  /// Gets the string representation of this [MTGLegality]
-  @override
-  String toString() => jsonEncode(toJson());
-
-  /// Checks if this [MTGLegality] is equal to another [MTGLegality]
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is MTGLegality && other.format == format && other.legality == legality;
-  }
-
-  /// Gets the hash code of this [MTGLegality]
-  @override
-  int get hashCode => format.hashCode ^ legality.hashCode;
-
-  /// Gets the formatted format of this [MTGLegality]
-  String get formattedFormat {
-    switch (format) {
-      case "standard":
-        return "Standard";
-      case "future":
-        return "Future";
-      case "historic":
-        return "Historic";
-      case "gladiator":
-        return "Gladiator";
-      case "pioneer":
-        return "Pioneer";
-      case "modern":
-        return "Modern";
-      case "legacy":
-        return "Legacy";
-      case "pauper":
-        return "Pauper";
-      case "vintage":
-        return "Vintage";
-      case "penny":
-        return "Penny";
-      case "commander":
-        return "Commander";
-      case "brawl":
-        return "Brawl";
-      case "duel":
-        return "Duel";
-      case 'historicbrawl':
-        return "Historic Brawl";
-      case 'paupercommander':
-        return "Pauper Commander";
-      case 'premodern':
-        return "Pre-Modern";
-      case 'alchemy':
-        return "Alchemy";
-      case 'explorer':
-        return "Explorer";
-      case "oldschool":
-        return "Old School";
-      default:
-        return format;
-    }
-  }
-
-  /// Gets the formatted legality of this [MTGLegality]
-  String get formattedLegality {
-    switch (legality) {
-      case "legal":
-        return "Legal";
-      case "not_legal":
-        return "Not Legal";
-      case "restricted":
-        return "Restricted";
-      case "banned":
-        return "Banned";
-      default:
-        return legality;
-    }
-  }
-}
-
-/// A class representing a price object in the API. A price object contains the price of a card in a currency. It has a [currency] and a [price].
-class MTGPrice {
-  /// The currency of the price
-  final String currency;
-
-  /// The price of the card in the currency
-  final String price;
-
-  /// Creates a new [MTGPrice] with the given [currency] and [price]
-  MTGPrice(this.currency, this.price);
-
-  /// Creates a new [MTGPrice] from the given JSON [json]
-  factory MTGPrice.fromJson(Map<String, dynamic> json) {
-    return MTGPrice(json["currency"], json["price"]);
-  }
-
-  /// Gets the JSON representation of this [MTGPrice]
-  Map<String, dynamic> toJson() {
-    return {
-      'currency': currency,
-      'price': price,
-    };
-  }
-
-  /// Gets the string representation of this [MTGPrice]
-  @override
-  String toString() => jsonEncode(toJson());
-
-  /// Checks if this [MTGPrice] is equal to another [MTGPrice]
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is MTGPrice && other.currency == currency && other.price == price;
-  }
-
-  /// Gets the hash code of this [MTGPrice]
-  @override
-  int get hashCode => currency.hashCode ^ price.hashCode;
-
-  /// Gets the formatted currency of this [MTGPrice]
-  String get formattedCurrency {
-    switch (currency) {
-      case "usd":
-        return "USD";
-      case 'usd_foil':
-        return "USD Foil";
-      case 'usd_etched':
-        return "USD Etched";
-      case "eur":
-        return "EUR";
-      case 'eur_foil':
-        return "EUR Foil";
-      case "tix":
-        return "TIX";
-      default:
-        return currency;
-    }
-  }
-
-  /// Gets the formatted price of this [MTGPrice]
-  String get formattedPrice {
-    switch (currency) {
-      case "usd":
-        return "\$$price";
-      case 'usd_foil':
-        return "\$$price";
-      case 'usd_etched':
-        return "\$$price";
-      case "eur":
-        return "€$price";
-      case 'eur_foil':
-        return "€$price";
-      case "tix":
-        return "$price TIX";
-      default:
-        return price;
-    }
   }
 }

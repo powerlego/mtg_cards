@@ -5,3 +5,5 @@
 
 A Flutter Project that stores my MTG Cards
 
+Data for the cards is provided by [scryfall](https://scryfall.com/).  The currency conversion is provided by [exchangerate.host](https://exchangerate.host/).
+
